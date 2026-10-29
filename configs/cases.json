@@ -1,0 +1,240 @@
+[
+  {
+    "suite": "genesis",
+    "id": "rigid_freefall",
+    "category": "Rigid",
+    "priority": "P0",
+    "description": "Box under gravity (single environment)",
+    "nodes": [
+      "halo",
+      "node1"
+    ],
+    "backends": {
+      "halo": "amdgpu",
+      "node1": "cuda"
+    },
+    "source": "https://github.com/Genesis-Embodied-AI/genesis-world"
+  },
+  {
+    "suite": "genesis",
+    "id": "rigid_articulation",
+    "category": "Rigid/robot",
+    "priority": "P0",
+    "description": "Procedural passive 2-DOF pendulum URDF; not a controlled Franka trial",
+    "nodes": [
+      "halo",
+      "node1"
+    ],
+    "backends": {
+      "halo": "amdgpu",
+      "node1": "cuda"
+    },
+    "source": "https://github.com/Genesis-Embodied-AI/genesis-world"
+  },
+  {
+    "suite": "genesis",
+    "id": "sph_dambreak",
+    "category": "Fluid/SPH",
+    "priority": "P0",
+    "description": "Legacy ID: suspended 27-particle SPH liquid box; no developed dam-break wave",
+    "nodes": [
+      "halo",
+      "node1"
+    ],
+    "backends": {
+      "halo": "amdgpu",
+      "node1": "cuda"
+    },
+    "source": "https://github.com/Genesis-Embodied-AI/genesis-world"
+  },
+  {
+    "suite": "genesis",
+    "id": "mpm_material",
+    "category": "Fluid/MPM",
+    "priority": "P0",
+    "description": "MPM P2G and G2P sanity and conservation",
+    "nodes": [
+      "halo",
+      "node1"
+    ],
+    "backends": {
+      "halo": "amdgpu",
+      "node1": "cuda"
+    },
+    "source": "https://github.com/Genesis-Embodied-AI/genesis-world"
+  },
+  {
+    "suite": "genesis",
+    "id": "rigid_sph_coupling",
+    "category": "Coupling/SPH+rigid",
+    "priority": "P0",
+    "description": "SPH plus embedded fixed rigid box and actual coupler kernels; no dynamic force accuracy claim",
+    "nodes": [
+      "halo",
+      "node1"
+    ],
+    "backends": {
+      "halo": "amdgpu",
+      "node1": "cuda"
+    },
+    "source": "https://github.com/Genesis-Embodied-AI/genesis-world/blob/main/examples/coupling/sph_rigid.py"
+  },
+  {
+    "suite": "chrono",
+    "id": "fsi_sph",
+    "category": "Fluid/FSI-SPH",
+    "priority": "P0",
+    "description": "Upstream Chrono FSI-SPH small scene",
+    "nodes": [
+      "halo",
+      "node1"
+    ],
+    "backends": {
+      "halo": "hip",
+      "node1": "cuda"
+    },
+    "source": "https://github.com/projectchrono/chrono"
+  },
+  {
+    "suite": "chrono",
+    "id": "granular_dem",
+    "category": "Granular/DEM",
+    "priority": "P1",
+    "description": "27-sphere freefall integration/backend probe, cm/g/s; no impact validation",
+    "nodes": [
+      "halo",
+      "node1"
+    ],
+    "backends": {
+      "halo": "hip",
+      "node1": "cuda"
+    },
+    "source": "https://github.com/projectchrono/chrono"
+  },
+  {
+    "suite": "incflo",
+    "id": "cfd_cavity",
+    "category": "Fluid/CFD",
+    "priority": "P1",
+    "description": "Incompressible grid solver lid-driven cavity",
+    "nodes": [
+      "halo",
+      "node1"
+    ],
+    "backends": {
+      "halo": "hip",
+      "node1": "cuda"
+    },
+    "source": "https://github.com/AMReX-Fluids/incflo"
+  },
+  {
+    "suite": "mjx",
+    "id": "rigid_freefall_rocm",
+    "category": "Rigid/JAX ROCm",
+    "priority": "P0",
+    "description": "User-requested MuJoCo MJX JAX physics on gfx1151",
+    "nodes": [
+      "halo"
+    ],
+    "backends": {
+      "halo": "amdgpu"
+    },
+    "source": "https://mujoco.readthedocs.io/en/stable/mjx.html"
+  },
+  {
+    "suite": "genesis",
+    "id": "rigid_contacts_monolith",
+    "category": "Rigid/contact documented dispatch workaround",
+    "priority": "P0",
+    "description": "Same three-box contact scene and gates; explicit monolithic HIP solver dispatch, separate from default decomposed path",
+    "nodes": [
+      "halo"
+    ],
+    "backends": {
+      "halo": "amdgpu"
+    },
+    "source": "https://genesis-embodied-ai.github.io/quadrants/user_guide/perf_dispatch.html"
+  },
+  {
+    "suite": "patch_alternatives",
+    "id": "mjwarp_standard_header",
+    "category": "Patch replacement investigation",
+    "priority": "User-requested",
+    "description": "Same 500-step CPU parity using SDK standard header instead of study typedef header",
+    "nodes": [
+      "halo"
+    ],
+    "backends": {
+      "halo": "hip"
+    },
+    "source": "https://rocm.docs.amd.com/projects/HIP/en/latest/",
+    "device_target": "gfx1100"
+  },
+  {
+    "suite": "fluidlab",
+    "id": "fluid_smoke",
+    "category": "Supplemental physics attempt",
+    "priority": "User-requested",
+    "description": "fluid_smoke",
+    "nodes": [
+      "halo"
+    ],
+    "backends": {
+      "halo": "hip"
+    },
+    "source": "https://github.com/zhouxian/FluidLab"
+  },
+  {
+    "suite": "nekrs",
+    "id": "cfd_smoke",
+    "category": "Supplemental physics attempt",
+    "priority": "User-requested",
+    "description": "cfd_smoke",
+    "nodes": [
+      "halo"
+    ],
+    "backends": {
+      "halo": "hip"
+    },
+    "source": "https://github.com/Nek5000/nekRS"
+  },
+  {
+    "suite": "instinct",
+    "id": "provided_gpu_smoke",
+    "category": "GPU",
+    "priority": "P0",
+    "description": "LIBERO GPU physics, OSC control and camera pipeline",
+    "nodes": [
+      "halo"
+    ],
+    "backends": {
+      "halo": "hip"
+    }
+  },
+  {
+    "suite": "taichi",
+    "id": "provided_gpu_smoke",
+    "category": "GPU",
+    "priority": "P0",
+    "description": "AMD GPU supplied MPM88 example",
+    "nodes": [
+      "halo"
+    ],
+    "backends": {
+      "halo": "hip"
+    }
+  },
+  {
+    "suite": "gsplat",
+    "id": "provided_gpu_smoke",
+    "category": "Rendering",
+    "priority": "P0",
+    "description": "GPU Gaussian rasterization; separate rendering adjunct",
+    "nodes": [
+      "halo"
+    ],
+    "backends": {
+      "halo": "hip"
+    }
+  }
+]

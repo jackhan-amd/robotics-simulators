@@ -1,0 +1,47 @@
+{
+  "fluidlab_sha": "7295eb6ed7ee92b2be471fd30b432238577f28ce",
+  "taichi_sha": "d05e4aaf257c172d1b4655c548e038b92df67da2",
+  "module_sha256": "e50cdabc1e016856b6823551b8160a94f80c4d4079d3758a7ec97b230631fcd6",
+  "patched_source_sha256": "9ecb172ccf3630e424f65ac5f9c8ffab441308a653a3803ba95f7b5947b0c38e",
+  "patch_ref": "patches/fluidlab_taichi18_struct_reset.patch",
+  "patch_sha256": "2a0d9ebd6be8ea4c59d639d671beec10a8f548d3885d27d614b2bc7548333bc4",
+  "runtime_addition": {
+    "file": "oclc_isa_version_1151.bc",
+    "sha256": "eadca1fc1b4d14c635baed58c0ed32572d589cf08e3f5ebeec176786eb0e5a5a",
+    "source": "existing HIP7.16/Clang24 SDK",
+    "verified_constant": 11501,
+    "all_other_runtime_math_files_unchanged": true
+  },
+  "runtime_version": 71626385,
+  "python": "3.12.15",
+  "llvm": "20.1.8",
+  "torch_dependency": "2.14.1+cpu (dtype/checkpoint only)",
+  "backend": "HIP",
+  "device_target": "gfx1151",
+  "grid": [
+    16,
+    16,
+    16
+  ],
+  "particles": 27,
+  "dt": 0.0002,
+  "steps": [
+    10,
+    250
+  ],
+  "max_vram_prealloc_gb": 0.125,
+  "solver_math_changed": false,
+  "scope": "Forward MPM core only; no full task environment, renderer, RL or gradients",
+  "successes": [
+    "20261020T202612Z_e2e0d957",
+    "20261020T202723Z_54bfd516",
+    "20261020T202751Z_e9aeda25",
+    "20261020T202845Z_aef025da",
+    "20261020T202852Z_7e6f58f5"
+  ],
+  "cpu_references": [
+    "20261020T202607Z_9b387094",
+    "20261020T202718Z_5bc0f8cd"
+  ],
+  "g2": false
+}

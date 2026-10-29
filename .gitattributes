@@ -1,0 +1,9 @@
+* text=auto eol=lf
+*.sh text eol=lf
+# Preserve the bytes covered by the upstream notice checksums.
+third_party_notices/** -text
+
+# Preserve verbatim upstream notices, including original trailing spaces.
+third_party_notices/** -whitespace
+
+LICENSE -text -whitespace

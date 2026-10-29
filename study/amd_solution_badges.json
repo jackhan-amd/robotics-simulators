@@ -1,0 +1,10 @@
+{
+  "meaning": "AMD blog introduction with an AMD-provided GPU solution, enablement recipe or distribution; not a blanket MI355X certification",
+  "engines": {
+    "mujoco": {"blog": "https://rocm.blogs.amd.com/artificial-intelligence/sim2real-rl-instinct/README.html", "solution": "https://github.com/AMD-Ecosystem/mujoco_warp", "note": "AMD Instinct MJWarp recipe and AMD ROCm port; MJX is a separate runtime"},
+    "instinct": {"blog": "https://rocm.blogs.amd.com/artificial-intelligence/faster-action-models/README.html", "solution": "https://github.com/AMD-AGI/faster-action-models/tree/main/simulate", "note": "AMD-provided Instinct Sim backend"},
+    "genesis": {"blog": "https://rocm.blogs.amd.com/artificial-intelligence/rocm-genesis/README.html", "solution": "https://github.com/Genesis-Embodied-AI/Genesis", "note": "AMD-published Ryzen AI MAX/Vulkan enablement tutorial; this report measures the separate AMD GPU backend on MI355X"},
+    "taichi": {"blog": "https://rocm.blogs.amd.com/artificial-intelligence/taichi_mi300x/README.html", "solution": "https://rocm.docs.amd.com/projects/simulation/en/latest/about/compatibility-matrix.html", "note": "AMD Simulation Taichi distribution; matrix lists MI355X"},
+    "gsplat": {"blog": "https://rocm.blogs.amd.com/software-tools-optimization/gsplat/README.html", "solution": "https://rocm.docs.amd.com/projects/simulation/en/latest/about/compatibility-matrix.html", "note": "AMD Simulation GSplat distribution; published GPU matrix lists MI300X/MI325X, so MI355X measurement remains exploratory"}
+  }
+}

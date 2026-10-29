@@ -1,0 +1,122 @@
+[
+  {
+    "project": "fluidlab",
+    "url": "https://github.com/zhouxian/FluidLab",
+    "sha": "7295eb6ed7ee92b2be471fd30b432238577f28ce",
+    "license": "No explicit repository license found",
+    "redistributed": false,
+    "submodules": []
+  },
+  {
+    "project": "nekrs",
+    "url": "https://github.com/Nek5000/nekRS",
+    "sha": "96b3cf9e5bacede16568826c04a21bc0fe50dc7d",
+    "license": "BSD-3-Clause",
+    "redistributed": false,
+    "submodules": []
+  },
+  {
+    "project": "taichi-amd",
+    "url": "https://github.com/AMD-Ecosystem/taichi",
+    "sha": "d05e4aaf257c172d1b4655c548e038b92df67da2",
+    "license": "Apache-2.0",
+    "redistributed": false,
+    "submodules": [
+      {
+        "sha": "fb9a40f1b8165c848cf49fdb396722af7181ff97",
+        "path": "external/DirectX-Headers",
+        "initialized": false
+      },
+      {
+        "sha": "0a92994d729ff76a58f692d3028ca1b64b145d91",
+        "path": "external/FP16",
+        "initialized": true
+      },
+      {
+        "sha": "1677374f23352716fc52183255a40c1b8e1d53eb",
+        "path": "external/PicoSHA2",
+        "initialized": true
+      },
+      {
+        "sha": "131278458ea8eebe6a6e9c476fbcf71278726e1a",
+        "path": "external/SPIRV-Cross",
+        "initialized": false
+      },
+      {
+        "sha": "b2a156e1c0434bc8c99aaebba1c7be98be7ac580",
+        "path": "external/SPIRV-Headers",
+        "initialized": true
+      },
+      {
+        "sha": "1aceb6af56e74b92a00378842dda5c5a73f49a4b",
+        "path": "external/SPIRV-Reflect",
+        "initialized": false
+      },
+      {
+        "sha": "5e61ea2098220059e89523f1f47b0bcd8c33b89a",
+        "path": "external/SPIRV-Tools",
+        "initialized": true
+      },
+      {
+        "sha": "76f00ef6cbb1886eb1162d1fa39bee8b51e22ee8",
+        "path": "external/Vulkan-Headers",
+        "initialized": false
+      },
+      {
+        "sha": "a88bc520a08d574b5b5363e56d6a5b4d106b77bc",
+        "path": "external/VulkanMemoryAllocator",
+        "initialized": false
+      },
+      {
+        "sha": "150b16ad12ad58a9a93b8988ded913e632a4df4f",
+        "path": "external/assets",
+        "initialized": false
+      },
+      {
+        "sha": "647eccde8e87d7669be1be8c661e26f1a78a3244",
+        "path": "external/backward_cpp",
+        "initialized": false
+      },
+      {
+        "sha": "0fd6b4f71dd85b2009ee4d1aeb296e2c11fc9d68",
+        "path": "external/eigen",
+        "initialized": true
+      },
+      {
+        "sha": "23685e3caeb249de6e082ae513bc1402e68b0643",
+        "path": "external/glad",
+        "initialized": false
+      },
+      {
+        "sha": "cf9263d56662ee7fcc18add84d91243167cc0328",
+        "path": "external/glfw",
+        "initialized": false
+      },
+      {
+        "sha": "06ed280db4e274fa5e1f36d5ea4f7dfd654ff9b0",
+        "path": "external/glm",
+        "initialized": true
+      },
+      {
+        "sha": "e8b478a7356f21efbada1aae15b49b332cc54e3f",
+        "path": "external/googletest",
+        "initialized": false
+      },
+      {
+        "sha": "c7529c8ea8ef36e344d00cb38e1493b465ce6090",
+        "path": "external/imgui",
+        "initialized": false
+      },
+      {
+        "sha": "cf6f1dd01e660d5865d68bf5fa78f6376b89470a",
+        "path": "external/spdlog",
+        "initialized": true
+      },
+      {
+        "sha": "695b58e71c628d6d50b28d0ab737f110ea696e04",
+        "path": "external/volk",
+        "initialized": false
+      }
+    ]
+  }
+]

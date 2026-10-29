@@ -1,0 +1,58 @@
+{
+  "engines": [
+    {
+      "id": "mujoco",
+      "title": "MuJoCo",
+      "description": "MJX-JAX ROCm and MJWarp GPU backends",
+      "documentation": "recipes/mujoco/README.md"
+    },
+    {
+      "id": "genesis",
+      "title": "Genesis World",
+      "description": "Rigid, SPH, MPM, SPH with fixed rigid boundary",
+      "documentation": "recipes/genesis/README.md"
+    },
+    {
+      "id": "chrono",
+      "title": "Project Chrono",
+      "description": "HIP FSI-SPH and DEM GPU solvers",
+      "documentation": "recipes/chrono/README.md"
+    },
+    {
+      "id": "incflo",
+      "title": "AMReX incflo",
+      "description": "Eulerian incompressible CFD",
+      "documentation": "recipes/incflo/README.md"
+    },
+    {
+      "id": "nekrs",
+      "title": "nekRS",
+      "description": "High-order incompressible CFD",
+      "documentation": "recipes/nekrs/README.md"
+    },
+    {
+      "id": "fluidlab",
+      "title": "FluidLab",
+      "description": "MPM forward solver",
+      "documentation": "recipes/fluidlab/README.md"
+    },
+    {
+      "id": "instinct",
+      "title": "Instinct Sim",
+      "description": "LIBERO GPU physics, OSC control and camera pipeline",
+      "documentation": "recipes/instinct/README.md"
+    },
+    {
+      "id": "taichi",
+      "title": "Taichi Lang",
+      "description": "AMD GPU supplied MPM88 example",
+      "documentation": "recipes/taichi/README.md"
+    },
+    {
+      "id": "gsplat",
+      "title": "GSplat",
+      "description": "GPU Gaussian rasterization; separate rendering adjunct",
+      "documentation": "recipes/gsplat/README.md"
+    }
+  ]
+}

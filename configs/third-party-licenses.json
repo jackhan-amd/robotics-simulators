@@ -1,0 +1,352 @@
+{
+  "components": [
+    {
+      "project": "MuJoCo",
+      "source_url": "https://github.com/google-deepmind/mujoco",
+      "revision": "a892750516336d8358949f4518fcc4fbbd85beae",
+      "license": "Apache-2.0",
+      "license_status": "verified_source_text",
+      "notices": [
+        {
+          "file": "third_party_notices/mujoco/LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "upstream_path": "LICENSE",
+          "url": "https://github.com/google-deepmind/mujoco/blob/a892750516336d8358949f4518fcc4fbbd85beae/LICENSE"
+        }
+      ],
+      "upstream_payload_in_git": false,
+      "scope": "External dependency. Its license is not changed by this repository MIT license."
+    },
+    {
+      "project": "Genesis World",
+      "source_url": "https://github.com/Genesis-Embodied-AI/genesis-world",
+      "revision": "90d55545c193082a8e32f9b1b6b7732f14d89be8",
+      "license": "Apache-2.0",
+      "license_status": "verified_source_text",
+      "notices": [
+        {
+          "file": "third_party_notices/genesis-world/LICENSE",
+          "sha256": "43070e2d4e532684de521b885f385d0841030efa2b1a20bafb76133a5e1379c1",
+          "upstream_path": "LICENSE",
+          "url": "https://github.com/Genesis-Embodied-AI/genesis-world/blob/90d55545c193082a8e32f9b1b6b7732f14d89be8/LICENSE"
+        }
+      ],
+      "upstream_payload_in_git": false,
+      "scope": "External dependency. Its license is not changed by this repository MIT license."
+    },
+    {
+      "project": "Chrono",
+      "source_url": "https://github.com/projectchrono/chrono",
+      "revision": "6f4004c358e5d0029aa3e39fc5ed13d66216f494",
+      "license": "BSD-3-Clause",
+      "license_status": "verified_source_text",
+      "notices": [
+        {
+          "file": "third_party_notices/chrono/LICENSE",
+          "sha256": "5f625eb4c9e0ddf86db9d1ed9b6adb5b30296ea81919282b2f38c977136bf079",
+          "upstream_path": "LICENSE",
+          "url": "https://github.com/projectchrono/chrono/blob/6f4004c358e5d0029aa3e39fc5ed13d66216f494/LICENSE"
+        }
+      ],
+      "upstream_payload_in_git": false,
+      "scope": "External dependency. Its license is not changed by this repository MIT license."
+    },
+    {
+      "project": "incflo",
+      "source_url": "https://github.com/AMReX-Fluids/incflo",
+      "revision": "ccb90bc41d9def18dddc4e1c4122a7d517add630",
+      "license": "BSD-3-Clause",
+      "license_status": "verified_source_text",
+      "notices": [
+        {
+          "file": "third_party_notices/incflo/LICENSE",
+          "sha256": "e76c9f7b48ac3b26abd685f9fd4d1d3130105e3e0e7153c536fed974521abbe8",
+          "upstream_path": "LICENSE",
+          "url": "https://github.com/AMReX-Fluids/incflo/blob/ccb90bc41d9def18dddc4e1c4122a7d517add630/LICENSE"
+        }
+      ],
+      "upstream_payload_in_git": false,
+      "scope": "External dependency. Its license is not changed by this repository MIT license."
+    },
+    {
+      "project": "AMReX",
+      "source_url": "https://github.com/AMReX-Codes/amrex",
+      "revision": "7f2fecd4adefeb6bcbc2a6d87243f062da0ef912",
+      "license": "BSD-3-Clause",
+      "license_status": "verified_source_text",
+      "notices": [
+        {
+          "file": "third_party_notices/amrex/LICENSE",
+          "sha256": "94c3bcb026d59a187b46116a41e1954035b95c2ab42bd69e318b6a55abc9e33e",
+          "upstream_path": "LICENSE",
+          "url": "https://github.com/AMReX-Codes/amrex/blob/7f2fecd4adefeb6bcbc2a6d87243f062da0ef912/LICENSE"
+        },
+        {
+          "file": "third_party_notices/amrex/NOTICE",
+          "sha256": "7975ef99e5760ae2baffcfaeba639a8e781fef482f230e0c0bdf49b3a4b21772",
+          "upstream_path": "NOTICE",
+          "url": "https://github.com/AMReX-Codes/amrex/blob/7f2fecd4adefeb6bcbc2a6d87243f062da0ef912/NOTICE"
+        }
+      ],
+      "upstream_payload_in_git": false,
+      "scope": "External dependency. Its license is not changed by this repository MIT license."
+    },
+    {
+      "project": "AMReX-Hydro",
+      "source_url": "https://github.com/AMReX-Fluids/AMReX-Hydro",
+      "revision": "a153304acd787205b170b0f7fd8284627e076056",
+      "license": "BSD-3-Clause",
+      "license_status": "verified_source_text",
+      "notices": [
+        {
+          "file": "third_party_notices/amrex-hydro/LICENSE",
+          "sha256": "497fd783f26ce0ecaedd4fdfcdf6e9f5e4f1aaaf15317d15bb4171dff4e51f7f",
+          "upstream_path": "LICENSE",
+          "url": "https://github.com/AMReX-Fluids/AMReX-Hydro/blob/a153304acd787205b170b0f7fd8284627e076056/LICENSE"
+        }
+      ],
+      "upstream_payload_in_git": false,
+      "scope": "External dependency. Its license is not changed by this repository MIT license."
+    },
+    {
+      "project": "Quadrants",
+      "source_url": "https://github.com/Genesis-Embodied-AI/quadrants",
+      "revision": "00423caa93b620f6f3ebbb5d3f26e74cf56ecf5b",
+      "license": "Apache-2.0",
+      "license_status": "verified_source_text",
+      "notices": [
+        {
+          "file": "third_party_notices/quadrants/LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "upstream_path": "LICENSE",
+          "url": "https://github.com/Genesis-Embodied-AI/quadrants/blob/00423caa93b620f6f3ebbb5d3f26e74cf56ecf5b/LICENSE"
+        }
+      ],
+      "upstream_payload_in_git": false,
+      "scope": "External dependency. Its license is not changed by this repository MIT license."
+    },
+    {
+      "project": "Eigen",
+      "source_url": "https://gitlab.com/libeigen/eigen",
+      "revision": "3147391d946bb4b6c68edd901f2add6ac1f31f8c",
+      "license": "MPL-2.0 (Eigen core; other files may have separate licenses)",
+      "license_status": "verified_source_text",
+      "notices": [
+        {
+          "file": "third_party_notices/eigen/COPYING.APACHE",
+          "sha256": "03379001a7b12a2ec997a25554247d985270b353c10d5bafee9ac8d6519820b7",
+          "upstream_path": "COPYING.APACHE",
+          "url": "https://gitlab.com/libeigen/eigen/blob/3147391d946bb4b6c68edd901f2add6ac1f31f8c/COPYING.APACHE"
+        },
+        {
+          "file": "third_party_notices/eigen/COPYING.BSD",
+          "sha256": "51928dce36213c5333ba3172e847d735d4c6e9b7ff2722a326c49067155b82eb",
+          "upstream_path": "COPYING.BSD",
+          "url": "https://gitlab.com/libeigen/eigen/blob/3147391d946bb4b6c68edd901f2add6ac1f31f8c/COPYING.BSD"
+        },
+        {
+          "file": "third_party_notices/eigen/COPYING.GPL",
+          "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+          "upstream_path": "COPYING.GPL",
+          "url": "https://gitlab.com/libeigen/eigen/blob/3147391d946bb4b6c68edd901f2add6ac1f31f8c/COPYING.GPL"
+        },
+        {
+          "file": "third_party_notices/eigen/COPYING.LGPL",
+          "sha256": "dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551",
+          "upstream_path": "COPYING.LGPL",
+          "url": "https://gitlab.com/libeigen/eigen/blob/3147391d946bb4b6c68edd901f2add6ac1f31f8c/COPYING.LGPL"
+        },
+        {
+          "file": "third_party_notices/eigen/COPYING.MINPACK",
+          "sha256": "c87b7f8ee88f6195e91743820c00354833583aef091b72e2d4a49c8e28e798a0",
+          "upstream_path": "COPYING.MINPACK",
+          "url": "https://gitlab.com/libeigen/eigen/blob/3147391d946bb4b6c68edd901f2add6ac1f31f8c/COPYING.MINPACK"
+        },
+        {
+          "file": "third_party_notices/eigen/COPYING.MPL2",
+          "sha256": "fab3dd6bdab226f1c08630b1dd917e11fcb4ec5e1e020e2c16f83a0a13863e85",
+          "upstream_path": "COPYING.MPL2",
+          "url": "https://gitlab.com/libeigen/eigen/blob/3147391d946bb4b6c68edd901f2add6ac1f31f8c/COPYING.MPL2"
+        },
+        {
+          "file": "third_party_notices/eigen/COPYING.README",
+          "sha256": "c83230b770f17ef1386ea1fd3681271dd98aa93646bdbfb5bff3a1b7050fff9d",
+          "upstream_path": "COPYING.README",
+          "url": "https://gitlab.com/libeigen/eigen/blob/3147391d946bb4b6c68edd901f2add6ac1f31f8c/COPYING.README"
+        }
+      ],
+      "upstream_payload_in_git": false,
+      "scope": "External dependency. Its license is not changed by this repository MIT license."
+    },
+    {
+      "project": "MuJoCo Warp (optional CUDA reference)",
+      "source_url": "https://github.com/google-deepmind/mujoco_warp",
+      "revision": "c384ac51df67eb92ab7657cc472ff7494dc036bf",
+      "license": "Apache-2.0",
+      "license_status": "recorded_upstream_declaration",
+      "notices": [],
+      "upstream_payload_in_git": false,
+      "scope": "External dependency. Its license is not changed by this repository MIT license."
+    },
+    {
+      "project": "NVIDIA Warp (MJWarp dependency)",
+      "source_url": "https://github.com/NVIDIA/warp",
+      "revision": "ffa038b1adf3927a8e893d4536f1a7562f17d749",
+      "license": "Apache-2.0",
+      "license_status": "recorded_upstream_declaration",
+      "notices": [],
+      "upstream_payload_in_git": false,
+      "scope": "External dependency. Its license is not changed by this repository MIT license.",
+      "issue": "Prebuilt Warp may include libmathdx under separate NVIDIA terms; AMD source recipe disables libmathdx."
+    },
+    {
+      "project": "MJWarp public AMD port",
+      "source_url": "https://github.com/AMD-Ecosystem/mujoco_warp",
+      "revision": "9dfdf7ab8d5a996fe143e9e2c1e5da646c6fc14f",
+      "license": "Apache-2.0",
+      "license_status": "verified_source_text",
+      "notices": [
+        {
+          "file": "third_party_notices/mjwarp-public-amd-port/LICENSE",
+          "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
+          "upstream_path": "LICENSE",
+          "url": "https://github.com/AMD-Ecosystem/mujoco_warp/blob/9dfdf7ab8d5a996fe143e9e2c1e5da646c6fc14f/LICENSE"
+        }
+      ],
+      "upstream_payload_in_git": false,
+      "scope": "External dependency. Its license is not changed by this repository MIT license."
+    },
+    {
+      "project": "Warp public AMD port",
+      "source_url": "https://github.com/AMD-Ecosystem/warp",
+      "revision": "2e2673bb7b90eaabb9cb89dc1f55a76f61c13aab",
+      "license": "Apache-2.0",
+      "license_status": "verified_source_text",
+      "notices": [
+        {
+          "file": "third_party_notices/warp-public-amd-port/LICENSE.md",
+          "sha256": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9",
+          "upstream_path": "LICENSE.md",
+          "url": "https://github.com/AMD-Ecosystem/warp/blob/2e2673bb7b90eaabb9cb89dc1f55a76f61c13aab/LICENSE.md"
+        }
+      ],
+      "upstream_payload_in_git": false,
+      "scope": "External dependency. Its license is not changed by this repository MIT license."
+    },
+    {
+      "project": "fluidlab",
+      "source_url": "https://github.com/zhouxian/FluidLab",
+      "revision": "7295eb6ed7ee92b2be471fd30b432238577f28ce",
+      "license": null,
+      "license_status": "missing",
+      "notices": [],
+      "upstream_payload_in_git": false,
+      "scope": "External dependency. Its license is not changed by this repository MIT license.",
+      "issue": "Pinned repository has no root license grant; renderer subdirectories have separate terms. No upstream FluidLab source or contextual patch is published."
+    },
+    {
+      "project": "nekrs",
+      "source_url": "https://github.com/Nek5000/nekRS",
+      "revision": "96b3cf9e5bacede16568826c04a21bc0fe50dc7d",
+      "license": "BSD-3-Clause",
+      "license_status": "verified_source_text",
+      "notices": [
+        {
+          "file": "third_party_notices/nekrs/LICENSE",
+          "sha256": "c0132c77930c0a9f4062383d8c3a29b43dad81410efd8f171194f2e3148c07c6",
+          "upstream_path": "LICENSE",
+          "url": "https://github.com/Nek5000/nekRS/blob/96b3cf9e5bacede16568826c04a21bc0fe50dc7d/LICENSE"
+        }
+      ],
+      "upstream_payload_in_git": false,
+      "scope": "External dependency. Its license is not changed by this repository MIT license."
+    },
+    {
+      "project": "taichi-amd",
+      "source_url": "https://github.com/AMD-Ecosystem/taichi",
+      "revision": "d05e4aaf257c172d1b4655c548e038b92df67da2",
+      "license": "Apache-2.0",
+      "license_status": "verified_source_text",
+      "notices": [
+        {
+          "file": "third_party_notices/taichi-amd/LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "upstream_path": "LICENSE",
+          "url": "https://github.com/AMD-Ecosystem/taichi/blob/d05e4aaf257c172d1b4655c548e038b92df67da2/LICENSE"
+        }
+      ],
+      "upstream_payload_in_git": false,
+      "scope": "External dependency. Its license is not changed by this repository MIT license."
+    },
+    {
+      "project": "GSplat AMD distribution",
+      "source_url": "https://github.com/AMD-Ecosystem/gsplat",
+      "revision": "ff8bc5489545bcc1b5a2b997d975834429a0d7af",
+      "license": "Apache-2.0",
+      "license_status": "verified_source_text",
+      "notices": [
+        {
+          "file": "third_party_notices/gsplat-study/LICENSE",
+          "sha256": "96a4f89293c0df19880da9b0e35f67589f5885ea61b224ef16bb2bd599a8a44d",
+          "upstream_path": "LICENSE",
+          "url": "https://github.com/AMD-Ecosystem/gsplat/blob/ff8bc5489545bcc1b5a2b997d975834429a0d7af/LICENSE"
+        }
+      ],
+      "upstream_payload_in_git": false,
+      "scope": "External study dependency. Parent license does not replace bundled third-party, model, dataset or asset terms; see retained provenance. No runtime or asset payload is included."
+    },
+    {
+      "project": "Instinct Sim / Faster Action Models",
+      "source_url": "https://github.com/AMD-AGI/faster-action-models",
+      "revision": "a5fa73101988870e51f04fe1e7be5da56dda3841",
+      "license": "Apache-2.0",
+      "license_status": "verified_source_text",
+      "notices": [
+        {
+          "file": "third_party_notices/instinct-sim-study/LICENSE",
+          "sha256": "9edcf3eb96503062ab5d44a550f135248ac4000419bb9a1cc03577aeeb9152da",
+          "upstream_path": "LICENSE",
+          "url": "https://github.com/AMD-AGI/faster-action-models/blob/a5fa73101988870e51f04fe1e7be5da56dda3841/LICENSE"
+        },
+        {
+          "file": "third_party_notices/instinct-sim-study/simulate/LICENSE",
+          "sha256": "9edcf3eb96503062ab5d44a550f135248ac4000419bb9a1cc03577aeeb9152da",
+          "upstream_path": "simulate/LICENSE",
+          "url": "https://github.com/AMD-AGI/faster-action-models/blob/a5fa73101988870e51f04fe1e7be5da56dda3841/simulate/LICENSE"
+        },
+        {
+          "file": "third_party_notices/instinct-sim-study/simulate/NOTICE",
+          "sha256": "ff4e583462df5b69df006a06fb10792234f7b0196f9e6cab647a1ae947a1f848",
+          "upstream_path": "simulate/NOTICE",
+          "url": "https://github.com/AMD-AGI/faster-action-models/blob/a5fa73101988870e51f04fe1e7be5da56dda3841/simulate/NOTICE"
+        },
+        {
+          "file": "third_party_notices/instinct-sim-study/simulate/PROVENANCE.md",
+          "sha256": "2ab14c4e7a47acd0fa89a67d4192c7983674d4f13160339b96ca609ae57c2a40",
+          "upstream_path": "simulate/PROVENANCE.md",
+          "url": "https://github.com/AMD-AGI/faster-action-models/blob/a5fa73101988870e51f04fe1e7be5da56dda3841/simulate/PROVENANCE.md"
+        }
+      ],
+      "upstream_payload_in_git": false,
+      "scope": "External study dependency. Parent license does not replace bundled third-party, model, dataset or asset terms; see retained provenance. No runtime or asset payload is included."
+    },
+    {
+      "project": "LIBERO study dependency",
+      "source_url": "https://github.com/Lifelong-Robot-Learning/LIBERO",
+      "revision": "8f1084e3132a39270c3a13ebe37270a43ece2a01",
+      "license": "MIT",
+      "license_status": "verified_source_text",
+      "notices": [
+        {
+          "file": "third_party_notices/libero-study/LICENSE",
+          "sha256": "e2885fd30a08381b799c4a33385522b23d637b4051b8f9a7f9f2519944b68ff6",
+          "upstream_path": "LICENSE",
+          "url": "https://github.com/Lifelong-Robot-Learning/LIBERO/blob/8f1084e3132a39270c3a13ebe37270a43ece2a01/LICENSE"
+        }
+      ],
+      "upstream_payload_in_git": false,
+      "scope": "External study dependency. Parent license does not replace bundled third-party, model, dataset or asset terms; see retained provenance. No runtime or asset payload is included."
+    }
+  ],
+  "scope": "Simulator recipe dependencies only. Models, worlds and training dependencies belong to robotics-studio."
+}

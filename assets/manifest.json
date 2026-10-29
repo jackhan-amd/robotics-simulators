@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "source-mujoco",
+      "kind": "git",
+      "destination": "upstream/mujoco",
+      "url": "https://github.com/google-deepmind/mujoco",
+      "revision": "a892750516336d8358949f4518fcc4fbbd85beae",
+      "license": "Apache-2.0",
+      "license_status": "verified",
+      "license_url": "https://github.com/google-deepmind/mujoco/tree/a892750516336d8358949f4518fcc4fbbd85beae",
+      "scope": "source",
+      "bytes": null
+    },
+    {
+      "id": "source-genesis-world",
+      "kind": "git",
+      "destination": "upstream/genesis-world",
+      "url": "https://github.com/Genesis-Embodied-AI/genesis-world",
+      "revision": "90d55545c193082a8e32f9b1b6b7732f14d89be8",
+      "license": "Apache-2.0",
+      "license_status": "verified",
+      "license_url": "https://github.com/Genesis-Embodied-AI/genesis-world/tree/90d55545c193082a8e32f9b1b6b7732f14d89be8",
+      "scope": "source",
+      "bytes": null
+    },
+    {
+      "id": "source-chrono",
+      "kind": "git",
+      "destination": "upstream/chrono",
+      "url": "https://github.com/projectchrono/chrono",
+      "revision": "6f4004c358e5d0029aa3e39fc5ed13d66216f494",
+      "license": "BSD-3-Clause",
+      "license_status": "verified",
+      "license_url": "https://github.com/projectchrono/chrono/tree/6f4004c358e5d0029aa3e39fc5ed13d66216f494",
+      "scope": "source",
+      "bytes": null
+    },
+    {
+      "id": "source-incflo",
+      "kind": "git",
+      "destination": "upstream/incflo",
+      "url": "https://github.com/AMReX-Fluids/incflo",
+      "revision": "ccb90bc41d9def18dddc4e1c4122a7d517add630",
+      "license": "BSD-3-Clause",
+      "license_status": "verified",
+      "license_url": "https://github.com/AMReX-Fluids/incflo/tree/ccb90bc41d9def18dddc4e1c4122a7d517add630",
+      "scope": "source",
+      "bytes": null
+    },
+    {
+      "id": "source-amrex",
+      "kind": "git",
+      "destination": "upstream/amrex",
+      "url": "https://github.com/AMReX-Codes/amrex",
+      "revision": "7f2fecd4adefeb6bcbc2a6d87243f062da0ef912",
+      "license": "BSD-3-Clause",
+      "license_status": "verified",
+      "license_url": "https://github.com/AMReX-Codes/amrex/tree/7f2fecd4adefeb6bcbc2a6d87243f062da0ef912",
+      "scope": "source",
+      "bytes": null
+    },
+    {
+      "id": "source-amrex-hydro",
+      "kind": "git",
+      "destination": "upstream/amrex-hydro",
+      "url": "https://github.com/AMReX-Fluids/AMReX-Hydro",
+      "revision": "a153304acd787205b170b0f7fd8284627e076056",
+      "license": "BSD-3-Clause",
+      "license_status": "verified",
+      "license_url": "https://github.com/AMReX-Fluids/AMReX-Hydro/tree/a153304acd787205b170b0f7fd8284627e076056",
+      "scope": "source",
+      "bytes": null
+    },
+    {
+      "id": "source-quadrants",
+      "kind": "git",
+      "destination": "upstream/quadrants",
+      "url": "https://github.com/Genesis-Embodied-AI/quadrants",
+      "revision": "00423caa93b620f6f3ebbb5d3f26e74cf56ecf5b",
+      "license": "Apache-2.0",
+      "license_status": "verified",
+      "license_url": "https://github.com/Genesis-Embodied-AI/quadrants/tree/00423caa93b620f6f3ebbb5d3f26e74cf56ecf5b",
+      "scope": "source",
+      "bytes": null
+    },
+    {
+      "id": "source-mjwarp-public-amd-port",
+      "kind": "git",
+      "destination": "upstream/mujoco-warp-amd",
+      "url": "https://github.com/AMD-Ecosystem/mujoco_warp",
+      "revision": "9dfdf7ab8d5a996fe143e9e2c1e5da646c6fc14f",
+      "license": "Apache-2.0",
+      "license_status": "verified",
+      "license_url": "https://github.com/AMD-Ecosystem/mujoco_warp/tree/9dfdf7ab8d5a996fe143e9e2c1e5da646c6fc14f",
+      "scope": "source",
+      "bytes": null
+    },
+    {
+      "id": "source-warp-public-amd-port",
+      "kind": "git",
+      "destination": "upstream/warp-amd",
+      "url": "https://github.com/AMD-Ecosystem/warp",
+      "revision": "2e2673bb7b90eaabb9cb89dc1f55a76f61c13aab",
+      "license": "Apache-2.0",
+      "license_status": "verified",
+      "license_url": "https://github.com/AMD-Ecosystem/warp/tree/2e2673bb7b90eaabb9cb89dc1f55a76f61c13aab",
+      "scope": "source",
+      "bytes": null
+    },
+    {
+      "id": "source-fluidlab",
+      "kind": "git",
+      "destination": "upstream/fluidlab",
+      "url": "https://github.com/zhouxian/FluidLab",
+      "revision": "7295eb6ed7ee92b2be471fd30b432238577f28ce",
+      "license": null,
+      "license_status": "requires_review",
+      "license_url": "https://github.com/zhouxian/FluidLab/tree/7295eb6ed7ee92b2be471fd30b432238577f28ce",
+      "scope": "source",
+      "bytes": null
+    },
+    {
+      "id": "source-nekrs",
+      "kind": "git",
+      "destination": "upstream/nekrs",
+      "url": "https://github.com/Nek5000/nekRS",
+      "revision": "96b3cf9e5bacede16568826c04a21bc0fe50dc7d",
+      "license": "BSD-3-Clause",
+      "license_status": "verified",
+      "license_url": "https://github.com/Nek5000/nekRS/tree/96b3cf9e5bacede16568826c04a21bc0fe50dc7d",
+      "scope": "source",
+      "bytes": null
+    },
+    {
+      "id": "source-taichi-amd",
+      "kind": "git",
+      "destination": "upstream/taichi-amd",
+      "url": "https://github.com/AMD-Ecosystem/taichi",
+      "revision": "d05e4aaf257c172d1b4655c548e038b92df67da2",
+      "license": "Apache-2.0",
+      "license_status": "verified",
+      "license_url": "https://github.com/AMD-Ecosystem/taichi/tree/d05e4aaf257c172d1b4655c548e038b92df67da2",
+      "scope": "source",
+      "bytes": null
+    },
+    {
+      "id": "torch-cpu-py312",
+      "kind": "file",
+      "destination": "assets/wheels/torch-2.14.1+cpu-cp312-cp312-manylinux_2_28_x86_64.whl",
+      "url": "https://download-r2.pytorch.org/whl/cpu/torch-2.14.1%2Bcpu-cp312-cp312-manylinux_2_28_x86_64.whl",
+      "sha256": "5a6363570c753812540a05eb82380e329469cbe668643e88111414c12627711f",
+      "license": "BSD-3-Clause plus bundled notices",
+      "license_status": "verified",
+      "license_url": "https://github.com/pytorch/pytorch/blob/v2.14.1/LICENSE",
+      "scope": "python-runtime"
+    },
+    {
+      "id": "runtime-nekrs-build-image",
+      "kind": "container",
+      "image": "rocm/vllm-dev@sha256:4fa5bc9c24d25ef7e0fe38b23fc5f2b27fc986177bd2f9e496997bcf5af03871",
+      "destination": "runtime-images/nekrs-build",
+      "license": "Aggregate image retains component-specific terms; no image payload redistribution",
+      "license_status": "requires_review",
+      "license_url": "https://github.com/ROCm/vllm",
+      "scope": "Pinned local builder image. Plan/inspect only; no automatic pull, daemon or Docker storage changes."
+    }
+  ],
+  "payloads_in_repository": false
+}

@@ -1,0 +1,12 @@
+absl-py==2.5.1
+etils==1.14.0
+fsspec==2026.9.0
+glfw==2.11.0
+mujoco @ https://files.pythonhosted.org/packages/d1/8d/02517dee6ae29fa22c4c739a07c6f295db9faa2a23028f9e48b28c2f697f/mujoco-3.16.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl
+mujoco-warp==3.16.0  # source SHA in sources.json
+numpy==2.5.4
+pyopengl==3.1.10
+typing-extensions==4.16.0
+warp-lang @ https://files.pythonhosted.org/packages/a8/ba/36023c3161c45f1c509c20c501b17980705fdd3b6c20b7ee9267f50f44a2/warp_lang-1.15.0-py3-none-manylinux_2_28_x86_64.whl
+websockets==17.3
+zipp==4.1.1

@@ -1,0 +1,71 @@
+{
+  "version": "2.0",
+  "status": "COMPLETED",
+  "constraint": "Only provided upstream examples/models. Preserve model geometry, physical parameters and native controllers. Add headless execution, env replication, reset, synchronization and measurement only. MI355X GPU physics only; CPU references for sanity checks only.",
+  "measurement": "Five repetitions after warm-up. Fixed per-env workload; env-step/s, per-env RTF, wall range and execution mode. Native GPU batching and independent-process replicas reported separately. Existing simple-scene measurements remain baselines.",
+  "cases": [
+    {
+      "engine": "mujoco",
+      "example": "AMD mujoco_warp benchmarks/humanoid/humanoid.xml",
+      "status": "Measured: envs 2048,4096,8192,16384,32768,65536; envs 2048,4096,8192,16384,32768,65536; provided-example measurements in env-scaling-data.json"
+    },
+    {
+      "engine": "genesis",
+      "example": "examples/rigid/single_franka_envs.py",
+      "status": "Measured: envs 1,16,64,256,1024,2048,4096,8192,16384,32768,65536; provided-example measurements in env-scaling-data.json",
+      "envs": [
+        1,
+        16,
+        64,
+        256,
+        1024,
+        2048,
+        4096,
+        8192,
+        16384,
+        32768,
+        65536
+      ]
+    },
+    {
+      "engine": "genesis",
+      "example": "examples/coupling/sph_rigid.py",
+      "status": "Measured: envs 1,2,4,8; provided-example measurements in env-scaling-data.json"
+    },
+    {
+      "engine": "chrono",
+      "example": "src/demos/fsi/sph/demo_FSI-SPH_DamBreak.cpp and src/demos/dem/demo_DEM_repose.cpp",
+      "status": "Measured: envs 1,2,4,8; envs 1,2,4,8; provided-example measurements in env-scaling-data.json"
+    },
+    {
+      "engine": "incflo",
+      "example": "test_2d/benchmark.lid_driven_cavity",
+      "status": "Measured: envs 1,2,4,8; provided-example measurements in env-scaling-data.json"
+    },
+    {
+      "engine": "nekrs",
+      "example": "examples/tgv",
+      "status": "Measured: envs 1,2,4,8; provided-example measurements in env-scaling-data.json"
+    },
+    {
+      "engine": "fluidlab",
+      "example": "fluidlab/envs/mixing_env.py and supplied agent_mixing.yaml",
+      "status": "Measured: envs 1,2,4,8; provided-example measurements in env-scaling-data.json"
+    },
+    {
+      "engine": "taichi",
+      "example": "taichi/examples/simulation/mpm88.py",
+      "status": "Measured: envs 1,2,4,8,16; provided-example measurements in env-scaling-data.json"
+    },
+    {
+      "engine": "gsplat",
+      "example": "provided rendering example and its supplied/downloadable scene",
+      "status": "Measured: envs 1,2,4,8,16,32; provided-example measurements in env-scaling-data.json"
+    },
+    {
+      "engine": "instinct",
+      "example": "provided LIBERO/RoboCasa backend scene",
+      "status": "Measured: envs 1,2,4,8,16,32; provided-example measurements in env-scaling-data.json"
+    }
+  ]
+}

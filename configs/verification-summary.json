@@ -1,0 +1,281 @@
+{
+  "last_reviewed": "2026-10-23",
+  "scope": "Historical scene-specific functional checks. This summary is not generated from the current process exit code. No throughput qualification.",
+  "source_commit": "49735379a2703439f02ffdb1b7d042403f1a626f",
+  "configurations": [
+    {
+      "configuration": "mjx_jax",
+      "engine": "mujoco",
+      "title": "MuJoCo MJX-JAX",
+      "backend": "amdgpu",
+      "status": "PASS",
+      "g1": true,
+      "device": "gfx1151",
+      "scene": "ROCm JAX implementation; 500 steps × 3 reset rollouts.",
+      "gates": {
+        "analytic_freefall": true,
+        "contact": true,
+        "cpu_vz": true,
+        "cpu_z": true,
+        "discrete_euler": true,
+        "final_height": true,
+        "finite_state": true,
+        "gpu_resident": true,
+        "penetration": true,
+        "time": true
+      },
+      "cuda_reference_status": null
+    },
+    {
+      "configuration": "mjwarp_final",
+      "engine": "mujoco",
+      "title": "MJWarp",
+      "backend": "hip",
+      "status": "PASS",
+      "g1": true,
+      "device": "gfx1151",
+      "scene": "CUDA: upstream. ROCm: public AMD port + official SDK/internal integer type options. 500 steps and CPU state comparison.",
+      "gates": {
+        "finite_state": true,
+        "cpu_qpos": true,
+        "cpu_qvel": true,
+        "analytic_freefall": true,
+        "discrete_euler": true,
+        "penetration": true,
+        "final_height": true,
+        "final_speed": true,
+        "contact_occurred": true,
+        "simulation_time": true,
+        "no_buffer_overflow": true,
+        "gpu_resident": true,
+        "physics_kernels": true,
+        "hip_device": true
+      },
+      "cuda_reference_status": "PASS"
+    },
+    {
+      "configuration": "genesis_freefall",
+      "engine": "genesis",
+      "title": "Genesis freefall",
+      "backend": "amdgpu",
+      "status": "PASS",
+      "g1": true,
+      "device": "gfx1151",
+      "scene": "50 steps; exact physics gates and selected device checked.",
+      "gates": {
+        "analytic_freefall": true,
+        "backend_verified": true,
+        "finite_state": true,
+        "finite_velocity": true,
+        "profiled_simulation_kernels": true,
+        "velocity": true
+      },
+      "cuda_reference_status": "PASS"
+    },
+    {
+      "configuration": "genesis_articulation",
+      "engine": "genesis",
+      "title": "Genesis articulation",
+      "backend": "amdgpu",
+      "status": "PASS",
+      "g1": true,
+      "device": "gfx1151",
+      "scene": "2-DOF pendulum; 50 steps, joint-limit and motion validation.",
+      "gates": {
+        "backend_verified": true,
+        "finite_state": true,
+        "joint_limits": true,
+        "motion": true,
+        "profiled_simulation_kernels": true
+      },
+      "cuda_reference_status": "PASS"
+    },
+    {
+      "configuration": "genesis_contacts",
+      "engine": "genesis",
+      "title": "Genesis contact",
+      "backend": "amdgpu",
+      "status": "PASS",
+      "g1": true,
+      "device": "gfx1151",
+      "scene": "Three boxes; documented monolithic HIP dispatch and CPU trajectory checks. CUDA uses its validated default dispatch.",
+      "gates": {
+        "backend_verified": true,
+        "drop": true,
+        "finite_state": true,
+        "finite_velocity": true,
+        "penetration": true,
+        "profiled_simulation_kernels": true,
+        "rise": true,
+        "speed": true,
+        "cpu_positions": true,
+        "cpu_velocities": true
+      },
+      "cuda_reference_status": "PASS"
+    },
+    {
+      "configuration": "genesis_sph",
+      "engine": "genesis",
+      "title": "Genesis SPH",
+      "backend": "amdgpu",
+      "status": "PASS",
+      "g1": true,
+      "device": "gfx1151",
+      "scene": "27 particles, 50 steps; original solver, static-mass readout and COM/mass validation.",
+      "gates": {
+        "backend_verified": true,
+        "com_freefall": true,
+        "domain_bounds": true,
+        "downward_com": true,
+        "finite_state": true,
+        "mass_conservation": true,
+        "particle_count": true,
+        "profiled_simulation_kernels": true,
+        "speed": true
+      },
+      "cuda_reference_status": "PASS"
+    },
+    {
+      "configuration": "genesis_mpm",
+      "engine": "genesis",
+      "title": "Genesis MPM",
+      "backend": "amdgpu",
+      "status": "PASS",
+      "g1": true,
+      "device": "gfx1151",
+      "scene": "50 steps; exact physics gates and selected device checked.",
+      "gates": {
+        "backend_verified": true,
+        "com_freefall": true,
+        "domain_bounds": true,
+        "downward_com": true,
+        "finite_state": true,
+        "mass_conservation": true,
+        "particle_count": true,
+        "profiled_simulation_kernels": true,
+        "speed": true
+      },
+      "cuda_reference_status": "PASS"
+    },
+    {
+      "configuration": "genesis_coupling",
+      "engine": "genesis",
+      "title": "Genesis SPH + fixed rigid",
+      "backend": "amdgpu",
+      "status": "PASS",
+      "g1": true,
+      "device": "gfx1151",
+      "scene": "27 particles with fixed rigid boundary, 50 steps; original solver and COM/mass validation.",
+      "gates": {
+        "backend_verified": true,
+        "domain_bounds": true,
+        "finite_state": true,
+        "fixed_rigid": true,
+        "mass_conservation": true,
+        "particle_count": true,
+        "profiled_simulation_kernels": true,
+        "speed": true
+      },
+      "cuda_reference_status": "PASS"
+    },
+    {
+      "configuration": "chrono_fsi",
+      "engine": "chrono",
+      "title": "Chrono FSI-SPH",
+      "backend": "hip",
+      "status": "PASS",
+      "g1": true,
+      "device": "gfx1151",
+      "scene": "27 fluid particles + 6522 boundary markers, 50 steps; HIP kernels and conservation gates.",
+      "gates": {
+        "finite": true,
+        "bounds": true,
+        "density": true,
+        "mass": true,
+        "speed": true,
+        "com": true
+      },
+      "cuda_reference_status": "PASS"
+    },
+    {
+      "configuration": "chrono_dem",
+      "engine": "chrono",
+      "title": "Chrono DEM",
+      "backend": "hip",
+      "status": "PASS",
+      "g1": true,
+      "device": "gfx1151",
+      "scene": "27 spheres, 50-step gravity integration in cm/g/s; native managed memory policy.",
+      "gates": {
+        "finite": true,
+        "bounds": true,
+        "particle_count": true,
+        "com": true,
+        "velocity": true
+      },
+      "cuda_reference_status": "PASS"
+    },
+    {
+      "configuration": "incflo",
+      "engine": "incflo",
+      "title": "AMReX incflo",
+      "backend": "hip",
+      "status": "PASS",
+      "g1": true,
+      "device": "gfx1151",
+      "scene": "16×16 2D cavity, 50 steps; projection residual and all-field CPU comparison.",
+      "gates": {
+        "backend": true,
+        "density": true,
+        "finite_fields": true,
+        "lid_motion": true,
+        "projection_residual": true,
+        "steps": true,
+        "time": true,
+        "velocity": true
+      },
+      "cuda_reference_status": "PASS"
+    },
+    {
+      "configuration": "nekrs",
+      "engine": "nekrs",
+      "title": "nekRS",
+      "backend": "hip",
+      "status": "PASS",
+      "g1": true,
+      "device": "gfx1151",
+      "scene": "Ethier: 32 elements, order5, 10 steps; analytical L2, CPU norm and actual HIP trace.",
+      "gates": {
+        "ten_steps": true,
+        "time": true,
+        "finite": true,
+        "velocity_l2": true,
+        "pressure_l2": true,
+        "scalar_l2": true
+      },
+      "cuda_reference_status": null
+    },
+    {
+      "configuration": "fluidlab",
+      "engine": "fluidlab",
+      "title": "FluidLab",
+      "backend": "hip",
+      "status": "PASS",
+      "g1": true,
+      "device": "gfx1151",
+      "scene": "Forward MPM core: 27 particles, 16³ grid, 250 steps/0.05s; API compatibility patch and real ISA runtime artifact, CPU states and HIP kernels checked.",
+      "gates": {
+        "backend": true,
+        "bounds": true,
+        "downward": true,
+        "finite": true,
+        "freefall_com": true,
+        "mass": true,
+        "particle_count": true,
+        "speed": true,
+        "step_count": true
+      },
+      "cuda_reference_status": null
+    }
+  ]
+}

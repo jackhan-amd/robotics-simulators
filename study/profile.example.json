@@ -1,0 +1,9 @@
+{
+  "LAB_ROOT": "/path/to/external/study",
+  "STUDY_STORAGE_ROOT": "/path/to/external/study/storage",
+  "STUDY_SSH_TARGET": "gpu-server-alias",
+  "STUDY_SSH_PORT": 22,
+  "STUDY_STRICT_HOST_KEY_CHECKING": true,
+  "ROCM_PATH": "/path/to/matching/rocm-sdk",
+  "ROCM_BLOGS_ROOT": "/path/to/rocm-blogs"
+}

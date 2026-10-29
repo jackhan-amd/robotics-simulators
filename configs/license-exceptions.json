@@ -1,0 +1,25 @@
+{
+  "files": [
+    {
+      "file": "smokes/chrono/fsi_sph.cpp",
+      "license": "BSD-3-Clause",
+      "upstream_copyright": "Project Chrono Development Team"
+    },
+    {
+      "file": "smokes/chrono/dem.cpp",
+      "license": "BSD-3-Clause",
+      "upstream_copyright": "Project Chrono Development Team"
+    },
+    {
+      "file": "smokes/genesis_rigid.py",
+      "license": "Apache-2.0",
+      "upstream_copyright": "Genesis World contributors"
+    },
+    {
+      "file": "smokes/genesis_fluid.py",
+      "license": "Apache-2.0",
+      "upstream_copyright": "Genesis World contributors"
+    }
+  ],
+  "third_party_notices": "Verbatim upstream license/notice files retain original copyright."
+}
