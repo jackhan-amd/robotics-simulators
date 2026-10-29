@@ -22,6 +22,8 @@ rendering library. CPU-only engines and standalone CPU performance tests are
 excluded. Short CPU calculations remain only where a GPU numerical sanity check
 requires them.
 
+[Experiment settings](docs/benchmark-parameters.md) lists model, solver, env count, warm-up, seed and timing settings; the JSON manifest covers both measured cohorts.
+
 For clone-to-benchmark instructions, follow [the reproduction quick start](docs/benchmark-reproduction.md).
 
 Start with [common prerequisites](recipes/README.md), [verification rules](docs/verification.md)

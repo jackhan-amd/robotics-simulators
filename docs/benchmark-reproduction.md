@@ -4,6 +4,8 @@ This guide starts from a new checkout. It reproduces the supplied-example worklo
 the repository contains their code and source pins, not virtual environments,
 upstream payloads, models, private logs or an AMD driver installation.
 
+[Experiment settings](benchmark-parameters.md) lists model, solver, env count, warm-up, seed and timing settings; the JSON manifest covers both measured cohorts.
+
 ## 1. Clone and select a target
 
 ```bash
