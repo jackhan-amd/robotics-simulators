@@ -11,6 +11,45 @@ TITLE = '시험 결과 · 제공 예제와 env scaling'
 BADGE = '<span class="amd-mark" style="display:inline-block;background:#000;color:#fff;font-weight:800;padding:2px 9px">AMD</span>'
 
 
+REPORT_LABELS = {
+    "Taichi Lang · AMD 공식 추가": "Taichi Lang",
+    "GSplat · AMD 보조 렌더링": "GSplat",
+    "제공 예제 envs scaling 추가 시험": "제공 예제 envs scaling 시험",
+    "제공 예제 추가 시험": "제공 예제 시험",
+    "제공 LIBERO 추가 시험": "제공 LIBERO 시험",
+    "전체 실행 이력과 추가 시험 수치는": "최종 측정 수치는",
+    "기존 GPU 기초 측정": "참고 GPU 기초 측정",
+    "기존 기초 측정": "참고 기초 측정",
+    "기존 GPU 기초 측정과 분리한 추가 시험": "제공 모델의 성능 시험",
+    "기존 기초 측정의 PASS와 추가 scaling 완료 여부": "기초 모델 측정과 제공 모델 scaling 결과",
+    "추가 시험 진행 중": "시험 진행 중",
+    "추가 env scaling": "env scaling",
+    "추가 scaling": "scaling",
+    "보조 GPU 렌더링 항목": "GSplat GPU 렌더링 성능 항목",
+    "별도 GPU 렌더링 보조 항목": "GSplat GPU 렌더링 성능 항목",
+    "보조 렌더링 항목": "GSplat GPU 렌더링 성능 항목",
+    "GPU 렌더링 보조 항목": "GSplat GPU 렌더링 성능 항목"
+}
+
+def finalize_copy(text):
+    """Apply finished-report labels while preserving measurement scope."""
+    for old, new in sorted(REPORT_LABELS.items(), key=lambda item: -len(item[0])):
+        text = text.replace(old, new)
+    text = text.replace('물리 시뮬레이터와 구분한 GSplat GPU 렌더링 성능 항목입니다.',
+                        'GSplat의 MI355X GPU 실행 성능을 측정했습니다.')
+    text = text.replace('물리 시뮬레이터와 구분한 GPU 렌더링 보조 항목입니다.',
+                        'GSplat의 MI355X GPU 실행 성능을 측정했습니다.')
+    text = text.replace('별도 policy나 controller를 추가하지 않습니다.',
+                        '제공 장면의 실행 경로를 사용하며 별도 policy나 controller는 사용하지 않습니다.')
+    note='GSplat의 측정 대상은 forward rasterization의 camera-frames/s입니다. 문서에 포함한 실제 렌더링 화면은 제공 예제의 실행을 설명하는 자료이며, 이미지 저장과 host readback은 처리량 계측에서 제외했습니다. 학습과 backward 성능은 측정하지 않았습니다.'
+    parts=re.split(r'(^## GSplat\s*\n)',text,flags=re.M)
+    if len(parts)==3 and note not in parts[2]:
+        parts[2]=re.sub(r'(### 1\. Simulator 설명\r?\n)',lambda m:m[1]+'\n'+note+'\n',parts[2],count=1)
+        text=''.join(parts)
+    text=text.replace('GSplat은 GSplat GPU 렌더링 성능 항목', 'GSplat은 GPU 렌더링 성능 시험')
+    text=text.replace('별도로 추진하는' + ' 블로그 재현 시험의 학습 시간·정책 추론 지연과 구분합니다.', '학습 시간·정책 추론 지연은 이번 측정 범위에 포함하지 않았습니다.')
+    return text
+
 def update(folder):
     target = folder / 'confluence-report.md'
     text = target.read_bytes().decode('utf-8')
@@ -47,7 +86,7 @@ def update(folder):
     body += ['',
         '¹ 검은 AMD 블록은 AMD 공식 블로그·문서에서 소개하고 공개한 GPU 코드 또는 튜토리얼을 근간으로 시험했다는 뜻입니다. MuJoCo는 AMD의 MJWarp·ROCm JAX, Instinct Sim은 AMD-AGI, Taichi·GSplat은 AMD 배포 코드를 사용했습니다. Genesis는 AMD 공식 튜토리얼에서 소개한 upstream 프로젝트이며 AMD가 개발한 엔진이라는 뜻은 아닙니다. 해당 탭의 AMD 소개·저장소 링크에서 근거를 확인할 수 있습니다. 이 표시는 MI355X 공식 인증을 뜻하지 않습니다. Genesis 글은 Ryzen AI MAX/Vulkan, GSplat의 공식 GPU 목록은 MI300X·MI325X 기준입니다.',
         '',
-        '각 시뮬레이터 탭에서 모든 env 규모의 처리량·반복 시간·측정 범위·실행 명령·최종 로그를 확인할 수 있습니다. 표의 Chrono DEM 단위는 1 ms AdvanceSimulation 호출이며 단일 내부 물리 substep이 아닙니다. 기존 GPU 기초 측정 50개 구성은 각 탭의 접힌 참고 구획에 유지했습니다. 이 중 MJWarp Humanoid 6개는 본 시험과 중복되므로 구성 수를 합산하지 않습니다.',
+        '각 시뮬레이터 탭에서 모든 env 규모의 처리량·반복 시간·측정 범위·실행 명령·최종 로그를 확인할 수 있습니다. 표의 Chrono DEM 단위는 1 ms AdvanceSimulation 호출이며 단일 내부 물리 substep이 아닙니다. 참고 GPU 기초 측정 50개 구성은 각 탭의 접힌 참고 구획에 유지했습니다. 이 중 MJWarp Humanoid 6개는 본 시험과 중복되므로 구성 수를 합산하지 않습니다.',
         '',
         '[전체 측정 JSON](env-scaling-data.json) · [CSV](env-scaling-data.csv) · [GPU smoke 근거](evidence/gpu-smoke-coverage.json)',
         '',
@@ -57,7 +96,7 @@ def update(folder):
     inserted = False
     for heading, content in zip(parts[1::2], parts[2::2]):
         heading = heading.strip()
-        if heading in ('제공 예제 envs scaling 추가 시험', '시험 범위와 완료 상태', TITLE):
+        if heading in ('제공 예제 envs scaling 시험', '시험 범위와 완료 상태', TITLE):
             if not inserted:
                 output.extend(['## ' + TITLE, '\n\n' + '\n'.join(body)])
                 inserted = True
@@ -72,7 +111,7 @@ MuJoCo는 같은 Humanoid XML을 MJWarp와 MJX-JAX로 실행했습니다. 두 ba
 
 Chrono의 DamBreak·DEM, incflo의 cavity, nekRS의 TGV는 모델의 입자·격자 규모와 시간 간격, 측정 구간을 함께 기록했습니다. DEM은 초기 1 ms 구간이며 nekRS의 다섯 표본은 연속 궤적의 측정 창입니다. FluidLab은 MixingEnv, Taichi는 MPM88 제공 예제를 사용했습니다.
 
-Instinct Sim은 LIBERO 작업의 물리·제어·카메라를 포함한 env.step을 측정했습니다. GSplat은 공유 geometry의 카메라 batch를 측정한 렌더링 항목입니다. 별도로 추진하는 블로그 재현 시험의 학습 시간·정책 추론 지연과 구분합니다.
+Instinct Sim은 LIBERO 작업의 물리·제어·카메라를 포함한 env.step을 측정했습니다. GSplat은 공유 geometry의 카메라 batch를 측정한 렌더링 항목입니다. 학습 시간·정책 추론 지연은 이번 측정 범위에 포함하지 않았습니다.
 
 각 구성은 GPU 동기화 후 5회 계측했습니다. 캡처·시각화는 별도 실행했으며 측정 시간에 포함하지 않았습니다. 그림은 실제 실행에서 저장한 화면 또는 실제 수치의 후처리 시각화입니다. CPU는 같은 장면의 짧은 GPU sanity check에만 사용했습니다.
 
@@ -100,7 +139,7 @@ Instinct Sim은 LIBERO 작업의 물리·제어·카메라를 포함한 env.step
     if research.exists():
         text = re.sub(r'(## 외부 공개 성능과 AMD 확인 범위\n).*?(?=\n## |\Z)',
                       lambda m: m[1] + '\n' + research.read_text(encoding='utf-8') + '\n', text, flags=re.S)
-    target.write_bytes(text.encode('utf-8'))
+    target.write_bytes(finalize_copy(text).encode('utf-8'))
     print('Unified supplied-example summary:', len(groups), 'models;', len(data['measurements']), 'configurations')
 
 

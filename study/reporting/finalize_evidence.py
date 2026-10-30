@@ -12,7 +12,7 @@ for runid,name in mapping.items():
  for ext in('.json','.log'):text=text.replace('evidence/results/'+runid+ext,'evidence/final/'+name+ext)
 text=re.sub(r'\[([^\]]+)\]\(evidence/results/\d{8}T\d{6}Z[^)]+\)',r'[\1](benchmark-data.json)',text)
 text=sanitize_text(text)
-text=text.replace('전체 실행 이력과 추가 시험 수치는','최종 측정 수치는').replace('FAIL/BLOCKED를 수치로 대체하지 않으며 원본 로그를 남긴다.','각 구성의 상태와 최종 측정 근거를 함께 기록한다.').replace('실패·시간 초과는 통과 수치로 대체하지 않는다. ','')
+text=text.replace('최종 측정 수치는','최종 측정 수치는').replace('FAIL/BLOCKED를 수치로 대체하지 않으며 원본 로그를 남긴다.','각 구성의 상태와 최종 측정 근거를 함께 기록한다.').replace('실패·시간 초과는 통과 수치로 대체하지 않는다. ','')
 text=text.replace('의 GPU replay에서 step','의 GPU replay(`recipes/genesis/benchmarks/capture_provided_genesis.py`)에서 step')
 text=re.sub(r'최초 smoke는 float32 gravity.*?초기 실패·수정 후 결과를 모두 보존(?:한다|했다)\.','중력 파라미터는 float32 표현 오차를 고려해 허용오차 1e-6으로 비교하며, 물리 gate는 유지한다.',text,flags=re.S)
 text=text.replace('버전별 시도와 실패는 분리해 기록한다.','최종 실행 버전과 필요한 workaround를 함께 기록한다.')

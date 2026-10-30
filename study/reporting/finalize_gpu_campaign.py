@@ -13,8 +13,8 @@ if c['status']=='IN_PROGRESS':print('Campaign still in progress');raise SystemEx
 assert not c['counts']['PENDING']and not c['counts']['REMEASUREMENT_PENDING']
 assert all(x['smoke_status']=='PASS'for x in c['campaigns'])
 f=O/'confluence-report.md';s=f.read_text(encoding='utf-8')
-s=s.replace('추가 env scaling은 진행 중이다.','요청한 제공 예제 env scaling을 모두 실행했다. 실패 구성에는 처리량을 제시하지 않는다.')
-s=s.replace('추가 시험 진행 중이다. MI355X GPU에서 계산하는','요청한 env 규모의 실행을 마쳤다. MI355X GPU에서 계산하는')
+s=s.replace('env scaling은 진행 중이다.','요청한 제공 예제 env scaling을 모두 실행했다. 실패 구성에는 처리량을 제시하지 않는다.')
+s=s.replace('시험 진행 중이다. MI355X GPU에서 계산하는','요청한 env 규모의 실행을 마쳤다. MI355X GPU에서 계산하는')
 s=s.replace('제공 예제의 현재 진행 상태는 아래와 같다.','제공 예제의 최종 실행 상태는 아래와 같다.')
 f.write_text(s,encoding='utf-8')
 print('Final campaign:',c['status'],c['counts'])

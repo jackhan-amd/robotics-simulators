@@ -9,7 +9,7 @@ if garden.exists():
  shutil.copy2(garden,images/garden.name);s=re.sub(r'!\[[^\]]*\]\(images/gsplat-synthetic.png\)',f'![제공 garden fixture의 실제 MI355X GPU 렌더링](images/{garden.name})',s)
  s=s.replace('이번 MI355X smoke 실행에서 생성한 합성 Gaussian 구름의 화면.','제공된 `assets/test_garden.npz`와 공식 helper를 사용해 MI355X에서 렌더링한 실제 출력이다. 좌표·색상은 제공 자산이며 scale·회전·opacity는 helper 초기화값이다. 학습된 checkpoint의 화질을 나타내지 않는다.')
  entries.append(dict(file=garden.name,sha256=hashlib.sha256(garden.read_bytes()).hexdigest(),source='provided GSplat garden smoke',evidence='raw GPU rendering saved by provided_gsplat_garden.py; supplied fixture/helper, no trained checkpoint'))
- extras['GSplat · AMD 보조 렌더링']=[f'![제공 garden fixture의 실제 MI355X GPU 렌더링](images/{garden.name})','',garden_caption,'']
+ extras['GSplat']=[f'![제공 garden fixture의 실제 MI355X GPU 렌더링](images/{garden.name})','',garden_caption,'']
 libero=E/'instinct-provided-libero.png'
 if libero.exists():
  shutil.copy2(libero,images/libero.name);extras['Instinct Sim · Faster Action Models backend']=[f'![실제 LIBERO task 0 GPU 카메라 관측](images/{libero.name})','','제공 LIBERO spatial task 0의 실제 GPU 카메라 관측이다. smoke의 20회 env.step 뒤에 저장한 원본 관측이며, 저장은 측정 구간에서 제외했다.',''];entries.append(dict(file=libero.name,sha256=hashlib.sha256(libero.read_bytes()).hexdigest(),source='provided LIBERO task 0 GPU smoke, original agentview_image'))
@@ -31,7 +31,7 @@ parts=re.split(r'^## (.+)\s*$',s,flags=re.M);out=[parts[0]]
 for title,body in zip(parts[1::2],parts[2::2]):
  if title in extras:
   body=re.sub(r'<!-- PROVIDED-CAPTURES -->.*?<!-- /PROVIDED-CAPTURES -->\s*','',body,flags=re.S)
-  if title=='GSplat · AMD 보조 렌더링':body=re.sub(r'!\[[^\]]*\]\(images/gsplat-provided-garden.png\)','',body).replace(garden_caption,'')
+  if title=='GSplat':body=re.sub(r'!\[[^\]]*\]\(images/gsplat-provided-garden.png\)','',body).replace(garden_caption,'')
   body+='\n<!-- PROVIDED-CAPTURES -->\n#### 실제 제공 예제 결과\n\n'+'\n'.join(extras[title])+'\n<!-- /PROVIDED-CAPTURES -->\n'
  if title=='Genesis World':
   new=[]

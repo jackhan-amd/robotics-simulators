@@ -39,7 +39,7 @@ if '[처리량·단위 검산](evidence/throughput-audit.json)'not in s:s=s.repl
 note='기초 측정 목록과 제공 예제 목록은 MJWarp Humanoid의 6개 실행을 공유하므로 구성 수를 합산하지 않는다.'
 s=s.replace(note+' JAX 0.12.0 결과는 별도 버전 진단으로 표시한다.','').replace(note,'')
 s=s.replace('재현 절차:',note+'\n\n재현 절차:',1)
-s=s.replace('LIBERO·RoboCasa 전체 평가, OSC controller와 ray tracer의 정확도·성능은 이번 물리 시험 범위 밖이다.','LIBERO·RoboCasa의 전체 정책 평가는 수행하지 않았다. 제공 LIBERO 추가 시험의 end-to-end 처리량에는 GPU OSC·ray tracer 경로를 포함하지만, 이들의 개별 정확도나 개별 처리량을 검증한 것은 아니다.')
+s=s.replace('LIBERO·RoboCasa 전체 평가, OSC controller와 ray tracer의 정확도·성능은 이번 물리 시험 범위 밖이다.','LIBERO·RoboCasa의 전체 정책 평가는 수행하지 않았다. 제공 LIBERO 시험의 end-to-end 처리량에는 GPU OSC·ray tracer 경로를 포함하지만, 이들의 개별 정확도나 개별 처리량을 검증한 것은 아니다.')
 s=s.replace('FSI-SPH와 DEM의 HIP 장치·커널·유한 상태, CPU multibody 기준','FSI-SPH와 DEM의 HIP 장치·커널·유한 상태')
 s=s.replace('이번 MI355X smoke 실행에서 저장한 합성 Gaussian 렌더링 화면.','')
 s=s.replace('합성 장면의 forward rasterization과 다른 작업이다.','이번 forward rasterization과 다른 작업이다.')
@@ -53,7 +53,7 @@ MuJoCo 탭에서 제공 Humanoid 모델의 MJWarp와 MJX 결과를 버전별로 
 
 Genesis는 제공 Franka의 native env batch와 SPH–강체 결합 예제의 독립 GPU 프로세스 복제를 구분해 설명한다. Chrono의 DamBreak와 DEM, incflo의 cavity, nekRS의 TGV는 각 모델의 입자·격자 규모와 시간 간격, 측정 구간을 먼저 제시한다. 특히 DEM은 초기 1 ms 구간이며 nekRS는 연속 궤적의 다섯 측정 창이다.
 
-FluidLab은 제공 MixingEnv의 실제 입자 좌표를, Taichi는 제공 MPM88 예제의 GPU 실행 결과를 보여준다. Instinct Sim은 제공 LIBERO 작업의 GPU 물리·제어·카메라를 포함한 env.step 처리량이다. GSplat은 공유 geometry의 카메라 batch를 측정한 보조 렌더링 항목으로 설명한다.
+FluidLab은 제공 MixingEnv의 실제 입자 좌표를, Taichi는 제공 MPM88 예제의 GPU 실행 결과를 보여준다. Instinct Sim은 제공 LIBERO 작업의 GPU 물리·제어·카메라를 포함한 env.step 처리량이다. GSplat은 공유 geometry의 카메라 batch를 측정한 GSplat GPU 렌더링 성능 항목으로 설명한다.
 
 각 탭의 Run ID에서 실제 버전과 반복 시간을 확인한다. 화면은 실제 실행이나 별도 캡처 재실행에서 저장한 것만 사용한다. 수치 출력을 그림으로 만든 경우에는 후처리 시각화라고 표시한다. CPU 실행은 GPU 결과와 같은 장면의 sanity check 근거로만 다룬다.
 
@@ -92,4 +92,4 @@ assert not re.search(r'^## .*?(?:PyBullet|Drake|Gazebo|SOFA|URLab|Schola)',(O/'c
 assert 'mujoco-cpu-bench'not in (O/'confluence-report.md').read_text(encoding='utf-8')
 data=json.loads((O/'benchmark-data.json').read_text(encoding='utf-8'))
 assert not any(x.get('engine')in excluded or x.get('backend_observed')in('cpu','CPU')for x in data)
-print('GPU-only scope PASS: 8 physics engines, 1 rendering adjunct; CPU throughput excluded')
+print('GPU-only scope PASS: 8 physics engines, 1 rendering benchmark; CPU throughput excluded')

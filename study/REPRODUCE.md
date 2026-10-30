@@ -112,7 +112,7 @@ Taichi measures independent gravity particles without interactions. FluidLab mea
 
 ## Instinct Sim backend from Faster Action Models
 
-The additional official backend is `simulate/` in `AMD-AGI/faster-action-models`, commit `a5fa73101988870e51f04fe1e7be5da56dda3841`. It targets gfx950 and reads MJCF. The public evaluation uses it behind LIBERO/RoboCasa. This study checks the independent physics API; policy inference, the OSC controller and camera rendering are outside this measurement.
+The Instinct Sim backend is `simulate/` in `AMD-AGI/faster-action-models`, commit `a5fa73101988870e51f04fe1e7be5da56dda3841`. It targets gfx950 and reads MJCF. The public evaluation uses it behind LIBERO/RoboCasa. This study checks the independent physics API; policy inference, the OSC controller and camera rendering are outside this measurement.
 
 ```bash
 # After cloning the pinned repository into storage/upstream/faster-action-models:

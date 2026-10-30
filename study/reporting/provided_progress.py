@@ -47,8 +47,8 @@ summaries=[]
 for i,((engine,model),items)in enumerate(groups.items()):
  image=f'provided-scaling-{engine}-{i}.png';fig,ax=plt.subplots(figsize=(7.5,4.1));ax.errorbar([a['envs']for a in items],[a['throughput']for a in items],yerr=[[max(0,a['throughput']-a['throughput']*a['median_s']/a['max_s'])for a in items],[max(0,a['throughput']*a['median_s']/a['min_s']-a['throughput'])for a in items]],marker='o',capsize=3,label='Median; range of 5 measured samples');ax.set_xscale('log',base=2);ax.set_xlabel('Independent environments / cameras');ax.set_ylabel(items[0]['metric']);ax.set_title(engine+' — supplied example');ax.grid(True,alpha=.25);ax.set_title(engine+' | '+model,fontsize=10);ax.legend(fontsize=8);fig.tight_layout();fig.savefig(O/'images'/image,dpi=160);plt.close(fig)
  summaries.append((engine,model,items,image))
-title='## 제공 예제 envs scaling 추가 시험'
-body=[title,'','추가 시험 진행 중이다. MI355X GPU에서 계산하는 제공 예제와 모델만 성능 평가에 포함한다. 모델·재료·해상도·중력·solver 등 물리 설정을 유지하며 headless 처리, backend 선택, env 복제, reset, 동기화와 계측을 추가한다. 호환성 수정과 측정 구간 변경은 원자료에 기록한다.','','아래 결과는 기존 GPU 기초 측정과 분리한 추가 시험이다. 각 행은 같은 모델·같은 env 수에서 5회 측정한 중앙값이다. GPU native batch와 독립 GPU 프로세스 복제를 구분한다. GSplat은 보조 GPU 렌더링 항목이며 env는 카메라 수다. CPU-only 성능은 포함하지 않으며, CPU는 GPU 결과의 sanity check에만 사용한다.','']
+title='## 제공 예제 envs scaling 시험'
+body=[title,'','시험 진행 중이다. MI355X GPU에서 계산하는 제공 예제와 모델만 성능 평가에 포함한다. 모델·재료·해상도·중력·solver 등 물리 설정을 유지하며 headless 처리, backend 선택, env 복제, reset, 동기화와 계측을 추가한다. 호환성 수정과 측정 구간 변경은 원자료에 기록한다.','','아래 결과는 제공 모델의 성능 시험이다. 각 행은 같은 모델·같은 env 수에서 5회 측정한 중앙값이다. GPU native batch와 독립 GPU 프로세스 복제를 구분한다. GSplat은 GSplat GPU 렌더링 성능 항목이며 env는 카메라 수다. CPU-only 성능은 포함하지 않으며, CPU는 GPU 결과의 sanity check에만 사용한다.','']
 details={};software={};plots={}
 body+=['| 엔진 | 제공 모델 / 작업 | 통과한 envs | PASS / 계획 |','|---|---|---|---:|']
 for engine,model,items,image in summaries:
@@ -70,7 +70,7 @@ for engine,model,items,image in summaries:
  fields.update({key:x[key]for key in('compiler_profile','xla_flags')if key in x})
  soft=['<details markdown="1"><summary>제공 예제 재현 정보 · '+model+'</summary>','','```json',json.dumps(fields,ensure_ascii=False,indent=2),'```','','</details>','']
  details.setdefault(engine,[]).extend(block);software.setdefault(engine,[]).extend(soft);plots.setdefault(engine,[]).extend([f'![{engine} supplied-example env scaling](images/{image})',''])
-body+=['','실패·시간 초과는 통과 수치로 대체하지 않는다. 전체 실행 이력과 추가 시험 수치는 [env-scaling-data.json](env-scaling-data.json), [CSV](env-scaling-data.csv)에 기록한다.','']
+body+=['','실패·시간 초과는 통과 수치로 대체하지 않는다. 최종 측정 수치는 [env-scaling-data.json](env-scaling-data.json), [CSV](env-scaling-data.csv)에 기록한다.','']
 f=O/'confluence-report.md';s=f.read_text(encoding='utf-8');start=s.find(title)
 if start>=0:
  end=s.find('\n## ',start+len(title));s=s[:start]+'\n'.join(body)+s[end if end>=0 else len(s):]
@@ -79,7 +79,7 @@ active=json.loads((B/'configs/benchmarks/report-plan.json').read_text(encoding='
 for section,content in zip(parts[1::2],parts[2::2]):
  engine=next((e['id']for e in active['engines']if e['title']==section),None)
  if engine:
-  content=content.replace('#### 기존 GPU 기초 측정\n','').replace('#### 기존 GPU 기초 측정 그래프\n','')
+  content=content.replace('#### 참고 GPU 기초 측정\n','').replace('#### 참고 GPU 기초 측정 그래프\n','')
   for tag in('THROUGHPUT','PLOTS'):
    content=re.sub(r'<!-- BASELINE-'+tag+r' -->\s*<details(?: markdown="1")?><summary>[^<]*</summary>\s*(.*?)\s*</details>\s*<!-- /BASELINE-'+tag+r' -->',lambda m:m[1],content,flags=re.S)
   for tag in('SOFTWARE','THROUGHPUT','PLOTS'):content=re.sub(r'<!-- PROVIDED-'+tag+r' -->.*?<!-- /PROVIDED-'+tag+r' -->\s*','',content,flags=re.S)
@@ -91,7 +91,7 @@ for section,content in zip(parts[1::2],parts[2::2]):
    if engine=='mujoco':
     match=re.search(r'#### 실제 실행 화면.*?(?=\n!\[[^\n]*throughput\]\(images/mujoco-|\Z)',plotbody,flags=re.S)
     if match:captures+='\n'+match[0];plotbody=plotbody[:match.start()]+plotbody[match.end():]
-   wrap=lambda tag,text:'<!-- BASELINE-'+tag+' -->\n<details markdown="1"><summary>기존 GPU 기초 측정 · 참고</summary>\n\n'+text.strip()+'\n\n</details>\n<!-- /BASELINE-'+tag+' -->\n'
+   wrap=lambda tag,text:'<!-- BASELINE-'+tag+' -->\n<details markdown="1"><summary>참고 GPU 기초 측정 · 참고</summary>\n\n'+text.strip()+'\n\n</details>\n<!-- /BASELINE-'+tag+' -->\n'
    content=before+soft+'### 3. Throughput\n\n'+through+wrap('THROUGHPUT',baseline)+'\n### 4. Throughput plot\n\n'+figs+captures+'\n'+wrap('PLOTS',plotbody)
  out+=['## '+section,content]
 s='\n'.join(out);f.write_text(s,encoding='utf-8')

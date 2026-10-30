@@ -5,6 +5,7 @@ import argparse,base64,datetime,html,json,mimetypes,os,pathlib,re,sys,tempfile
 sys.path.insert(0,str(pathlib.Path(tempfile.gettempdir())/'robotics-study-plot-deps'))
 import markdown
 from polite_korean import html as polite_html
+from report_presentation import finalize_copy
 B=REPO_ROOT
 ap=argparse.ArgumentParser();ap.add_argument('--data-dir',type=pathlib.Path,default=B/'report');ap.add_argument('--input',type=pathlib.Path);ap.add_argument('--output',type=pathlib.Path);ap.add_argument('--plan',type=pathlib.Path);ap.add_argument('--public',action='store_true');args=ap.parse_args()
 if args.public:os.environ['STUDY_PUBLIC']='1'
@@ -14,7 +15,7 @@ amd_engines={e['id']:e for e in p['engines']if e.get('amd_solution')}
 def amd_badge(engine):
  return '<span class="amd-mark" title="AMD 블로그 소개·GPU 지원 경로 제공; MI355X 공식 지원·측정 성공 여부는 별도">AMD</span>'if engine in amd_engines else''
 count=sum(e.get('primary_performance_configurations',e.get('measured_configurations',0))for e in p['engines'])
-text=(args.input or O/'confluence-report.md').read_text(encoding='utf-8')
+text=finalize_copy((args.input or O/'confluence-report.md').read_text(encoding='utf-8'))
 pieces=re.split(r'^## (.+)\s*$',text,flags=re.M);sections=dict(zip(pieces[1::2],pieces[2::2]))
 def render(source):
  out=markdown.markdown(source,extensions=['tables','fenced_code','sane_lists','md_in_html'])
@@ -66,8 +67,8 @@ panels['evidence']=panels['evidence'].replace('images/provenance.json','images/a
 panels['evidence']=re.sub(r' · <a href="images/AMD-NOTICE.txt">AMD notice</a>','',panels['evidence'])
 groups=[('일반 안내',['overview','environment','plan','research','evidence']),('Rigid simulation',['mujoco','instinct']),('Fluid simulation',['incflo','nekrs','fluidlab']),('Multiphysics · Rigid / Fluid',['genesis','chrono']),('Simulation framework',['taichi']),('Rendering',['gsplat'])]
 labels=dict(names);nav_html=''.join('<div class="nav-group"><div class="nav-heading">'+esc(title)+'</div>'+''.join(f'<a href="#{i}">{esc(labels[i])}</a>'for i in ids if i in labels)+'</div>'for title,ids in groups)
-if '제공 예제 envs scaling 추가 시험'in sections:
- panels['env-scaling']='<h2>제공 예제 envs scaling 추가 시험 · 진행 중</h2>'+render(sections['제공 예제 envs scaling 추가 시험'])
+if '제공 예제 envs scaling 시험'in sections:
+ panels['env-scaling']='<h2>제공 예제 envs scaling 시험 · 진행 중</h2>'+render(sections['제공 예제 envs scaling 시험'])
  nav_html=nav_html.replace('<a href="#overview">','<a href="#env-scaling">제공 예제 envs scaling · 진행 중</a><a href="#overview">',1)
 css='''*{box-sizing:border-box}body{font:15px/1.7 system-ui,"Malgun Gothic",sans-serif;margin:0;background:#eef2f6;color:#182638}header{padding:25px 32px;background:#14263e;color:white}h1{font-size:26px;margin:0}header p{margin:5px 0;color:#c6d3e3}.layout{display:flex;min-height:85vh}nav{width:265px;flex-shrink:0;padding:14px;background:#dfe7ef}nav a{display:block;padding:8px 12px;color:#254463;text-decoration:none;border-radius:6px}nav a.active{background:#174f7b;color:white}main{max-width:1420px;flex:1;min-width:0;padding:28px}.panel{display:none}.panel.active{display:block}h2{margin-top:0}h3{margin-top:28px;border-bottom:1px solid #c4d2df;padding-bottom:6px}p{max-width:1120px}table{border-collapse:collapse;width:100%;display:block;overflow:auto;background:white}th,td{text-align:left;padding:10px;vertical-align:top;border-bottom:1px solid #d8e1e9}th{background:#dce7f0}pre{white-space:pre-wrap;overflow-wrap:anywhere;padding:18px;background:#122238;color:#e2edf6;border-radius:6px;font:13px/1.6 Consolas,monospace}code{overflow-wrap:anywhere}.badge{display:inline-block;background:#fff1c9;color:#6b4b00;padding:3px 10px;border-radius:5px}button{cursor:pointer;padding:7px 14px;border:1px solid #aabccd;border-radius:4px}img{max-width:100%;max-height:600px;background:white}details{margin:20px 0}.dark{background:#172333;color:#dce6ee}.dark table{background:#233449}.dark th{background:#32465e}.dark nav{background:#1c2d42}.dark nav a{color:#c6daed}.dark a{color:#8acaff}@media(max-width:850px){.layout{display:block}nav{width:100%;display:flex;overflow:auto;position:sticky;top:0}nav a{white-space:nowrap}main{padding:16px}header{padding:20px}}@media print{nav,button{display:none}.panel{display:block;break-before:page}main{padding:0}.layout{display:block}pre{background:#eee;color:black}}'''
 js='''function show(){let id=location.hash.slice(1)||'overview';if(!document.getElementById(id))id='overview';document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('active',a.hash==='#'+id));}addEventListener('hashchange',show);show();document.getElementById('theme').onclick=()=>document.body.classList.toggle('dark');document.querySelectorAll('.copy').forEach(b=>b.onclick=()=>navigator.clipboard.writeText(b.nextElementSibling.innerText));'''
@@ -79,7 +80,7 @@ css+=' .amd-mark{display:inline-block;background:#000!important;color:#fff!impor
 css+=' #env-scaling th:first-child,#env-scaling td:first-child{min-width:140px}#env-scaling th:last-child,#env-scaling td:last-child{white-space:nowrap;min-width:100px}#env-scaling td:nth-child(2){overflow-wrap:anywhere;min-width:300px;max-width:650px}'
 for engine,e in amd_engines.items():
  nav_html=nav_html.replace('href="#'+engine+'">'+esc(e['title'])+'</a>','href="#'+engine+'">'+esc(e['title'])+' '+amd_badge(engine)+'</a>')
-doc='<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MI355X Robotics Simulator 시험 보고서</title><style>'+css+'</style></head><body><header><h1>MI355X Robotics Simulator 시험 보고서</h1><p>추가 시험 진행 중 · MI355X 1 GPU · '+str(count)+'개 성능 구성 × 5회 · 갱신 '+stamp+'</p><button id="theme">밝게 / 어둡게</button></header><div class="layout"><nav>'+''.join(f'<a href="#{i}">{esc(n)}</a>'for i,n in names)+'</nav><main>'+''.join(f'<section class="panel" id="{i}">{s}</section>'for i,s in panels.items())+'</main></div><script>'+js+'</script></body></html>'
+doc='<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MI355X Robotics Simulator 시험 보고서</title><style>'+css+'</style></head><body><header><h1>MI355X Robotics Simulator 시험 보고서</h1><p>시험 진행 중 · MI355X 1 GPU · '+str(count)+'개 성능 구성 × 5회 · 갱신 '+stamp+'</p><button id="theme">밝게 / 어둡게</button></header><div class="layout"><nav>'+''.join(f'<a href="#{i}">{esc(n)}</a>'for i,n in names)+'</nav><main>'+''.join(f'<section class="panel" id="{i}">{s}</section>'for i,s in panels.items())+'</main></div><script>'+js+'</script></body></html>'
 output.write_text(doc,encoding='utf-8')
 doc=doc.replace(''.join(f'<a href="#{i}">{esc(n)}</a>'for i,n in names),nav_html).replace(str(count)+'개 성능 구성 × 5회',str(count)+'개 성능 구성 + CPU 검증 기준 1개 · 각 5회')
 doc=re.sub(r' \+ CPU 검증 (?:기준|기록) 1개','',doc)
@@ -87,8 +88,8 @@ doc=doc.replace(str(count)+'개 성능 구성',str(count)+'개 GPU 기초 측정
 campaign=O/'gpu-campaign-status.json'
 if campaign.exists():
  c=json.loads(campaign.read_text(encoding='utf-8'));label={'IN_PROGRESS':'제공 예제 GPU 시험 진행 중','COMPLETED':'제공 예제 GPU 시험 완료','COMPLETED_WITH_LIMITATIONS':'제공 예제 GPU 시험 완료 · 제약 사항 포함'}[c['status']]
- doc=doc.replace('추가 시험 진행 중 · MI355X 1 GPU · '+str(count)+'개 GPU 기초 측정 구성 · 각 5회',label+' · MI355X 1 GPU · 제공 예제 '+str(c['counts']['PASS'])+'/'+str(c['expected_configurations'])+' PASS · 기초 GPU '+str(count)+'개 구성 별도')
- if c['status']!='IN_PROGRESS':doc=doc.replace('제공 예제 envs scaling 추가 시험 · 진행 중','제공 예제 envs scaling 추가 시험 · 실행 완료').replace('제공 예제 envs scaling · 진행 중','제공 예제 envs scaling · 실행 완료')
+ doc=doc.replace('시험 진행 중 · MI355X 1 GPU · '+str(count)+'개 GPU 기초 측정 구성 · 각 5회',label+' · MI355X 1 GPU · 제공 예제 '+str(c['counts']['PASS'])+'/'+str(c['expected_configurations'])+' PASS · 기초 GPU '+str(count)+'개 구성 별도')
+ if c['status']!='IN_PROGRESS':doc=doc.replace('제공 예제 envs scaling 시험 · 진행 중','제공 예제 envs scaling 시험 · 실행 완료').replace('제공 예제 envs scaling · 진행 중','제공 예제 envs scaling · 실행 완료')
 if args.public:
  doc=doc.replace('confluence-report.md','report.md').replace('../study/REPRODUCE.md','../../../study/REPRODUCE.md').replace('../validation-report-mi355x.html','environment.json').replace('evidence/results/software-sources-and-builds.json','software.json').replace('evidence/measurement-audit.json','gpu-campaign-status.json').replace('evidence/smoke-coverage.json','smoke-coverage.json').replace('evidence/gpu-smoke-coverage.json','smoke-coverage.json')
  doc=doc.replace('Confluence용 Markdown','공개 보고서 Markdown').replace('Confluence 초안에는 자동으로 반영하지 못했다. 첨부 Markdown과 images 폴더를 이용해 본문과 그림을 붙일 수 있다.','공개 본문과 집계 자료는 이 폴더에 있으며, 연결 설정과 개별 실행 로그는 포함하지 않는다.')

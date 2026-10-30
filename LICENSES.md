@@ -25,7 +25,7 @@ External runtime packages, containers, models and assets retain their own licens
 | Instinct Sim / Faster Action Models | Apache-2.0 | [LICENSE](third_party_notices/instinct-sim-study/LICENSE) · [LICENSE](third_party_notices/instinct-sim-study/simulate/LICENSE) · [NOTICE](third_party_notices/instinct-sim-study/simulate/NOTICE) · [PROVENANCE.md](third_party_notices/instinct-sim-study/simulate/PROVENANCE.md) |
 | LIBERO study dependency | MIT | [LICENSE](third_party_notices/libero-study/LICENSE) |
 
-Only the included GPU simulator stack and its dependencies are listed. GSplat is a rendering adjunct; LIBERO supplies the Instinct Sim task/assets.
+Only the included GPU simulator stack and its dependencies are listed. GSplat is a rendering benchmark; LIBERO supplies the Instinct Sim task/assets.
 
 FluidLab has no explicit root license grant in the pinned source. Its upstream code and contextual patches are not bundled. The common `tools/fetch_sources.py fetch --engine fluidlab` command provides an explicit pinned upstream clone connection. The local integration requires source/runtime supplied with the rights holder’s permission; see [prerequisites](recipes/fluidlab/README.md).
 

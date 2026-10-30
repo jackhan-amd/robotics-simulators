@@ -1,6 +1,6 @@
 {
   "version": "2.1",
-  "state": "MI355X GPU physics: 8 engines; GSplat separate GPU rendering adjunct; CPU for GPU sanity references only; COMPLETED",
+  "state": "MI355X GPU physics: 8 engines; GSplat separate GPU rendering benchmark; CPU for GPU sanity references only; COMPLETED",
   "repository_commit": "d1adb4a0cd5f55ce80443e642092190de9d12f6e",
   "method": [
     "물리 검증과 성능 측정을 분리한다. 설치 성공이나 종료코드 0만으로 물리 검증을 통과시키지 않는다.",
@@ -165,7 +165,7 @@
     },
     {
       "id": "taichi",
-      "title": "Taichi Lang · AMD 공식 추가",
+      "title": "Taichi Lang",
       "use": "사용자 정의 물리·입자·MPM 커널의 JIT 프레임워크",
       "smoke": "Same supplied scene on MI355X GPU; explicit backend and scene-specific numerical/image checks before performance sweep",
       "performance": "supplied MPM88; envs=1,2,4,8,16; 5 synchronized samples per configuration",
@@ -189,7 +189,7 @@
     },
     {
       "id": "gsplat",
-      "title": "GSplat · AMD 보조 렌더링",
+      "title": "GSplat",
       "use": "3D Gaussian differentiable rasterization. 물리 엔진과 별도 분류.",
       "smoke": "Same supplied scene on MI355X GPU; explicit backend and scene-specific numerical/image checks before performance sweep",
       "performance": "supplied garden camera batch (renderer); envs=1,2,4,8,16,32; 5 synchronized samples per configuration",
@@ -220,5 +220,5 @@
     32768,
     65536
   ],
-  "scope_constraint": "CPU-only engines excluded. CPU references cannot be counted as simulator performance. GSplat is a separately labeled GPU rendering adjunct."
+  "scope_constraint": "CPU-only engines excluded. CPU references cannot be counted as simulator performance. GSplat is a separately labeled GPU rendering benchmark."
 }

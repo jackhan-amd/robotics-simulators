@@ -15,7 +15,7 @@ Original copyright and third-party notices are retained.
 | FluidLab | HIP MPM; operator-authorized upstream required | [Local prerequisites](recipes/fluidlab/README.md) |
 | Instinct Sim | LIBERO GPU physics, control and cameras | [Recipe](recipes/instinct/README.md) |
 | Taichi Lang | AMD GPU MPM88 | [Recipe](recipes/taichi/README.md) |
-| GSplat | GPU Gaussian rasterization; rendering adjunct | [Recipe](recipes/gsplat/README.md) |
+| GSplat | GPU Gaussian rasterization; rendering benchmark | [Recipe](recipes/gsplat/README.md) |
 
 The first eight components perform physics simulation. GSplat is a separate
 rendering library. CPU-only engines and standalone CPU performance tests are
