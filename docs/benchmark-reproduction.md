@@ -75,7 +75,7 @@ python3 study/prepare_mjx_aligned.py
 
 Read the script's required environment and [MJX profile](../study/mjx-profile.json)
 before execution. FluidLab requires operator-authorized upstream source/runtime;
-it is not bundled or automatically acquired. Taichi and Instinct Sim require their
+it is not bundled or automatically acquired. FluidLab measurements cover forward simulation only; gradient/backward, learning and optimization were not tested. Its engine runs on the same MI355X server GPU, with runtime files kept in a separate local directory. Taichi and Instinct Sim require their
 documented payload/build/asset setup. An install exit code is not a physics check.
 
 ## 4. Run smoke, then env scaling

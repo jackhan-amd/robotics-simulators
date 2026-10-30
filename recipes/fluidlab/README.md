@@ -1,4 +1,25 @@
-# FluidLab 로컬 MPM 실행 조건
+# FluidLab 실행 조건과 측정 범위
+
+## MI355X 측정 범위: forward simulation만 측정
+
+현재 성능 결과는 제공 `MixingEnv(version=0)`의 **forward simulation만** 측정한 것입니다. Gradient/backward 계산, 학습, 제어·궤적 최적화와 optimizer 반복은 시험하지 않았습니다. 이 결과를 해당 경로의 성능으로 해석하지 않습니다.
+
+물리 계산은 FluidLab 엔진을 설치한 **동일 MI355X 서버의 GPU**에서 실행했습니다. 다른 서버나 외부 계산 서비스를 호출한 것이 아닙니다. 실행용 source·환경을 Git working tree와 분리한 로컬 디렉터리에 배치했다는 의미이며, 이 의존성도 전체 benchmark project의 실행 환경에 해당합니다.
+
+| 조건 | 측정 설정 |
+|---|---|
+| 장면 | 제공 MixingEnv: coffee/milk, cup, supplied agent |
+| 입자 수 | 86,527 |
+| envs | 1, 2, 4, 8; 독립 GPU 프로세스 복제 |
+| outer dt / substeps | 0.002초 / 10 |
+| measured steps / 반복 | env당 100 step / 5회 |
+| warm-up | 50 step; 계측 제외 |
+| seed / 제어 | 0 / stationary agent, zero action |
+| 실행 범위 | forward TaichiEnv.step; loss·gradient·optimizer·renderer 제외 |
+
+공개 Git에 add·commit된 것은 [실행 어댑터](../../study/provided_fluidlab_model.py), [계측 코드](../../study/provided_replicas.py), [실행 coordinator](../../study/provided_replicas_suite.py), 준비·호환성 도구와 설정입니다. **FluidLab 원본 엔진 source 전체는 이 Git 저장소에 add·commit되어 있지 않습니다.** 아래 upstream source를 별도 의존성으로 사용합니다. 이는 파일 배치·소스 배포 방식에 관한 구분이며 계산 위치에 관한 구분이 아닙니다.
+
+## 기존 gfx1151 MPM core smoke
 
 기존 로컬 환경에서는 FluidLab MPM core를 AMD Taichi의 `ti.amdgpu`로 실행했다. 장면은 물27입자, grid16³, dt0.0002초, 250substeps다.
 

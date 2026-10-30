@@ -35,7 +35,7 @@ All primary configurations use five samples and synchronized GPU boundaries. Mos
 
 - nekRS: supplied TGV mesh, Re 1600, polynomial order 7, cubature order 9 and dt 0.003 s. Mesh/input hashes and source commit are in the manifest.
 
-- FluidLab: provided MixingEnv version 0, seed 0, 86527 particles, outer dt 0.002 s and ten substeps. Forward/headless execution disables gradients and loss, uses the supplied stationary agent with zero actions, and performs no optimizer step.
+- FluidLab (**forward only; gradient/backward, learning and optimization untested**): provided MixingEnv version 0, seed 0, 86527 particles, outer dt 0.002 s and ten substeps. Forward/headless execution disables gradients and loss, uses the supplied stationary agent with zero actions, and performs no optimizer step.
 
 - Instinct Sim: LIBERO spatial task 0, first supplied initial state, seed 0, zero seven-dimensional actions, 20 Hz control, 25 physics substeps per control step and 128 by 128 cameras. The supplied OSC/gripper and GPU observation/success pipeline are retained. HP_RENDERER=rt, HP_OBS_LAG=2 and HP_SUCCESS_MODE=robosuite are set in the coordinator.
 
@@ -43,9 +43,11 @@ All primary configurations use five samples and synchronized GPU boundaries. Mos
 
 - GSplat: supplied garden fixture, 111785 Gaussians, 648 by 420 pixels, torch seed 0, packed=False, ten warm frames and 100 measured frames per camera. The first camera is cloned for the camera batch, sharing static geometry; no trained checkpoint is used.
 
-## Where the remaining defaults are defined
+## Measured paths and parameter provenance
 
-The manifest enumerates recorded settings and explicit adapter overrides. It does not flatten every internal material, contact, solver, renderer or model default into a new configuration file. Those unchanged values are defined by the pinned upstream source/model files. Follow the recorded source commit, source/model/asset hashes and [software/build observations](../study/software-observations.json), together with the linked adapter. Changing an upstream release while retaining the same command is not the same experiment.
+The specification describes the parameters and conditions used for the measured paths. A measured forward path does not establish coverage of gradient/backward, learning, optimization, rendering or other engine paths. Parameters left unchanged are identified through the pinned example/model files, source commits and hashes, together with [software/build observations](../study/software-observations.json) and the linked adapter. Parameter inheritance and execution-path coverage are separate questions.
+
+FluidLab engine execution occurred locally on the same MI355X GPU server. The Git repository tracks its harness, adapters and configuration, but does not vendor the complete upstream engine source. Separate runtime/source directories are part of the benchmark deployment, not remote compute services.
 
 FluidLab upstream source has no explicit root license grant in the pinned snapshot. It is not redistributed or automatically acquired; the source/runtime must be supplied with the rights holder’s permission. Publishing numeric settings does not grant access or redistribution rights to its source/assets. See [LICENSES.md](../LICENSES.md).
 
