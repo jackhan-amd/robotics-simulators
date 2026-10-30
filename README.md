@@ -28,7 +28,7 @@ All engines use [pinned upstream dependency links](docs/upstream-dependencies.md
 
 See [the source layout](docs/repository-layout.md) for engine-owned smoke/benchmark code, shared study infrastructure and supported entry points.
 
-For clone-to-benchmark instructions, follow [the reproduction quick start](docs/benchmark-reproduction.md).
+For clone-to-benchmark instructions, follow [the reproduction quick start](docs/benchmark-quickstart.md).
 
 Start with [common prerequisites](recipes/README.md), [verification rules](docs/verification.md)
 and the relevant engine recipe. Core smokes preserve their reviewed gfx1151

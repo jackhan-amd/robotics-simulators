@@ -60,4 +60,4 @@ python tools/run.py export_benchmark_parameters.py --data-dir /path/to/results/r
   --output report/benchmark-parameters.json
 ```
 
-The exporter checks the cohort sizes for this campaign. It does not infer an unrecorded default or validate a new GPU execution. Follow [the benchmark quick start](benchmark-reproduction.md) for environment setup and measurements.
+The exporter checks the cohort sizes for this campaign. It does not infer an unrecorded default or validate a new GPU execution. Follow [the benchmark quick start](benchmark-quickstart.md) for environment setup and measurements.

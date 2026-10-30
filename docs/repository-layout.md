@@ -42,7 +42,7 @@ configured local benchmark workspace using their stable basenames. This flat
 runtime deployment keeps the existing measured coordinator protocol; it is
 separate from source organization. Engine checkouts remain pinned upstream
 dependencies, not vendored source. See [upstream dependencies](upstream-dependencies.md)
-and the [benchmark guide](benchmark-reproduction.md).
+and the [benchmark guide](benchmark-quickstart.md).
 
 Use a fresh runtime workspace after changing the source release. The bootstrap
 refuses conflicting adapter files; it does not overwrite a previously measured

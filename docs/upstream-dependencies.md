@@ -46,7 +46,7 @@ its own upstream Git origin. The clone tool does not use a remote compute servic
 ## Source checkout is separate from runtime preparation
 
 Fetch only retrieves pinned source. Follow each recipe and the
-[benchmark quick start](benchmark-reproduction.md) to build/install the GPU runtime,
+[benchmark quick start](benchmark-quickstart.md) to build/install the GPU runtime,
 prepare assets, run smoke and measure throughput. Python wheels and official images
 may provide some engine runtimes; the corresponding source pin remains available
 for attribution and parameter inspection. Native submodule/dependency initialization

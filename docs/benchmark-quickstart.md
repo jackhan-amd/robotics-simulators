@@ -1,4 +1,4 @@
-# Reproduce the MI355X GPU benchmarks
+# Run the MI355X GPU benchmarks
 
 See [the common upstream dependency convention](upstream-dependencies.md) for every engine’s source URL, commit and clone command.
 
@@ -66,7 +66,7 @@ python3 tools/run.py setup_remote.py
 used for sanity checks; it does not install CPU-only simulators. Record tool
 versions after setup. Some dependencies are large; prepare one engine at a time.
 
-Use [REPRODUCE.md](../docs/benchmark-recipes.md) for exact engine commands and source pins.
+Use [engine benchmark recipes](../docs/benchmark-recipes.md) for exact engine commands and source pins.
 `tools/runtime/install_gpu.py` prepares supported Python backends in isolated prefixes;
 `tools/runtime/build_engine.py` provides gfx950 native build adapters. MJX Humanoid uses
 matched JAX/jaxlib/PJRT/plugin 0.12.0 and the isolated ROCm 7.14.1 loader:
