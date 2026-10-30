@@ -1,16 +1,18 @@
 # 공통 준비
 
+엔진은 [공통 upstream 연결 방식](../docs/upstream-dependencies.md)으로 고정 commit을 clone합니다. 프로젝트 기본 저장 경로는 Git에서 제외되는 `.runtime/`이며, source 위치와 계산을 실행하는 서버는 별개입니다.
+
 지원 기준은 Linux x86_64와 Python3.12다. C++ 빌드는 CMake·Ninja·C++ compiler가 필요하다. 도구가 없다면 사용자 소유 prefix에 준비한다. 아래 절차는 호스트 driver나 global Python을 변경하지 않는다.
 
-## 외장 저장소와 Python
+## runtime 저장 경로와 Python
 
 ```bash
-python3 tools/configure.py --storage-root "$EXTERNAL_STUDY_ROOT" --name simulator
-# 출력 예: source '<외장 경로>/private/environment-simulator.sh'
+python3 tools/configure.py --storage-root "$RUNTIME_STORAGE_ROOT" --name simulator
+# 출력 예: source '<runtime 저장 경로>/private/environment-simulator.sh'
 # 실제 출력한 명령을 실행한다.
 ```
 
-`uv` 실행 파일과 Python3.12가 필요하다. 이미 있는 Python3.12를 쓸 때는 `PYTHON312`에 그 실행 파일을 지정할 수 있다. `UV_PYTHON_INSTALL_DIR`, cache와 임시 파일은 configure가 지정한 외장 경로를 사용한다.
+`uv` 실행 파일과 Python3.12가 필요하다. 이미 있는 Python3.12를 쓸 때는 `PYTHON312`에 그 실행 파일을 지정할 수 있다. `UV_PYTHON_INSTALL_DIR`, cache와 임시 파일은 configure가 지정한 runtime 저장 경로를 사용한다.
 
 | 경로 | 용도 |
 |---|---|

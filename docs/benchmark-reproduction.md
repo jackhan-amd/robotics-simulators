@@ -1,5 +1,7 @@
 # Reproduce the MI355X GPU benchmarks
 
+See [the common upstream dependency convention](upstream-dependencies.md) for every engine’s source URL, commit and clone command.
+
 This guide starts from a new checkout. It reproduces the supplied-example workloads;
 the repository contains their code and source pins, not virtual environments,
 upstream payloads, models, private logs or an AMD driver installation.
@@ -21,9 +23,9 @@ Read [the observed versions](../study/software-observations.json) and
 [per-engine preparation](../study/REPRODUCE.md). The original core recipe smokes
 retain their reviewed gfx1151 target; use the study adapters for MI355X.
 
-## 2. Configure external storage
+## 2. Configure configured runtime storage
 
-Prepare one external workspace and copy `study/profile.example.json` to the ignored
+Prepare one runtime workspace and copy `study/profile.example.json` to the ignored
 `private/study-profile.json` on the client, filling in your own connection and paths.
 Alternatively set the documented environment variables. Never commit that profile.
 On the Linux GPU target:
@@ -44,7 +46,7 @@ source "$LAB_ROOT/env.sh"
 
 The bootstrap links `$LAB_ROOT/repo` to this checkout and copies the adapters into
 the flat workspace. It refuses conflicting files and preserves an existing env.sh.
-Use a fresh external workspace when changing adapter versions.
+Use a fresh runtime workspace when changing adapter versions.
 The measurement code uses `$LAB_ROOT/storage/venvs`, `upstream`, `build`, `install`
 and `official-taichi` as described in the engine guide. The base Torch/ROCm runtime
 must already be supplied; the repository does not install global drivers.
@@ -75,7 +77,7 @@ python3 study/prepare_mjx_aligned.py
 
 Read the script's required environment and [MJX profile](../study/mjx-profile.json)
 before execution. FluidLab requires operator-authorized upstream source/runtime;
-it is not bundled or automatically acquired. FluidLab measurements cover forward simulation only; gradient/backward, learning and optimization were not tested. Its engine runs on the same MI355X server GPU, with runtime files kept in a separate local directory. Taichi and Instinct Sim require their
+it is not bundled; use the common upstream clone tool for its pinned source. FluidLab measurements cover forward simulation only; gradient/backward, learning and optimization were not tested. Its engine runs on the same MI355X server GPU, with runtime files kept in a separate local directory. Taichi and Instinct Sim require their
 documented payload/build/asset setup. An install exit code is not a physics check.
 
 ## 4. Run smoke, then env scaling

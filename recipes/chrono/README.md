@@ -1,5 +1,19 @@
 # Project Chrono: HIP FSI-SPH·DEM
 
+## Upstream source connection
+
+This engine follows the [common upstream dependency convention](../../docs/upstream-dependencies.md).
+The project tracks its adapters and pinned source declaration; the upstream engine
+is a separate Git checkout in configured local runtime storage.
+
+```bash
+python3 tools/fetch_sources.py plan --engine chrono
+python3 tools/fetch_sources.py fetch --engine chrono
+```
+
+Source checkout is separate from the GPU runtime build and smoke below. The source
+directory is a project dependency; it does not indicate a remote compute service.
+
 [Chrono](https://github.com/projectchrono/chrono) commit `6f4004c358e5d0029aa3e39fc5ed13d66216f494`의 FSI-SPH와 DEM을 HIP/gfx1151로 빌드한다. Native multibody core는 별도 CPU solver다.
 
 ## 필요한 도구

@@ -241,7 +241,7 @@
       "license_status": "missing",
       "notices": [],
       "upstream_payload_in_git": false,
-      "scope": "External dependency. Its license is not changed by this repository MIT license.",
+      "scope": "Upstream source is connected by an explicit pinned clone command in tools/fetch_sources.py, not vendored. No root license grant was found in the pinned tree; original terms are unchanged. Runtime setup and GPU validation are separate.",
       "issue": "Pinned repository has no root license grant; renderer subdirectories have separate terms. No upstream FluidLab source or contextual patch is published."
     },
     {

@@ -1,5 +1,19 @@
 # Genesis World: Rigid와 Fluid
 
+## Upstream source connection
+
+This engine follows the [common upstream dependency convention](../../docs/upstream-dependencies.md).
+The project tracks its adapters and pinned source declaration; the upstream engine
+is a separate Git checkout in configured local runtime storage.
+
+```bash
+python3 tools/fetch_sources.py plan --engine genesis
+python3 tools/fetch_sources.py fetch --engine genesis
+```
+
+Source checkout is separate from the GPU runtime build and smoke below. The source
+directory is a project dependency; it does not indicate a remote compute service.
+
 Explicit `gs.amdgpu`로 강체·관절·접촉, SPH, MPM과 fixed-rigid SPH 경계를 실행한다. Viewer와 renderer를 켜지 않는다.
 
 고정 source는 [Genesis World](https://github.com/Genesis-Embodied-AI/genesis-world)의 `90d55545c193082a8e32f9b1b6b7732f14d89be8`다. 기록한 Python 조합은 Genesis1.4.4, Quadrants1.3.3, Torch2.14.1+rocm7.14다. 전체 목록은 [ROCm lock](../../configs/genesis-rocm-py312.lock.txt)에 있다.

@@ -24,6 +24,8 @@ requires them.
 
 [Experiment settings](docs/benchmark-parameters.md) lists model, solver, env count, warm-up, seed and timing settings; the JSON manifest covers both measured cohorts.
 
+All engines use [pinned upstream dependency links](docs/upstream-dependencies.md) and the common `tools/fetch_sources.py` clone tool. Engine dependencies may live under the project-local, Git-ignored `.runtime/` directory; this is a file-layout choice, not remote computation.
+
 For clone-to-benchmark instructions, follow [the reproduction quick start](docs/benchmark-reproduction.md).
 
 Start with [common prerequisites](recipes/README.md), [verification rules](docs/verification.md)

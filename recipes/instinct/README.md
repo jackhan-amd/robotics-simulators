@@ -1,5 +1,19 @@
 # Instinct Sim on MI355X
 
+## Upstream source connection
+
+This engine follows the [common upstream dependency convention](../../docs/upstream-dependencies.md).
+The project tracks its adapters and pinned source declaration; the upstream engine
+is a separate Git checkout in configured local runtime storage.
+
+```bash
+python3 tools/fetch_sources.py plan --engine instinct
+python3 tools/fetch_sources.py fetch --engine instinct
+```
+
+Source checkout is separate from the GPU runtime build and smoke below. The source
+directory is a project dependency; it does not indicate a remote compute service.
+
 Prepare the pinned AMD-AGI/faster-action-models simulator and LIBERO checkout, build its GPU backend for gfx950, and provide its Python environment as `venvs/instinct-sim`. Follow the Instinct Sim section of the study guide, including LIBERO config and asset paths.
 
 See [common configuration](../README.md), [MI355X quick start](../../docs/benchmark-reproduction.md)

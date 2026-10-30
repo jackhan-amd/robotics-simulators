@@ -26,7 +26,7 @@ export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
 cd "$STUDY_WORKTREE"
 ```
 
-Configure locations through `study/workspace.py` using the ignored private profile or environment variables described in [README.md](README.md). The measured deployment copied the selected `study/` adapters into `${LAB_ROOT}/` and extracted the integration repository into its `repo/` subdirectory. Runtime sources, builds and environments stay in external storage. `study/run_remote.py` checks the target architecture and serializes jobs with a shared lock. Use `--wait` when another study job holds the lock. Inspect GPU processes before starting a run.
+Configure locations through `study/workspace.py` using the ignored private profile or environment variables described in [README.md](README.md). The measured deployment copied the selected `study/` adapters into `${LAB_ROOT}/` and extracted the integration repository into its `repo/` subdirectory. Runtime sources, builds and environments stay in configured runtime storage. `study/run_remote.py` checks the target architecture and serializes jobs with a shared lock. Use `--wait` when another study job holds the lock. Inspect GPU processes before starting a run.
 
 The wrapper writes `<UTC>-<case>-<suffix>.json` and `.log` into the remote `evidence/` directory. Keep these together. Use the case's successful JSON command, selected environment and parent capture receipt to reproduce that measurement. GPU APIs may call the HIP device `cuda:0`; the smoke separately checks the actual AMD name, architecture and HIP runtime.
 

@@ -1,5 +1,19 @@
 # AMReX incflo: HIP 2D CFD
 
+## Upstream source connection
+
+This engine follows the [common upstream dependency convention](../../docs/upstream-dependencies.md).
+The project tracks its adapters and pinned source declaration; the upstream engine
+is a separate Git checkout in configured local runtime storage.
+
+```bash
+python3 tools/fetch_sources.py plan --engine incflo
+python3 tools/fetch_sources.py fetch --engine incflo
+```
+
+Source checkout is separate from the GPU runtime build and smoke below. The source
+directory is a project dependency; it does not indicate a remote compute service.
+
 Eulerian incompressible CFD를 작은 2D grid로 실행한다. SPH particle 처리량과 비교하는 장면은 아니다.
 
 | Source | 고정 commit |

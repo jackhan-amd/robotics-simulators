@@ -23,9 +23,22 @@
 
 기존 로컬 환경에서는 FluidLab MPM core를 AMD Taichi의 `ti.amdgpu`로 실행했다. 장면은 물27입자, grid16³, dt0.0002초, 250substeps다.
 
+## Upstream 연결
+
+모든 엔진의 [공통 의존성 연결 방식](../../docs/upstream-dependencies.md)을 사용합니다.
+
+```bash
+export STUDY_STORAGE_ROOT="$PWD/.runtime"
+python3 tools/fetch_sources.py fetch --engine fluidlab
+export FLUIDLAB_SOURCE_ROOT="$STUDY_STORAGE_ROOT/upstream/fluidlab"
+export STUDY_FLUIDLAB_SOURCE="$FLUIDLAB_SOURCE_ROOT"
+```
+
+Clone은 source 확보 단계이며 runtime 빌드·호환성 준비·GPU 검증은 별도 단계입니다.
+
 ## 공개 설치 recipe의 제약
 
-[고정 FluidLab source](https://github.com/zhouxian/FluidLab/tree/7295eb6ed7ee92b2be471fd30b432238577f28ce)에 root license grant가 없다. Renderer 하위 라이선스로 MPM source 전체의 사용·재배포 권한을 추정하지 않는다. 이 저장소는 해당 source와 contextual API port patch를 배포하거나 자동 취득하지 않는다.
+[고정 FluidLab source](https://github.com/zhouxian/FluidLab/tree/7295eb6ed7ee92b2be471fd30b432238577f28ce)에 root license grant가 없다. Renderer 하위 라이선스로 MPM source 전체의 사용·재배포 권한을 추정하지 않는다. 이 저장소는 해당 source와 contextual API port patch를 배포하지 않습니다. 다른 엔진과 같은 공통 clone 도구로 고정 upstream commit을 연결합니다.
 
 따라서 이 항목은 기존에 사용 허가와 API 호환성을 확인한 source/runtime이 있는 환경의 실행 절차다. 새 사용자용 공개 설치가 완료됐다고 표시하지 않는다. Taichi는 공개 AMD source commit `d05e4aaf257c172d1b4655c548e038b92df67da2`와 LLVM20.1.8을 사용했다. 로컬 artifact 식별은 [구성 정보](../../configs/fluidlab-resolution.json)에 있다.
 

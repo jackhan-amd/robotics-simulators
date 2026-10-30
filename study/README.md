@@ -1,16 +1,18 @@
 # MI355X simulator measurements
 
+See [the common upstream dependency convention](../docs/upstream-dependencies.md) for every engine’s source URL, commit and clone command.
+
 This directory contains the benchmark adapters, replay capture tools and report generators used for the MI355X study. The core simulator catalog remains in `recipes/` and `simulators/`; this study adds supplied-example throughput and environment scaling measurements.
 
 The physics study covers MuJoCo MJX/MJWarp, Genesis, Chrono HIP, incflo HIP, nekRS HIP, FluidLab HIP, Instinct Sim and Taichi AMD. GSplat is a separate rendering workload. CPU execution provides short, same-scene sanity references for GPU results. It is excluded from performance totals.
 
-## Configure external storage
+## Configure configured runtime storage
 
-Copy `study/profile.example.json` to the ignored `private/study-profile.json`, or set the corresponding environment variables. Supply your SSH alias, external workspace, storage and ROCm paths. Keep credentials, runtime environments, upstream checkouts, caches and raw execution history outside version control.
+Copy `study/profile.example.json` to the ignored `private/study-profile.json`, or set the corresponding environment variables. Supply your SSH alias, runtime workspace, storage and ROCm paths. Keep credentials, runtime environments, upstream checkouts, caches and raw execution history outside version control.
 
-`study/workspace.py` resolves configuration for the Windows client and Linux target. `LAB_ROOT` names the external target workspace. `STUDY_STORAGE_ROOT` holds dependencies. `STUDY_WORKTREE` identifies a checkout or extracted repository on the target. Set `STUDY_PROFILE` to use a different private profile.
+`study/workspace.py` resolves configuration for the Windows client and Linux target. `LAB_ROOT` names the runtime workspace. `STUDY_STORAGE_ROOT` holds dependencies. `STUDY_WORKTREE` identifies a checkout or extracted repository on the target. Set `STUDY_PROFILE` to use a different private profile.
 
-The existing measurement coordinators use a flat deployment: copy the selected `study/*.py` adapters and `study/workspace.py` into the external target workspace, with the repository under its `repo/` directory. Review the coordinator's imports before deployment. Do not execute every preparation or diagnostic script in this directory. Some preserve earlier integration investigations.
+The existing measurement coordinators use a flat deployment: copy the selected `study/*.py` adapters and `study/workspace.py` into the runtime workspace, with the repository under its `repo/` directory. Review the coordinator's imports before deployment. Do not execute every preparation or diagnostic script in this directory. Some preserve earlier integration investigations.
 
 ## Run a bounded measurement
 

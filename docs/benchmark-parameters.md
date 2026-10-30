@@ -49,7 +49,7 @@ The specification describes the parameters and conditions used for the measured 
 
 FluidLab engine execution occurred locally on the same MI355X GPU server. The Git repository tracks its harness, adapters and configuration, but does not vendor the complete upstream engine source. Separate runtime/source directories are part of the benchmark deployment, not remote compute services.
 
-FluidLab upstream source has no explicit root license grant in the pinned snapshot. It is not redistributed or automatically acquired; the source/runtime must be supplied with the rights holder’s permission. Publishing numeric settings does not grant access or redistribution rights to its source/assets. See [LICENSES.md](../LICENSES.md).
+FluidLab upstream source has no explicit root license grant in the pinned snapshot. It is not redistributed here; the common clone tool provides its pinned upstream checkout, and the source/runtime must be supplied with the rights holder’s permission. Publishing numeric settings does not grant access or redistribution rights to its source/assets. See [LICENSES.md](../LICENSES.md).
 
 The adapter SHA-256 identifies the portable code in this repository, not a byte-for-byte identity claim for the original private execution copy. Published source references use repository paths; server paths, run IDs, raw logs and individual timing history are excluded.
 

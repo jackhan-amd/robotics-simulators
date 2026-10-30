@@ -12,7 +12,7 @@
     "primary_configurations": 64,
     "reference_baseline_records": 50,
     "overlap_note": "Six MJWarp Humanoid configurations appear in both cohorts; counts must not be added.",
-    "licensing": "External source/models are not redistributed. FluidLab source requires rights-holder permission; its default source contents are not made public by this manifest.",
+    "licensing": "Upstream engine/model sources remain separate dependencies and are not vendored. Their original terms apply; FluidLab source-license status is recorded in configs/upstream-sources.json.",
     "parameter_provenance": "Recorded settings and explicit adapter overrides describe the measured paths. Unchanged parameters are identified by pinned upstream example/model files and hashes. This does not establish coverage of other execution paths."
   },
   "source_and_build_versions": "study/software-observations.json",
@@ -312,7 +312,7 @@
         "computation_location": "Same MI355X GPU server as the benchmark; no remote compute service",
         "git_tracked": "Harness, measurement adapters, preparation/compatibility tools and configuration",
         "not_vendored": "Complete upstream FluidLab engine source",
-        "file_layout": "Separate local source/runtime directories within the benchmark deployment; outside this Git working tree"
+        "file_layout": "Separate local upstream checkout and runtime directories within the benchmark deployment; connected through the common source manifest"
       }
     },
     {

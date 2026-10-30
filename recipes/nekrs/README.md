@@ -1,5 +1,19 @@
 # nekRS: HIP Ethier CFD
 
+## Upstream source connection
+
+This engine follows the [common upstream dependency convention](../../docs/upstream-dependencies.md).
+The project tracks its adapters and pinned source declaration; the upstream engine
+is a separate Git checkout in configured local runtime storage.
+
+```bash
+python3 tools/fetch_sources.py plan --engine nekrs
+python3 tools/fetch_sources.py fetch --engine nekrs
+```
+
+Source checkout is separate from the GPU runtime build and smoke below. The source
+directory is a project dependency; it does not indicate a remote compute service.
+
 [nekRS](https://github.com/Nek5000/nekRS) commit `96b3cf9e5bacede16568826c04a21bc0fe50dc7d`를 HIP 활성·CUDA 비활성으로 빌드한다. 장면은 upstream Ethier의32요소, polynomial order5, dt0.002초, 10step이다.
 
 ## 빌드 환경
