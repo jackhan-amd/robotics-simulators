@@ -5,6 +5,7 @@ from workspace import profile
 B=REPO_ROOT;O=B/'report';bundle=O/'mi355x-simulator-results.zip'
 with zipfile.ZipFile(bundle)as z:
  assert z.testzip()is None;names=set(z.namelist())
+ assert not any(pathlib.PurePosixPath(n).name=='validation-report-mi355x.html' for n in names)
  assert all(not n.startswith(('/','\\'))and'..'not in pathlib.PurePosixPath(n).parts for n in names)
  campaign=json.loads(z.read('report/gpu-campaign-status.json'))
  assert campaign['status']=='COMPLETED'and campaign['counts']==dict(PASS=64,FAIL=0,BLOCKED=0,PENDING=0,REMEASUREMENT_PENDING=0)

@@ -94,7 +94,6 @@
     "summarize_mjx_failures.py": "recipes/mujoco/benchmarks/summarize_mjx_failures.py",
     "sweep_mujoco.py": "recipes/mujoco/benchmarks/sweep_mujoco.py",
     "update_humanizer_review.py": "study/reporting/update_humanizer_review.py",
-    "validation_report.py": "study/reporting/validation_report.py",
     "vendor_study_notices.py": "study/reporting/vendor_study_notices.py",
     "verify_english_review.py": "study/reporting/verify_english_review.py"
   }

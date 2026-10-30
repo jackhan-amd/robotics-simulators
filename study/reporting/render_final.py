@@ -34,7 +34,7 @@ panels['overview']+=table(['Simulator','최종 상태','성능 구성 수','고�
 panels['overview']+='<p>PASS는 이 보고서의 작은 시험 장면과 수치 조건을 통과했다는 뜻이다. CPU_ONLY는 CPU 실행이다. 엔진마다 장면과 집계 단위가 다르므로 하나의 성능 순위로 해석할 수 없다.</p>'
 panels['overview']+='<h3>실험 개요</h3>'+render(sections.get('실험 개요',sections.get('고객 설명에 사용할 시연 순서','')))
 panels['environment']='<h2>측정 환경과 해석</h2>'+render(sections['측정 환경과 해석'])
-panels['environment']+=table(['항목','관측값'],[('GPU','AMD Instinct MI355X × 1 · gfx950 · PCI ID 1002:75a3'),('VRAM','309220868096 bytes / 288 GiB'),('CPU','AMD EPYC 9575F · host logical CPUs 256'),('Runtime','SDK 10.1.0 packaging / Torch HIP 7.16.26385; MJX private ROCm 7.14.1'),('작업 경로','${LAB_ROOT}'),('노드 관측','<a href="../validation-report-mi355x.html">한국어/English 노드 관측 보고서</a>')])
+panels['environment']+=table(['항목','관측값'],[('GPU','AMD Instinct MI355X × 1 · gfx950 · PCI ID 1002:75a3'),('VRAM','309220868096 bytes / 288 GiB'),('CPU','AMD EPYC 9575F · host logical CPUs 256'),('Runtime','SDK 10.1.0 packaging / Torch HIP 7.16.26385; MJX private ROCm 7.14.1'),('작업 경로','${LAB_ROOT}')])
 panels['plan']='<h2>'+esc(p.get('report_section_title','시험 방법 및 조건'))+' '+esc(p['version'])+'</h2><p>'+esc(p['state'])+'</p><ol>'+''.join('<li>'+esc(x)+'</li>'for x in p['method'])+'</ol><p><a href="test-plan.json">시험 조건 JSON</a> · <a href="evidence/gpu-smoke-coverage.json">제공 예제 GPU smoke와 실제 Run ID</a></p>'
 panels['research']='<h2>외부 공개 성능과 AMD 확인 범위</h2><p>로컬 rocm-blogs commit 630de9e66daee9204d5bb053bcd6be15afd29aab (2026-08-25)와 공식 웹 자료를 조사했다. 공개 수치를 찾지 못했다는 설명은 확인한 자료의 범위에 한정한다.</p>'+render(sections['외부 공개 성능과 AMD 확인 범위'])
 panels['environment']=re.sub(r'<tr><td>[^<]+</td><td>\$\{LAB_ROOT\}</td></tr>','',panels['environment'])
@@ -83,7 +83,7 @@ if campaign.exists():
  doc=doc.replace('시험 진행 중 · MI355X 1 GPU · '+str(count)+'개 GPU 기초 측정 구성 · 각 5회',label+' · MI355X 1 GPU · 제공 예제 '+str(c['counts']['PASS'])+'/'+str(c['expected_configurations'])+' PASS · 기초 GPU '+str(count)+'개 구성 별도')
  if c['status']!='IN_PROGRESS':doc=doc.replace('제공 예제 envs scaling 시험 · 진행 중','제공 예제 envs scaling 시험 · 실행 완료').replace('제공 예제 envs scaling · 진행 중','제공 예제 envs scaling · 실행 완료')
 if args.public:
- doc=doc.replace('confluence-report.md','report.md').replace('../study/REPRODUCE.md','../../../study/REPRODUCE.md').replace('../validation-report-mi355x.html','environment.json').replace('evidence/results/software-sources-and-builds.json','software.json').replace('evidence/measurement-audit.json','gpu-campaign-status.json').replace('evidence/smoke-coverage.json','smoke-coverage.json').replace('evidence/gpu-smoke-coverage.json','smoke-coverage.json')
+ doc=doc.replace('confluence-report.md','report.md').replace('../study/REPRODUCE.md','../../../study/REPRODUCE.md').replace('evidence/results/software-sources-and-builds.json','software.json').replace('evidence/measurement-audit.json','gpu-campaign-status.json').replace('evidence/smoke-coverage.json','smoke-coverage.json').replace('evidence/gpu-smoke-coverage.json','smoke-coverage.json')
  doc=doc.replace('보고서 Markdown','공개 보고서 Markdown').replace('Confluence 초안에는 자동으로 반영하지 못했다. 첨부 Markdown과 images 폴더를 이용해 본문과 그림을 붙일 수 있다.','공개 본문과 집계 자료는 이 폴더에 있으며, 연결 설정과 개별 실행 로그는 포함하지 않는다.')
 doc=doc.replace('64/64 PASS','64개 구성').replace('고객 설명에 사용할 시연 순서','실험 개요').replace('고객 설명 순서','실험 개요')
 output.write_text(polite_html(doc),encoding='utf-8')
