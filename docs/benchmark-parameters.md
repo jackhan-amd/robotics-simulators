@@ -10,8 +10,8 @@ These are forward simulation and rendering experiments. There is no policy train
 |---|---|---|---|---|---|
 | chrono-dem | 1, 2, 4, 8 | 1 outer advance (400 native substeps) | 0.0010000000474974513 | discarded_full_trials=1 | [code](../recipes/chrono/benchmarks/provided_chrono_replicas.py) |
 | chrono-fsi | 1, 2, 4, 8 | 1000 steps/env | 0.0001 | discarded_full_trials=1 | [code](../recipes/chrono/benchmarks/provided_chrono_replicas.py) |
-| fluidlab | 1, 2, 4, 8 | 100 steps/env | 0.002 | steps=50 | [code](../study/benchmarks/provided_replicas.py) |
-| genesis-sph | 1, 2, 4, 8 | 100 steps/env | 0.01 | steps=50 | [code](../study/benchmarks/provided_replicas.py) |
+| fluidlab | 1, 2, 4, 8 | 100 steps/env | 0.002 | steps=50 | [code](../tools/benchmarks/provided_replicas.py) |
+| genesis-sph | 1, 2, 4, 8 | 100 steps/env | 0.01 | steps=50 | [code](../tools/benchmarks/provided_replicas.py) |
 | genesis-franka | 1, 16, 64, 256, 1024, 2048, 4096, 8192, 16384, 32768, 65536 | 1000 steps/env | 0.01 | steps=100 | [code](../recipes/genesis/benchmarks/provided_genesis_franka.py) |
 | gsplat | 1, 2, 4, 8, 16, 32 | 100 frames/camera | not applicable | frames=10 | [code](../recipes/gsplat/benchmarks/provided_gsplat_garden.py) |
 | incflo | 1, 2, 4, 8 | 50 steps/env | original CFL=0.45, fixed_dt=-1 | discarded_full_trials=1 | [code](../recipes/incflo/benchmarks/provided_incflo.py) |
@@ -19,7 +19,7 @@ These are forward simulation and rendering experiments. There is no policy train
 | mujoco-mjx | 2048, 4096, 8192, 16384, 32768, 65536 | 1000 steps/env | 0.005 | full_compiled_rollouts=1 | [code](../recipes/mujoco/benchmarks/provided_mjx_humanoid.py) |
 | mujoco-mjwarp | 2048, 4096, 8192, 16384, 32768, 65536 | 1000 steps/env | 0.005 | steps=100 | [code](../recipes/mujoco/benchmarks/representative_mujoco.py) |
 | nekrs | 1, 2, 4, 8 | 100 steps/env | 0.003 | steps=100 | [code](../recipes/nekrs/benchmarks/provided_nekrs_windows.py) |
-| taichi | 1, 2, 4, 8, 16 | 1000 steps/env | 0.0002 | steps=50 | [code](../study/benchmarks/provided_replicas.py) |
+| taichi | 1, 2, 4, 8, 16 | 1000 steps/env | 0.0002 | steps=50 | [code](../tools/benchmarks/provided_replicas.py) |
 
 All primary configurations use five samples and synchronized GPU boundaries. Most use reset rollouts; nekRS uses five consecutive trajectory windows after 100 warm steps. Native process replication includes its documented IPC barriers. Build, initialization, validation/readback and rendering are included or excluded as stated per workload in the manifest; Instinct Sim includes GPU cameras/control/observations, while GSplat measures rendering only.
 
@@ -56,7 +56,7 @@ The adapter SHA-256 identifies the portable code in this repository, not a byte-
 To export settings from your own accepted result bundle, use:
 
 ```bash
-python study/run.py export_benchmark_parameters.py --data-dir /path/to/results/report \
+python tools/run.py export_benchmark_parameters.py --data-dir /path/to/results/report \
   --output report/benchmark-parameters.json
 ```
 

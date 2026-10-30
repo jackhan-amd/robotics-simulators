@@ -25,7 +25,7 @@ with zipfile.ZipFile(bundle)as z:
    text=z.read(name).decode('utf-8');assert not any(v in text or v.replace('\\','/')in text for v in tokens),name
  with zipfile.ZipFile(io.BytesIO(z.read('report/mi355x-reproduction-code.zip')))as source:
   assert source.testzip()is None
-  assert {'study/workspace.py','study/README.md','recipes/mujoco/benchmarks/provided_mjx_humanoid.py','study/reporting/render_final.py'}<=set(source.namelist())
+  assert {'tools/workspace.py','docs/benchmark-tools.md','recipes/mujoco/benchmarks/provided_mjx_humanoid.py','tools/reporting/render_final.py'}<=set(source.namelist())
   assert not any(n.startswith(('private/','report/','_workspace/'))for n in source.namelist())
  result=dict(status='PASS',bundle=bundle.name,sha256=hashlib.sha256(bundle.read_bytes()).hexdigest(),files=len(names),simulator_tabs=9,gpu_requested_configurations=64,pass_count=64,fail_count=0,final_successful_receipts=len(evidence),cpu_throughput_in_customer_package=False)
 (O/'delivery-audit.json').write_text(json.dumps(result,indent=2),encoding='utf-8');print(json.dumps(result))

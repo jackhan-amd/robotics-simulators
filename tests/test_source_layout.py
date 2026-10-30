@@ -1,14 +1,14 @@
 """Check relocation wiring and fresh flat runtime deployment without a GPU."""
 import json,os,pathlib,subprocess,sys,tempfile,unittest
 R=pathlib.Path(__file__).resolve().parents[1]
-sys.path.insert(0,str(R/'study'))
+sys.path.insert(0,str(R/'tools'))
 from workspace import script_index,script_path
 
 class SourceLayoutTests(unittest.TestCase):
     def test_registry_covers_every_managed_script(self):
         index=script_index()
         files=set()
-        for folder in ['study/runtime','study/reporting','study/benchmarks','study/capture']:
+        for folder in ['tools/runtime','tools/reporting','tools/benchmarks','tools/capture']:
             files.update(p.relative_to(R).as_posix()for p in(R/folder).glob('*.py'))
         files.update(p.relative_to(R).as_posix()for p in(R/'recipes').glob('*/benchmarks/*.py'))
         self.assertEqual(set(index.values()),files)
@@ -33,7 +33,7 @@ class SourceLayoutTests(unittest.TestCase):
             runtime=root/'runtime';env=dict(os.environ,LAB_ROOT=str(runtime),
                 STUDY_STORAGE_ROOT=str(root/'storage'),STUDY_WORKTREE=str(R),
                 ROCM_PATH=str(root/'sdk'),PATH=str(tools)+os.pathsep+os.environ['PATH'])
-            run=subprocess.run([sys.executable,str(R/'study/run.py'),'bootstrap.py'],env=env,capture_output=True,text=True,timeout=30)
+            run=subprocess.run([sys.executable,str(R/'tools/run.py'),'bootstrap.py'],env=env,capture_output=True,text=True,timeout=30)
             self.assertEqual(run.returncode,0,run.stdout+run.stderr)
             self.assertEqual((runtime/'repo').resolve(),R)
             self.assertTrue((runtime/'provided_mjx_humanoid.py').is_file())

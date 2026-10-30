@@ -20,7 +20,7 @@ python3 -m simulators check
 The measured target was one MI355X/gfx950 with 288 GiB VRAM, Ubuntu 24.04.5
 and Python 3.12.3. Preserve the installed driver and use isolated user prefixes.
 Read the locally generated version snapshot (`report/evidence/software-observations.json`) and
-[per-engine preparation](../study/REPRODUCE.md). The original core recipe smokes
+[per-engine preparation](../docs/benchmark-recipes.md). The original core recipe smokes
 retain their reviewed gfx1151 target; use the study adapters for MI355X.
 
 ## 2. Configure configured runtime storage
@@ -40,7 +40,7 @@ mkdir -p "$LAB_ROOT" "$STUDY_STORAGE_ROOT"
 python3 -m venv "$LAB_ROOT/bootstrap-tools"
 "$LAB_ROOT/bootstrap-tools/bin/pip" install uv
 export PATH="$LAB_ROOT/bootstrap-tools/bin:$PATH"
-python3 study/run.py bootstrap.py
+python3 tools/run.py bootstrap.py
 source "$LAB_ROOT/env.sh"
 ```
 
@@ -59,20 +59,20 @@ retain those packages. With Python 3.12 and a compatible ROCm Torch visible:
 ```bash
 python3 -c "import sys,torch; assert sys.version_info[:2]==(3,12); assert torch.version.hip; print(torch.__version__)"
 "$LAB_ROOT/bin/uv" venv --system-site-packages --python "$(command -v python3)" "$STUDY_STORAGE_ROOT/venvs/base"
-python3 study/run.py setup_remote.py
+python3 tools/run.py setup_remote.py
 ```
 
 `setup_remote.py` creates user-owned native build tools and the MuJoCo package
 used for sanity checks; it does not install CPU-only simulators. Record tool
 versions after setup. Some dependencies are large; prepare one engine at a time.
 
-Use [REPRODUCE.md](../study/REPRODUCE.md) for exact engine commands and source pins.
-`study/runtime/install_gpu.py` prepares supported Python backends in isolated prefixes;
-`study/runtime/build_engine.py` provides gfx950 native build adapters. MJX Humanoid uses
+Use [REPRODUCE.md](../docs/benchmark-recipes.md) for exact engine commands and source pins.
+`tools/runtime/install_gpu.py` prepares supported Python backends in isolated prefixes;
+`tools/runtime/build_engine.py` provides gfx950 native build adapters. MJX Humanoid uses
 matched JAX/jaxlib/PJRT/plugin 0.12.0 and the isolated ROCm 7.14.1 loader:
 
 ```bash
-python3 study/run.py prepare_mjx_aligned.py
+python3 tools/run.py prepare_mjx_aligned.py
 ```
 
 Read the script's required environment and [MJX profile](../configs/benchmarks/mjx-profile.json)
@@ -126,9 +126,9 @@ five finite positive timing samples and any validation barriers. Compute
 For Chrono DEM, distinguish the 1 ms outer advance call from internal substeps;
 for nekRS, retain the consecutive-window sampling definition.
 
-From the configured client checkout, `python study/run.py refresh_gpu_report.py --collect`
+From the configured client checkout, `python tools/run.py refresh_gpu_report.py --collect`
 collects evidence and rebuilds an existing reviewed report package. A fresh code
 clone does not contain the private report Markdown or raw history: results can be
 inspected directly from receipts, or an independently supplied customer results
-ZIP can be rebuilt with the offline commands in [study/README.md](../study/README.md).
+ZIP can be rebuilt with the offline commands in [docs/benchmark-tools.md](../docs/benchmark-tools.md).
 Never label new runs PASS solely because a process exited successfully.

@@ -594,7 +594,7 @@
       "scope": "LIBERO GPU physics, OSC control and camera pipeline",
       "command": [
         "python3",
-        "study/run.py",
+        "tools/run.py",
         "catalog_gpu_smoke.py",
         "instinct"
       ],
@@ -602,7 +602,7 @@
       "target_arch": "gfx950",
       "target_name": "MI355X",
       "review_status": "UNREVIEWED_CATALOG_ENTRY",
-      "note": "Runs the supplied-example adapter. Catalog wiring does not establish new GPU physics validity. Historical MI355X measurements are documented separately in study/REPRODUCE.md."
+      "note": "Runs the supplied-example adapter. Catalog wiring does not establish new GPU physics validity. Historical MI355X measurements are documented separately in docs/benchmark-recipes.md."
     },
     {
       "id": "taichi-provided-gpu",
@@ -616,7 +616,7 @@
       "scope": "AMD GPU supplied MPM88 example",
       "command": [
         "python3",
-        "study/run.py",
+        "tools/run.py",
         "catalog_gpu_smoke.py",
         "taichi"
       ],
@@ -624,7 +624,7 @@
       "target_arch": "gfx950",
       "target_name": "MI355X",
       "review_status": "UNREVIEWED_CATALOG_ENTRY",
-      "note": "Runs the supplied-example adapter. Catalog wiring does not establish new GPU physics validity. Historical MI355X measurements are documented separately in study/REPRODUCE.md."
+      "note": "Runs the supplied-example adapter. Catalog wiring does not establish new GPU physics validity. Historical MI355X measurements are documented separately in docs/benchmark-recipes.md."
     },
     {
       "id": "gsplat-provided-gpu",
@@ -638,7 +638,7 @@
       "scope": "GPU Gaussian rasterization; separate rendering adjunct",
       "command": [
         "python3",
-        "study/run.py",
+        "tools/run.py",
         "catalog_gpu_smoke.py",
         "gsplat"
       ],
@@ -646,7 +646,7 @@
       "target_arch": "gfx950",
       "target_name": "MI355X",
       "review_status": "UNREVIEWED_CATALOG_ENTRY",
-      "note": "Runs the supplied-example adapter. Catalog wiring does not establish new GPU physics validity. Historical MI355X measurements are documented separately in study/REPRODUCE.md."
+      "note": "Runs the supplied-example adapter. Catalog wiring does not establish new GPU physics validity. Historical MI355X measurements are documented separately in docs/benchmark-recipes.md."
     }
   ],
   "aliases": {

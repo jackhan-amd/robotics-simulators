@@ -5,7 +5,7 @@ from workspace import activate_imports,script_index,script_path
 def main(argv=None):
     args=list(sys.argv[1:]if argv is None else argv)
     if not args or args[0]in('--list','--help','-h'):
-        print('Usage: python study/run.py <script.py> [arguments]')
+        print('Usage: python tools/run.py <script.py> [arguments]')
         print(json.dumps(script_index(),indent=2));return 0
     command=args.pop(0)
     if command not in script_index():raise SystemExit('Unknown registered study command: '+command)

@@ -9,7 +9,7 @@ def unpack(archive):
   for item in z.infolist():assert(root/item.filename).resolve().is_relative_to(root.resolve())
   z.extractall(root)
 unpack(a.bundle);unpack(root/'report/mi355x-reproduction-code.zip')
-commands=[['study/run.py','render_final.py','--data-dir','report','--plan','report/test-plan.json'],['study/run.py','audit_gpu_measurements.py','--data-dir','report','--accepted-evidence'],['study/run.py','audit_artifacts.py','--data-dir','report','--plan','report/test-plan.json']]
+commands=[['tools/run.py','render_final.py','--data-dir','report','--plan','report/test-plan.json'],['tools/run.py','audit_gpu_measurements.py','--data-dir','report','--accepted-evidence'],['tools/run.py','audit_artifacts.py','--data-dir','report','--plan','report/test-plan.json']]
 logs=[]
 for command in commands:
  r=subprocess.run([sys.executable,*command],cwd=root,capture_output=True,text=True,encoding='utf-8',timeout=180)

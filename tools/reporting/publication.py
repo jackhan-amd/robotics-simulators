@@ -9,7 +9,7 @@ def repository_reference(text):
  """Name upstream files by repository path, never by their installed location."""
  normalized=str(text).replace('\\','/')
  match=re.search(r'/taichi/examples/(.+\.py)$',normalized)
- if match:return 'AMD Taichi provided example: '+match[1]+' (adapter: study/benchmarks/provided_replicas.py)'
+ if match:return 'AMD Taichi provided example: '+match[1]+' (adapter: tools/benchmarks/provided_replicas.py)'
  match=re.search(r'/upstream/([^/]+)/([^\s\"<>`]+)',normalized)
  if match:return match[1]+'/'+match[2]
  values=profile()
@@ -37,7 +37,7 @@ def sanitize_text(text):
   text=re.sub(re.escape(root)+r'/([A-Za-z_][A-Za-z0-9_]*\.py)',lambda m:source_reference(m[1]),text)
  storage=values.get('STUDY_STORAGE_ROOT',root+'/storage'if root else'')
  for prefix in filter(None,(storage,'${STUDY_STORAGE_ROOT}')):
-  text=re.sub(re.escape(prefix)+r'/official-taichi/root/[^\s\"<>`]+/taichi/examples/([^\s\"<>`]+\.py)',r'AMD Taichi provided example: \1 (adapter: study/benchmarks/provided_replicas.py)',text)
+  text=re.sub(re.escape(prefix)+r'/official-taichi/root/[^\s\"<>`]+/taichi/examples/([^\s\"<>`]+\.py)',r'AMD Taichi provided example: \1 (adapter: tools/benchmarks/provided_replicas.py)',text)
  for old,new in sorted(replacements.items(),key=lambda item:-len(item[0])):text=text.replace(old,new)
  if root:
   basename=pathlib.PurePosixPath(root).name

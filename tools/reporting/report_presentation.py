@@ -47,10 +47,10 @@ mkdir -p "$LAB_ROOT" "$STUDY_STORAGE_ROOT"
 python3 -m venv "$LAB_ROOT/bootstrap-tools"
 "$LAB_ROOT/bootstrap-tools/bin/pip" install uv
 export PATH="$LAB_ROOT/bootstrap-tools/bin:$PATH"
-python3 study/run.py bootstrap.py
+python3 tools/run.py bootstrap.py
 source "$LAB_ROOT/env.sh"
 "$LAB_ROOT/bin/uv" venv --system-site-packages --python "$(command -v python3)" "$STUDY_STORAGE_ROOT/venvs/base"
-python3 study/run.py setup_remote.py"""
+python3 tools/run.py setup_remote.py"""
     requirements={
       'mujoco':'MJWarp용 mujoco=3.8.1·warp=1.13.0+rocm.0 환경과, 별도의 MJX용 JAX/jaxlib/PJRT/plugin=0.12.0·MuJoCo=3.16.0·ROCm 7.14.1 loader 환경을 사용합니다.',
       'genesis':'Genesis 1.4.4의 AMD GPU 환경, 제공 Franka·SPH 예제와 headless 실행용 라이브러리를 준비합니다.',
@@ -63,15 +63,15 @@ python3 study/run.py setup_remote.py"""
       'gsplat':'AMD GSplat v1.5.3b2의 고정 source와 ROCm PyTorch 환경을 준비합니다. 측정한 Torch 2.14 환경에서는 allocator API 호환성 처리가 필요합니다.'
     }
     preparation={
-      'mujoco':['python3 study/run.py install_gpu.py warp','python3 study/run.py prepare_mjx_aligned.py'],
-      'genesis':['python3 study/run.py install_gpu.py genesis'],
-      'chrono':['python3 study/run.py build_engine.py chrono','python3 study/run.py build_provided_chrono.py'],
-      'incflo':['python3 study/run.py build_engine.py incflo','python3 study/run.py prepare_incflo.py','python3 study/run.py build_provided_incflo.py'],
-      'nekrs':['python3 study/run.py build_engine.py nekrs'],
-      'fluidlab':['export FLUIDLAB_SOURCE_ROOT="$STUDY_STORAGE_ROOT/upstream/fluidlab"','python3 study/run.py prepare_fluidlab.py'],
-      'taichi':['python3 study/run.py docker_extract_taichi.py'],
+      'mujoco':['python3 tools/run.py install_gpu.py warp','python3 tools/run.py prepare_mjx_aligned.py'],
+      'genesis':['python3 tools/run.py install_gpu.py genesis'],
+      'chrono':['python3 tools/run.py build_engine.py chrono','python3 tools/run.py build_provided_chrono.py'],
+      'incflo':['python3 tools/run.py build_engine.py incflo','python3 tools/run.py prepare_incflo.py','python3 tools/run.py build_provided_incflo.py'],
+      'nekrs':['python3 tools/run.py build_engine.py nekrs'],
+      'fluidlab':['export FLUIDLAB_SOURCE_ROOT="$STUDY_STORAGE_ROOT/upstream/fluidlab"','python3 tools/run.py prepare_fluidlab.py'],
+      'taichi':['python3 tools/run.py docker_extract_taichi.py'],
       'instinct':[],
-      'gsplat':['python3 study/run.py install_gpu.py gsplat']
+      'gsplat':['python3 tools/run.py install_gpu.py gsplat']
     }
     fence=chr(96)*3
     for heading,body in zip(parts[1::2],parts[2::2]):

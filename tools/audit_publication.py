@@ -2,7 +2,7 @@
 from __future__ import annotations
 import argparse,hashlib,json,pathlib,subprocess,sys
 ROOT=pathlib.Path(__file__).resolve().parents[1]
-sys.path.insert(0,str(ROOT/'study'))
+sys.path.insert(0,str(ROOT/'tools'))
 from workspace import profile
 
 def main():

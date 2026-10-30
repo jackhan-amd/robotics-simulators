@@ -6,7 +6,7 @@ from workspace import skill_root
 B=REPO_ROOT
 ap=argparse.ArgumentParser();ap.add_argument('--input',default='confluence-report.md');ap.add_argument('--metadata',default='humanizer-run.json');args=ap.parse_args()
 skill=skill_root('humanize-korean')
-if not(skill/'SKILL.md').is_file():raise RuntimeError('Install epoko77-ai/im-not-ai Codex skill first; see study/README.md')
+if not(skill/'SKILL.md').is_file():raise RuntimeError('Install epoko77-ai/im-not-ai Codex skill first; see docs/benchmark-tools.md')
 stamp=datetime.date.today().isoformat();root=B/'_workspace';root.mkdir(exist_ok=True)
 used=[int(p.name.split('-')[3])for p in root.glob(stamp+'-*')if len(p.name.split('-'))>=5]
 run=root/f'{stamp}-{max(used,default=0)+1:03d}-{secrets.token_hex(2)}';run.mkdir()

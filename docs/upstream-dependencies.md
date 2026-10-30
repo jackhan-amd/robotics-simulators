@@ -28,7 +28,7 @@ download leaves its staging directory for inspection. There is no implicit bulk 
 
 ```text
 robotics-simulators/                 project checkout
-  recipes/, study/, tools/ tracked harness and adapted examples
+  recipes/, tools/, tools/ tracked harness and adapted examples
   configs/upstream-sources.json     tracked dependency URLs and commits
   .runtime/                        local runtime files; Git ignored
     upstream/fluidlab/             independent upstream Git checkout

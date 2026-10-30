@@ -83,7 +83,7 @@ for title,content in zip(parts[1::2],parts[2::2]):
  out+=['## '+title,content]
 s='\n'.join(out)
 f.write_text(s,encoding='utf-8')
-f=B/'study/REPRODUCE.md';s=f.read_text(encoding='utf-8')
+f=B/'docs/benchmark-recipes.md';s=f.read_text(encoding='utf-8')
 s=re.sub(r'Native CPU uses[^\n]*','CPU execution is retained only for same-scene GPU sanity checks. CPU throughput is excluded from this campaign and is not a simulator performance result.',s)
 s=s.replace('python3 ${LAB_ROOT}/provided_mjx_suite.py','PROVIDED_MJX_ALIGNED=1 python3 ${LAB_ROOT}/provided_mjx_suite.py') if 'PROVIDED_MJX_ALIGNED=1 python3 ${LAB_ROOT}/provided_mjx_suite.py'not in s else s
 s=s.replace('`publish_provided_images.py`, `render_final.py`','`publish_provided_images.py`, `gpu_campaign_audit.py`, `enforce_gpu_report_scope.py`, `render_final.py`')

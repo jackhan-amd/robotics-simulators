@@ -83,7 +83,7 @@ if campaign.exists():
  doc=doc.replace('시험 진행 중 · MI355X 1 GPU · '+str(count)+'개 GPU 기초 측정 구성 · 각 5회',label+' · MI355X 1 GPU · 제공 예제 '+str(c['counts']['PASS'])+'/'+str(c['expected_configurations'])+' PASS · 기초 GPU '+str(count)+'개 구성 별도')
  if c['status']!='IN_PROGRESS':doc=doc.replace('제공 예제 envs scaling 시험 · 진행 중','제공 예제 envs scaling 시험 · 실행 완료').replace('제공 예제 envs scaling · 진행 중','제공 예제 envs scaling · 실행 완료')
 if args.public:
- doc=doc.replace('confluence-report.md','report.md').replace('../study/REPRODUCE.md','../../../study/REPRODUCE.md').replace('evidence/results/software-sources-and-builds.json','software.json').replace('evidence/measurement-audit.json','gpu-campaign-status.json').replace('evidence/smoke-coverage.json','smoke-coverage.json').replace('evidence/gpu-smoke-coverage.json','smoke-coverage.json')
+ doc=doc.replace('confluence-report.md','report.md').replace('../docs/benchmark-recipes.md','../../../docs/benchmark-recipes.md').replace('evidence/results/software-sources-and-builds.json','software.json').replace('evidence/measurement-audit.json','gpu-campaign-status.json').replace('evidence/smoke-coverage.json','smoke-coverage.json').replace('evidence/gpu-smoke-coverage.json','smoke-coverage.json')
  doc=doc.replace('보고서 Markdown','공개 보고서 Markdown').replace('Confluence 초안에는 자동으로 반영하지 못했다. 첨부 Markdown과 images 폴더를 이용해 본문과 그림을 붙일 수 있다.','공개 본문과 집계 자료는 이 폴더에 있으며, 연결 설정과 개별 실행 로그는 포함하지 않는다.')
 doc=doc.replace('64/64 PASS','64개 구성').replace('고객 설명에 사용할 시연 순서','실험 개요').replace('고객 설명 순서','실험 개요')
 output.write_text(polite_html(doc),encoding='utf-8')

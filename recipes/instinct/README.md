@@ -17,7 +17,7 @@ directory is a project dependency; it does not indicate a remote compute service
 Prepare the pinned AMD-AGI/faster-action-models simulator and LIBERO checkout, build its GPU backend for gfx950, and provide its Python environment as `venvs/instinct-sim`. Follow the Instinct Sim section of the study guide, including LIBERO config and asset paths.
 
 See [common configuration](../README.md), [MI355X quick start](../../docs/benchmark-reproduction.md)
-and [recorded software and commands](../../study/REPRODUCE.md). Runtime sources,
+and [recorded software and commands](../../docs/benchmark-recipes.md). Runtime sources,
 environments and assets stay in external `STUDY_STORAGE_ROOT`.
 
 ```bash

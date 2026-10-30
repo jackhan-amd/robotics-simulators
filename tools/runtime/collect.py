@@ -4,7 +4,7 @@ from workspace import run_root,ssh_prefix,scp_prefix,remote_file
 import json,pathlib,shlex,subprocess
 B=REPO_ROOT;O=B/'report/evidence/results';O.mkdir(parents=True,exist_ok=True)
 import tarfile
-subprocess.run(scp_prefix()+[str(B/'study/workspace.py'),str(B/'study/runtime/export_evidence.py'),remote_file(str(run_root())+'/')],check=True)
+subprocess.run(scp_prefix()+[str(B/'tools/workspace.py'),str(B/'tools/runtime/export_evidence.py'),remote_file(str(run_root())+'/')],check=True)
 subprocess.run(ssh_prefix()+[shlex.join(['env','LAB_ROOT='+str(run_root()),'python3',str(run_root()/'export_evidence.py')])],check=True)
 archive=B/'report/evidence/remote-evidence.tar.gz'
 subprocess.run(scp_prefix()+[remote_file(run_root()/'evidence-export.tar.gz'),str(archive)],check=True)

@@ -2,7 +2,7 @@
 import json,os,pathlib,sys,tempfile,unittest
 from unittest.mock import patch
 ROOT=pathlib.Path(__file__).resolve().parents[1]
-sys.path.insert(0,str(ROOT/'study'))
+sys.path.insert(0,str(ROOT/'tools'))
 from workspace import activate_imports
 activate_imports()
 import publication
@@ -18,7 +18,7 @@ class StudyPublicationTests(unittest.TestCase):
   self.assertEqual(data,{'measurement':{'envs':4096,'synchronized_rollout_s':[1,2,3,4,5]}})
  def test_packaged_example_uses_logical_source_reference(self):
   source='${STUDY_STORAGE_ROOT}/official-taichi/root/usr/local/lib/python3.12/site-packages/taichi/examples/simulation/mpm88.py'
-  self.assertEqual(publication.repository_reference(source),'AMD Taichi provided example: simulation/mpm88.py (adapter: study/benchmarks/provided_replicas.py)')
+  self.assertEqual(publication.repository_reference(source),'AMD Taichi provided example: simulation/mpm88.py (adapter: tools/benchmarks/provided_replicas.py)')
   self.assertNotIn('official-taichi/root',publication.sanitize_text(source))
  def test_only_final_successful_gpu_runs_selected(self):
   campaign={'campaigns':[{'smoke_status':'PASS','smoke_run_id':'smoke-final','points':[{'status':'PASS','run_id':'accepted'},{'status':'FAIL','run_id':'rejected'},{'status':'REMEASUREMENT_PENDING','run_id':'superseded'}]}]}

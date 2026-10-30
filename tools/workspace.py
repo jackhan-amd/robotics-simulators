@@ -3,7 +3,7 @@ from __future__ import annotations
 import json,os,pathlib,shlex,tempfile
 
 _HERE=pathlib.Path(__file__).resolve().parent
-REPO_ROOT=pathlib.Path(os.environ.get('STUDY_WORKTREE',_HERE.parent if _HERE.name=='study'else _HERE/'repo'))
+REPO_ROOT=pathlib.Path(os.environ.get('STUDY_WORKTREE',_HERE.parent if _HERE.name=='tools'else _HERE/'repo'))
 def profile():
  path=pathlib.Path(os.environ.get('STUDY_PROFILE',REPO_ROOT/'private/study-profile.json'))
  return json.loads(path.read_text(encoding='utf-8'))if path.is_file()else{}
@@ -15,7 +15,7 @@ def configured_path(text):
  return pathlib.Path(text).expanduser()
 def run_root():
  root=value('LAB_ROOT',value('STUDY_RUN_ROOT'))
- if not root:raise RuntimeError('Set LAB_ROOT or STUDY_RUN_ROOT to an external study workspace; see study/README.md')
+ if not root:raise RuntimeError('Set LAB_ROOT or STUDY_RUN_ROOT to an external study workspace; see docs/benchmark-tools.md')
  return configured_path(root)
 def storage_root():
  configured=value('STUDY_STORAGE_ROOT')
@@ -58,25 +58,25 @@ def remote_file(path):return ssh_target()+':'+shlex.quote(str(path))
 
 
 def script_index():
-    return json.loads((REPO_ROOT/'study/scripts.json').read_text(encoding='utf-8'))['scripts']
+    return json.loads((REPO_ROOT/'tools/scripts.json').read_text(encoding='utf-8'))['scripts']
 
 def source_reference(name):
-    return script_index().get(name, 'study/'+name)
+    return script_index().get(name, 'tools/'+name)
 
 def script_path(name):
     """Resolve a registered source file, or its unchanged flat-deployment name."""
     if name not in script_index():raise ValueError('Unregistered study command: '+name)
     flat=_HERE/name
-    if _HERE.name!='study' and flat.is_file():return flat
+    if _HERE.name!='tools' and flat.is_file():return flat
     return REPO_ROOT/script_index()[name]
 
 def script_command(name, interpreter=None):
     import sys
-    return [interpreter or sys.executable, str(REPO_ROOT/'study/run.py'), name]
+    return [interpreter or sys.executable, str(REPO_ROOT/'tools/run.py'), name]
 
 def activate_imports():
     """Expose only the registered helper directories to study command imports."""
     import sys
-    paths=[REPO_ROOT/'study']+sorted({(REPO_ROOT/path).parent for path in script_index().values()})
+    paths=[REPO_ROOT/'tools']+sorted({(REPO_ROOT/path).parent for path in script_index().values()})
     for path in reversed(paths):
         if str(path) not in sys.path:sys.path.insert(0,str(path))

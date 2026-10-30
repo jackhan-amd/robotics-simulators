@@ -7,11 +7,11 @@ Original copyright and third-party notices are retained.
 
 | Component | GPU workload | Installation and execution |
 |---|---|---|
-| MuJoCo MJX / MJWarp | Articulated rigid-body physics | [GPU recipes](recipes/mujoco/README.md), [Humanoid study](study/REPRODUCE.md) |
-| Genesis World | Rigid, SPH, MPM and coupled physics | [Recipe](recipes/genesis/README.md), [study](study/README.md) |
-| Project Chrono | HIP FSI-SPH and DEM | [Recipe](recipes/chrono/README.md), [study](study/REPRODUCE.md) |
-| AMReX incflo | HIP Eulerian CFD | [Recipe](recipes/incflo/README.md), [study](study/REPRODUCE.md) |
-| nekRS | HIP spectral-element CFD | [Recipe](recipes/nekrs/README.md), [study](study/REPRODUCE.md) |
+| MuJoCo MJX / MJWarp | Articulated rigid-body physics | [GPU recipes](recipes/mujoco/README.md), [Humanoid study](docs/benchmark-recipes.md) |
+| Genesis World | Rigid, SPH, MPM and coupled physics | [Recipe](recipes/genesis/README.md), [study](docs/benchmark-tools.md) |
+| Project Chrono | HIP FSI-SPH and DEM | [Recipe](recipes/chrono/README.md), [study](docs/benchmark-recipes.md) |
+| AMReX incflo | HIP Eulerian CFD | [Recipe](recipes/incflo/README.md), [study](docs/benchmark-recipes.md) |
+| nekRS | HIP spectral-element CFD | [Recipe](recipes/nekrs/README.md), [study](docs/benchmark-recipes.md) |
 | FluidLab | HIP MPM; operator-authorized upstream required | [Local prerequisites](recipes/fluidlab/README.md) |
 | Instinct Sim | LIBERO GPU physics, control and cameras | [Recipe](recipes/instinct/README.md) |
 | Taichi Lang | AMD GPU MPM88 | [Recipe](recipes/taichi/README.md) |
@@ -32,7 +32,7 @@ For clone-to-benchmark instructions, follow [the reproduction quick start](docs/
 
 Start with [common prerequisites](recipes/README.md), [verification rules](docs/verification.md)
 and the relevant engine recipe. Core smokes preserve their reviewed gfx1151
-configuration. The separate [MI355X study](study/README.md) provides gfx950 build
+configuration. The separate [MI355X study](docs/benchmark-tools.md) provides gfx950 build
 adapters and supplied-example environment scaling; those targets are not interchangeable.
 The historical review summary does not validate a new machine or run.
 

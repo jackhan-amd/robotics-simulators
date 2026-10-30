@@ -13,7 +13,9 @@ Read `README.md`, the relevant engine recipe under `recipes/`, and `docs/verific
 - `configs/cases.json`: smoke cases; `configs/sources.json` and dependency locks: source and package pins.
 - engine-owned smoke files under `recipes/`: bounded physics scenes and backend compatibility helpers.
 - `simulators/`: catalog CLI and local HTML generation.
-- `tools/`: environment setup, asset acquisition, inventory and run recording.
+- `tools/`: shared environment setup, runtime orchestration, benchmark coordination, capture and reporting; `tools/run.py` launches registered commands.
+- `configs/`: maintained source/dependency pins and benchmark configuration.
+- `docs/benchmark-tools.md` and `docs/benchmark-recipes.md`: common benchmark setup and per-engine reproduction.
 - `tests/`: repository and harness checks that run without a GPU.
 
 ## Making changes
@@ -36,7 +38,7 @@ python3 -m simulators build
 git diff --check
 ```
 
-The HTML build writes ignored local files under `report/`. These checks validate repository wiring and harness behavior. Use the relevant recipe to validate actual simulator execution; `python3 -m simulators smoke <id>` previews a command and `--execute` runs it.
+The optional recipe-index build writes ignored local files under `.runtime/catalog/`. These checks validate repository wiring and harness behavior. Use the relevant recipe to validate actual simulator execution; `python3 -m simulators smoke <id>` previews a command and `--execute` runs it.
 
 ## Documentation and licensing
 

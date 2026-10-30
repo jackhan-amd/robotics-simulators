@@ -16,9 +16,9 @@ text=text.replace('최종 측정 수치는','최종 측정 수치는').replace('
 text=text.replace('의 GPU replay에서 step','의 GPU replay(`recipes/genesis/benchmarks/capture_provided_genesis.py`)에서 step')
 text=re.sub(r'최초 smoke는 float32 gravity.*?초기 실패·수정 후 결과를 모두 보존(?:한다|했다)\.','중력 파라미터는 float32 표현 오차를 고려해 허용오차 1e-6으로 비교하며, 물리 gate는 유지한다.',text,flags=re.S)
 text=text.replace('버전별 시도와 실패는 분리해 기록한다.','최종 실행 버전과 필요한 workaround를 함께 기록한다.')
-text=re.sub(r'^Run ID:.*$','실행 방법은 `study/REPRODUCE.md`를 따른다. 제공 예제 표의 최종 JSON에서 모델·버전·계측 조건과 실행 코드의 hash를 확인할 수 있다.',text,flags=re.M)
+text=re.sub(r'^Run ID:.*$','실행 방법은 `docs/benchmark-recipes.md`를 따른다. 제공 예제 표의 최종 JSON에서 모델·버전·계측 조건과 실행 코드의 hash를 확인할 수 있다.',text,flags=re.M)
 text=text.replace('각 탭의 Run ID에서 실제 버전과 반복 시간을 확인한다.','각 탭의 최종 JSON에서 실제 버전과 반복 시간을 확인한다.')
-text=re.sub(r'Pinned commit:.*?(?=\n\n)', 'Pinned base commit: `d1adb4a0cd5f55ce80443e642092190de9d12f6e`. 최종 성공 실행의 재현 명령·설정·수치 JSON·로그는 `evidence/final/`에 수록했다. 실행과 보고서 생성 코드는 코드 ZIP의 `study/`에 있으며, 버전 목록은 `evidence/software-observations.json`에 기록했다.',text,count=1,flags=re.S)
+text=re.sub(r'Pinned commit:.*?(?=\n\n)', 'Pinned base commit: `d1adb4a0cd5f55ce80443e642092190de9d12f6e`. 최종 성공 실행의 재현 명령·설정·수치 JSON·로그는 `evidence/final/`에 수록했다. 실행과 보고서 생성 코드는 코드 ZIP의 `tools/`에 있으며, 버전 목록은 `evidence/software-observations.json`에 기록했다.',text,count=1,flags=re.S)
 text=text.replace(' JAX 0.12.0 결과는 별도 버전 진단으로 표시한다.','')
 if c['status']=='IN_PROGRESS':
  text=text.replace('요청한 제공 예제 env scaling을 모두 실행했다. 실패 구성에는 처리량을 제시하지 않는다.','제공 예제 env scaling을 재측정 중이다. 통과한 구성만 처리량을 제시한다.')
@@ -54,7 +54,7 @@ for title,chapter in zip(parts[1::2],parts[2::2]):
   files=sorted(set(re.findall(r'python3\s+([A-Za-z_][A-Za-z0-9_]*\.py)',engine['command'])))
   assert all(script_path(name).is_file()for name in files)
   source_paths=' · '.join('`'+source_reference(name)+'`'for name in files)
-  block='<!-- PROVIDED-COMMAND -->\n\n#### 제공 예제 실행\n\n저장소 코드: '+source_paths+'. 외부 작업 공간과 공통 환경은 `study/REPRODUCE.md`에 따라 준비한다.\n\n```bash\n'+engine['command']+'\n```\n\n<!-- /PROVIDED-COMMAND -->\n\n'
+  block='<!-- PROVIDED-COMMAND -->\n\n#### 제공 예제 실행\n\n저장소 코드: '+source_paths+'. 외부 작업 공간과 공통 환경은 `docs/benchmark-recipes.md`에 따라 준비한다.\n\n```bash\n'+engine['command']+'\n```\n\n<!-- /PROVIDED-COMMAND -->\n\n'
   chapter=chapter.replace('### 3. Throughput',block+'### 3. Throughput',1)
  out+=['## '+title,chapter]
 text='\n'.join(out)
