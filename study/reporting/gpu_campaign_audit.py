@@ -48,7 +48,7 @@ baseline=json.loads((O/'benchmark-data.json').read_text(encoding='utf-8'));asser
 audit.write_text(json.dumps(dict(**data,baseline_gpu_configurations=len(baseline),baseline_samples_each=5,physics_accuracy_scope='Scene-specific finite-state/conservation/contact/parity checks; no blanket G2/application certification'),ensure_ascii=False,indent=2),encoding='utf-8')
 (O/'evidence/gpu-smoke-coverage.json').write_text(json.dumps([dict(engine=c['engine'],model=c['model'],status=c['smoke_status'],run_id=c['smoke_run_id'])for c in campaigns],ensure_ascii=False,indent=2),encoding='utf-8')
 f=B/'configs/benchmarks/report-plan.json';p=json.loads(f.read_text(encoding='utf-8'));p['state']=data['scope']+'; '+status
-p['method']=['CPU는 같은 장면의 초기 GPU 결과를 확인하는 sanity check에만 사용한다. CPU 처리량은 측정 결과와 집계에서 제외한다.'if x.startswith('CPU')else x for x in p['method']]
+p['method']=['CPU 계산은 같은 장면의 짧은 GPU sanity check에만 사용했습니다. CPU 처리량은 시뮬레이터 성능 결과에서 제외했습니다.'if x.startswith('CPU')else x for x in p['method']]
 for e in p['engines']:
  own=[c for c in campaigns if c['engine']==e['id']];passed=sum(point['status']=='PASS'for c in own for point in c['points']);expected=sum(len(c['points'])for c in own);e['baseline_performance_configurations']=e['measured_configurations'];e.pop('primary_performance_configurations',None);e['provided_configurations_passed']=passed;e['provided_configurations_expected']=expected;e['status']=f'GPU · provided {passed}/{expected} PASS'+(' · in progress'if any(point['status']in('PENDING','REMEASUREMENT_PENDING')for c in own for point in c['points'])else'')
  for state in ('FAIL','BLOCKED'):

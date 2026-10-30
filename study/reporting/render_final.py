@@ -35,7 +35,7 @@ panels['overview']+='<p>PASS는 이 보고서의 작은 시험 장면과 수치 
 panels['overview']+='<h3>실험 개요</h3>'+render(sections.get('실험 개요',sections.get('고객 설명에 사용할 시연 순서','')))
 panels['environment']='<h2>측정 환경과 해석</h2>'+render(sections['측정 환경과 해석'])
 panels['environment']+=table(['항목','관측값'],[('GPU','AMD Instinct MI355X × 1 · gfx950 · PCI ID 1002:75a3'),('VRAM','309220868096 bytes / 288 GiB'),('CPU','AMD EPYC 9575F · host logical CPUs 256'),('Runtime','SDK 10.1.0 packaging / Torch HIP 7.16.26385; MJX private ROCm 7.14.1'),('작업 경로','${LAB_ROOT}'),('노드 관측','<a href="../validation-report-mi355x.html">한국어/English 노드 관측 보고서</a>')])
-panels['plan']='<h2>시험계획 '+esc(p['version'])+'</h2><p>'+esc(p['state'])+'</p><ol>'+''.join('<li>'+esc(x)+'</li>'for x in p['method'])+'</ol><p><a href="test-plan.json">계획 JSON</a> · <a href="evidence/gpu-smoke-coverage.json">제공 예제 GPU smoke와 실제 Run ID</a></p>'
+panels['plan']='<h2>'+esc(p.get('report_section_title','시험 방법 및 조건'))+' '+esc(p['version'])+'</h2><p>'+esc(p['state'])+'</p><ol>'+''.join('<li>'+esc(x)+'</li>'for x in p['method'])+'</ol><p><a href="test-plan.json">시험 조건 JSON</a> · <a href="evidence/gpu-smoke-coverage.json">제공 예제 GPU smoke와 실제 Run ID</a></p>'
 panels['research']='<h2>외부 공개 성능과 AMD 확인 범위</h2><p>로컬 rocm-blogs commit 630de9e66daee9204d5bb053bcd6be15afd29aab (2026-08-25)와 공식 웹 자료를 조사했다. 공개 수치를 찾지 못했다는 설명은 확인한 자료의 범위에 한정한다.</p>'+render(sections['외부 공개 성능과 AMD 확인 범위'])
 panels['environment']=re.sub(r'<tr><td>[^<]+</td><td>\$\{LAB_ROOT\}</td></tr>','',panels['environment'])
 records=[]
@@ -52,20 +52,12 @@ for e in p['engines']:
   if r['engine']!=e['id']:continue
   s+='<p>'+esc(r['case'])+' · <a href="evidence/final/'+esc(r['_receipt'])+'">JSON</a> · <a href="evidence/final/'+esc(r['execution_log'])+'">log</a></p>'
  s+='</details>';panels[e['id']]=s
-panels['evidence']='<h2>근거·재현·문장 검토</h2><ul><li><a href="confluence-report.md">Confluence용 Markdown</a></li><li><a href="../study/REPRODUCE.md">실행 절차</a></li><li><a href="benchmark-data.json">49개 구성 원자료</a></li><li><a href="mujoco-throughput.csv">MuJoCo CSV</a></li><li><a href="evidence/results/software-sources-and-builds.json">소스와 native 빌드 설정</a></li><li><a href="evidence/measurement-audit.json">측정 검산·저장소 검사</a></li><li><a href="images/provenance.json">참고 화면 출처</a> · <a href="images/AMD-NOTICE.txt">AMD notice</a></li></ul>'
-human=O/'humanizer-review.json'
-if human.exists():panels['evidence']+='<details><summary>두 humanizer의 검토·보존 검사 결과</summary><pre>'+esc(human.read_text(encoding='utf-8'))+'</pre></details>'
-panels['evidence']=panels['evidence'].replace('49개 구성 원자료',f'{count}개 구성 원자료')
-panels['evidence']+='<p>Confluence 초안에는 자동으로 반영하지 못했다. 첨부 Markdown과 images 폴더를 사용해 본문과 그림을 옮길 수 있다. 그래프와 그림은 HTML에 포함되어 오프라인에서도 표시된다. 로그 링크를 열려면 함께 제공한 폴더 구조를 유지한다.</p>'
-if 'Confluence 반영 상태'in sections:panels['evidence']+='<h3>Confluence 반영 상태</h3>'+render(sections['Confluence 반영 상태'])
-names=[('overview','전체 결과'),('environment','측정 환경'),('plan','시험계획'),('research','외부 성능 조사')]+[(e['id'],e['title'])for e in p['engines']]+[('evidence','근거·재현·문장 검토')]
+names=[('overview','전체 결과'),('environment','측정 환경'),('plan','시험 방법 및 조건'),('research','외부 성능 조사')]+[(e['id'],e['title'])for e in p['engines']]
 if '실험 개요' in sections:
  panels['overview']='<h2>실험 개요</h2>'+render(sections['실험 개요'])+'<h3>시험 결과 · 제공 예제와 env scaling</h3>'+render(sections['시험 결과 · 제공 예제와 env scaling'])
 if '시험 범위와 완료 상태'in sections:
  panels['overview']='<h2>시험 범위와 완료 상태</h2>'+render(sections['시험 범위와 완료 상태'])+'<h3>고객 설명 순서</h3>'+render(sections['고객 설명에 사용할 시연 순서'])
-panels['evidence']=panels['evidence'].replace('images/provenance.json','images/actual-provenance.json').replace('참고 화면 출처','실제 캡처 출처')
-panels['evidence']=re.sub(r' · <a href="images/AMD-NOTICE.txt">AMD notice</a>','',panels['evidence'])
-groups=[('일반 안내',['overview','environment','plan','research','evidence']),('Rigid simulation',['mujoco','instinct']),('Fluid simulation',['incflo','nekrs','fluidlab']),('Multiphysics · Rigid / Fluid',['genesis','chrono']),('Simulation framework',['taichi']),('Rendering',['gsplat'])]
+groups=[('일반 안내',['overview','environment','plan','research']),('Rigid simulation',['mujoco','instinct']),('Fluid simulation',['incflo','nekrs','fluidlab']),('Multiphysics · Rigid / Fluid',['genesis','chrono']),('Simulation framework',['taichi']),('Rendering',['gsplat'])]
 labels=dict(names);nav_html=''.join('<div class="nav-group"><div class="nav-heading">'+esc(title)+'</div>'+''.join(f'<a href="#{i}">{esc(labels[i])}</a>'for i in ids if i in labels)+'</div>'for title,ids in groups)
 if '제공 예제 envs scaling 시험'in sections:
  panels['env-scaling']='<h2>제공 예제 envs scaling 시험 · 진행 중</h2>'+render(sections['제공 예제 envs scaling 시험'])
@@ -92,7 +84,7 @@ if campaign.exists():
  if c['status']!='IN_PROGRESS':doc=doc.replace('제공 예제 envs scaling 시험 · 진행 중','제공 예제 envs scaling 시험 · 실행 완료').replace('제공 예제 envs scaling · 진행 중','제공 예제 envs scaling · 실행 완료')
 if args.public:
  doc=doc.replace('confluence-report.md','report.md').replace('../study/REPRODUCE.md','../../../study/REPRODUCE.md').replace('../validation-report-mi355x.html','environment.json').replace('evidence/results/software-sources-and-builds.json','software.json').replace('evidence/measurement-audit.json','gpu-campaign-status.json').replace('evidence/smoke-coverage.json','smoke-coverage.json').replace('evidence/gpu-smoke-coverage.json','smoke-coverage.json')
- doc=doc.replace('Confluence용 Markdown','공개 보고서 Markdown').replace('Confluence 초안에는 자동으로 반영하지 못했다. 첨부 Markdown과 images 폴더를 이용해 본문과 그림을 붙일 수 있다.','공개 본문과 집계 자료는 이 폴더에 있으며, 연결 설정과 개별 실행 로그는 포함하지 않는다.')
+ doc=doc.replace('보고서 Markdown','공개 보고서 Markdown').replace('Confluence 초안에는 자동으로 반영하지 못했다. 첨부 Markdown과 images 폴더를 이용해 본문과 그림을 붙일 수 있다.','공개 본문과 집계 자료는 이 폴더에 있으며, 연결 설정과 개별 실행 로그는 포함하지 않는다.')
 doc=doc.replace('64/64 PASS','64개 구성').replace('고객 설명에 사용할 시연 순서','실험 개요').replace('고객 설명 순서','실험 개요')
 output.write_text(polite_html(doc),encoding='utf-8')
 (O/'test-plan.json').write_text(json.dumps(p,ensure_ascii=False,indent=2),encoding='utf-8')

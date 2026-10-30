@@ -6,7 +6,7 @@ This guide starts from a new checkout. It reproduces the supplied-example worklo
 the repository contains their code and source pins, not virtual environments,
 upstream payloads, models, private logs or an AMD driver installation.
 
-[Experiment settings](benchmark-parameters.md) lists model, solver, env count, warm-up, seed and timing settings; the JSON manifest covers both measured cohorts.
+[Experiment settings](benchmark-parameters.md) lists model, solver, env count, warm-up, seed and timing settings; the local JSON export covers both measured cohorts.
 
 ## 1. Clone and select a target
 
@@ -19,7 +19,7 @@ python3 -m simulators check
 
 The measured target was one MI355X/gfx950 with 288 GiB VRAM, Ubuntu 24.04.5
 and Python 3.12.3. Preserve the installed driver and use isolated user prefixes.
-Read [the observed versions](../configs/benchmarks/software.json) and
+Read the locally generated version snapshot (`report/evidence/software-observations.json`) and
 [per-engine preparation](../study/REPRODUCE.md). The original core recipe smokes
 retain their reviewed gfx1151 target; use the study adapters for MI355X.
 

@@ -42,6 +42,9 @@ assert s.count('class="amd-mark"')>=15
 assert 'AMD 코드·자료 기반' in md and '¹ 검은 AMD 블록' in md
 assert '제공 예제 envs scaling ·' not in s
 assert '| 실행 |' not in md
+assert 'evidence' not in p.ids
+assert not re.search(r'humanizer|Confluence|근거·재현·문장 검토',s,re.I)
+assert md.count('<!-- EXECUTION-GUIDE -->')==len(plan['engines'])
 assert 'AMD 공식 추가' not in md and 'AMD 보조 렌더링' not in md
 assert '제공 예제 추가 시험' not in md
 assert '고객 설명 순서' not in s and '고객 설명에 사용할 시연 순서' not in s

@@ -31,6 +31,74 @@ REPORT_LABELS = {
     "GPU 렌더링 보조 항목": "GSplat GPU 렌더링 성능 항목"
 }
 
+def customer_copy(text):
+    """Keep the customer body focused on experiments and inline reproduction."""
+    parts=re.split(r'^## (.+)\s*$',text,flags=re.M)
+    plan=json.loads((ROOT/'configs/benchmarks/report-plan.json').read_text(encoding='utf-8'))
+    engines={e['title']:e for e in plan['engines']}
+    output=[parts[0]]
+    common="""git clone https://github.com/jackhan-amd/robotics-simulators.git
+cd robotics-simulators
+export LAB_ROOT="/path/to/benchmark-runtime"
+export STUDY_STORAGE_ROOT="$LAB_ROOT/storage"
+export STUDY_WORKTREE="$PWD"
+export ROCM_PATH="/path/to/matching/rocm-sdk"
+mkdir -p "$LAB_ROOT" "$STUDY_STORAGE_ROOT"
+python3 -m venv "$LAB_ROOT/bootstrap-tools"
+"$LAB_ROOT/bootstrap-tools/bin/pip" install uv
+export PATH="$LAB_ROOT/bootstrap-tools/bin:$PATH"
+python3 study/run.py bootstrap.py
+source "$LAB_ROOT/env.sh"
+"$LAB_ROOT/bin/uv" venv --system-site-packages --python "$(command -v python3)" "$STUDY_STORAGE_ROOT/venvs/base"
+python3 study/run.py setup_remote.py"""
+    requirements={
+      'mujoco':'MJWarp용 mujoco=3.8.1·warp=1.13.0+rocm.0 환경과, 별도의 MJX용 JAX/jaxlib/PJRT/plugin=0.12.0·MuJoCo=3.16.0·ROCm 7.14.1 loader 환경을 사용합니다.',
+      'genesis':'Genesis 1.4.4의 AMD GPU 환경, 제공 Franka·SPH 예제와 headless 실행용 라이브러리를 준비합니다.',
+      'chrono':'고정 Chrono·Eigen source와 gfx950 HIP 빌드를 준비합니다. 제공 DamBreak·DEM 실행 파일은 계측 barrier를 포함한 빌드를 사용합니다.',
+      'incflo':'AMReX·AMReX-Hydro·incflo의 고정 source와 gfx950 HIP 실행 파일을 준비합니다. 제공 cavity 입력과 계측 barrier를 사용합니다.',
+      'nekrs':'고정 nekRS source, MPI·Fortran 도구와 HIP/OCCA 빌드를 준비합니다. 제공 TGV mesh·입력과 연속 측정 창을 사용합니다.',
+      'fluidlab':'고정 FluidLab source와 AMD Taichi 실행 환경을 준비합니다. 로컬 호환성 사본을 사용하며, 제공 MixingEnv의 forward simulation만 실행합니다.',
+      'taichi':'공식 AMD Taichi 1.8.0b2의 Python 3.12 payload와 LLVM 20 호환 runtime을 준비합니다. 제공 MPM88 예제를 사용합니다.',
+      'instinct':'Faster Action Models의 고정 simulate source, gfx950 빌드, LIBERO 8f1084e source·task asset과 instinct-sim Python 환경을 준비합니다.',
+      'gsplat':'AMD GSplat v1.5.3b2의 고정 source와 ROCm PyTorch 환경을 준비합니다. 측정한 Torch 2.14 환경에서는 allocator API 호환성 처리가 필요합니다.'
+    }
+    preparation={
+      'mujoco':['python3 study/run.py install_gpu.py warp','python3 study/run.py prepare_mjx_aligned.py'],
+      'genesis':['python3 study/run.py install_gpu.py genesis'],
+      'chrono':['python3 study/run.py build_engine.py chrono','python3 study/run.py build_provided_chrono.py'],
+      'incflo':['python3 study/run.py build_engine.py incflo','python3 study/run.py prepare_incflo.py','python3 study/run.py build_provided_incflo.py'],
+      'nekrs':['python3 study/run.py build_engine.py nekrs'],
+      'fluidlab':['export FLUIDLAB_SOURCE_ROOT="$STUDY_STORAGE_ROOT/upstream/fluidlab"','python3 study/run.py prepare_fluidlab.py'],
+      'taichi':['python3 study/run.py docker_extract_taichi.py'],
+      'instinct':[],
+      'gsplat':['python3 study/run.py install_gpu.py gsplat']
+    }
+    fence=chr(96)*3
+    for heading,body in zip(parts[1::2],parts[2::2]):
+        heading=heading.strip()
+        if re.search(r'Confluence|humanizer|근거.*문장 검토',heading,re.I):continue
+        engine=engines.get(heading)
+        if engine:
+            body=re.sub(r'<!-- PROVIDED-COMMAND -->.*?<!-- /PROVIDED-COMMAND -->\s*','',body,flags=re.S)
+            body=re.sub(r'<!-- EXECUTION-GUIDE -->.*?<!-- /EXECUTION-GUIDE -->\s*','',body,flags=re.S)
+            eid=engine['id']
+            setup=common+'\npython3 tools/fetch_sources.py fetch --engine '+eid
+            setup+='\n'+'\n'.join(preparation[eid])
+            if eid=='instinct':
+                setup+='\n# instinct-sim Python 환경과 LIBERO 의존성 준비 후 GPU backend 빌드\nexport PYTHON="$STUDY_STORAGE_ROOT/venvs/instinct-sim/bin/python"\nexport HIP_ARCH=gfx950 JOBS=8 HIPCXX="$ROCM_PATH/lib/llvm/bin/clang++"\ncd "$STUDY_STORAGE_ROOT/upstream/faster-action-models"\nbash simulate/build.sh libero "$STUDY_STORAGE_ROOT/build/instinct-sim-libero"'
+            block=['<!-- EXECUTION-GUIDE -->','#### 실행 안내','',
+              'Linux·Python 3.12와 이 절의 Software 버전에 맞는 ROCm SDK·PyTorch runtime을 사용합니다. 장치 점유를 확인한 뒤 할당된 MI355X GPU에서 한 시험 작업씩 실행합니다. 아래 경로는 사용자가 정하는 로컬 작업 경로입니다.',
+              '',requirements[eid],'',
+              '<details markdown="1"><summary>환경·source 준비 절차</summary>','',fence+'bash',setup,fence,'','</details>','',
+              'Runtime 설치·빌드와 task asset 준비를 마친 뒤 다음 명령으로 제공 예제의 smoke와 envs scaling을 실행합니다. 새 환경의 동작은 GPU backend와 장면별 수치 조건으로 확인해야 합니다.',
+              '', '<details markdown="1"><summary>Benchmark 재현 명령</summary>','',fence+'bash',engine['command'],fence,'','</details>','',
+              '<!-- /EXECUTION-GUIDE -->','']
+            body=body.replace('### 3. Throughput','\n'.join(block)+'\n### 3. Throughput',1)
+        output.extend(['## '+heading,body])
+    text='\n'.join(output)
+    text=re.sub(r'^재현 절차:.*$','재현을 위한 환경 준비와 실행 명령은 각 시뮬레이터의 실행 안내에 수록했습니다.',text,flags=re.M)
+    return text
+
 def finalize_copy(text):
     """Apply finished-report labels while preserving measurement scope."""
     for old, new in sorted(REPORT_LABELS.items(), key=lambda item: -len(item[0])):
@@ -48,7 +116,7 @@ def finalize_copy(text):
         text=''.join(parts)
     text=text.replace('GSplat은 GSplat GPU 렌더링 성능 항목', 'GSplat은 GPU 렌더링 성능 시험')
     text=text.replace('별도로 추진하는' + ' 블로그 재현 시험의 학습 시간·정책 추론 지연과 구분합니다.', '학습 시간·정책 추론 지연은 이번 측정 범위에 포함하지 않았습니다.')
-    return text
+    return customer_copy(text)
 
 def update(folder):
     target = folder / 'confluence-report.md'

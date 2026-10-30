@@ -1,18 +1,18 @@
 {
   "version": "2.1",
-  "state": "MI355X GPU physics: 8 engines; GSplat separate GPU rendering benchmark; CPU for GPU sanity references only; COMPLETED",
+  "state": "MI355X 1 GPU에서 제공 예제의 동작·성능·envs scaling 시험을 완료했습니다. CPU는 GPU 결과의 sanity check에만 사용했습니다.",
   "repository_commit": "d1adb4a0cd5f55ce80443e642092190de9d12f6e",
   "method": [
-    "물리 검증과 성능 측정을 분리한다. 설치 성공이나 종료코드 0만으로 물리 검증을 통과시키지 않는다.",
-    "GPU는 한 번에 한 작업만 실행한다. 매 실행 전 장치 이름, gfx950, 사용 중인 프로세스를 확인한다. CPU fallback은 CPU_ONLY로 기록한다.",
-    "headless physics-only가 기본이다. scene 구성, JIT/컴파일, warm-up, 정상상태 실행, 상태 readback을 나눠 기록한다. GPU 타이머 앞뒤에서 동기화한다.",
-    "정상상태는 5회 반복한다. 중앙값과 최소·최대값, 반복별 원자료를 제공한다. 실행당 충분한 step을 사용하고, 짧은 측정은 참고값으로 표시한다.",
-    "step/s = 측정 step 수 / 동기화 실행시간. 병렬 환경은 env-step/s = 환경 수 × step 수 / 실행시간. RTF = 환경당 step/s × dt. solver substep 수를 함께 표기한다.",
-    "입자·CFD 엔진은 particle-update/s 또는 cell-update/s, time/step, 격자·입자 수와 dt를 함께 보고한다. 다른 물리·정밀도의 엔진을 동일 순위표로 비교하지 않는다.",
-    "CPU는 같은 장면의 초기 GPU 결과를 확인하는 sanity check에만 사용한다. CPU 처리량은 측정 결과와 집계에서 제외한다.",
-    "연속된 상태의 유한값, 중력·접촉·보존량 등 장면별 조건을 확인한다. FAIL 또는 BLOCKED 결과에는 성능 합격값을 붙이지 않는다.",
-    "실행별 UTC, 명령, 환경, 소스/패키지 버전, 종료코드, 원본 stdout/stderr와 JSON을 보존한다. 재시도는 별도 실행으로 기록한다.",
-    "고객 시연은 장면 소개 화면, 규모 대비 처리량 그래프, 대표 실행 명령, 제약 순서로 진행한다. 참고 이미지와 실제 서버 실행 화면을 구별한다."
+    "동작·수치 검증과 성능 계측을 분리했습니다. 설치 성공이나 프로세스 종료코드 0만으로 GPU 동작과 물리 검증을 통과한 것으로 판정하지 않았습니다.",
+    "GPU 시험 작업은 순차적으로 수행했습니다. 장치 이름과 gfx950, GPU 사용 프로세스를 확인했으며 CPU fallback을 GPU 성능으로 집계하지 않았습니다. 독립 GPU 프로세스를 이용한 env 복제는 각 시험 작업 안에서 수행했습니다.",
+    "장면 구성, JIT·컴파일, warm-up, 측정 구간과 상태 readback의 범위를 구분했습니다. 처리량은 GPU 동기화 경계에서 계측했으며 엔진별로 포함된 작업을 명시했습니다. Instinct Sim의 env.step에는 제어·카메라·관측 처리가, GSplat 시험에는 forward rasterization이 포함됐습니다.",
+    "각 성능 구성에서 5개 표본을 기록하고 중앙값과 최소·최대 시간을 제시했습니다. nekRS는 warm-up 이후 연속된 궤적의 다섯 측정 창을 사용했으며, 독립적으로 reset한 반복과 구분했습니다.",
+    "처리량과 RTF는 기록된 env 수, 측정 step 수, 동기화 시간과 dt로 계산했습니다. env-step/s = envs × measured steps / synchronized seconds, RTF/env = 환경당 step/s × dt를 사용했습니다. Chrono DEM의 1 ms outer advance 호출은 내부 물리 substep과 구분했습니다.",
+    "엔진별 처리량 단위와 모델·입자·격자 규모, dt 및 계측 범위를 함께 기록했습니다. 모델과 물리·정밀도·단위가 다른 결과를 하나의 성능 순위로 합치지 않았습니다.",
+    "CPU 계산은 같은 장면의 짧은 GPU sanity check에만 사용했습니다. CPU 처리량은 시뮬레이터 성능 결과에서 제외했습니다.",
+    "유한 상태, 중력·접촉·보존량 등 장면별 조건과 실제 GPU backend를 확인했습니다. 최종 성능 표에는 채택된 실행 결과만 반영했습니다. FluidLab은 forward simulation만 측정했으며 gradient·학습·최적화는 시험하지 않았습니다.",
+    "재현 명령, 실행 환경, source·패키지 버전, 종료코드와 JSON·실행 로그를 기록했습니다. 보고서에는 최종 채택 실행의 근거를 연결했습니다.",
+    "제공 모델 설명, 규모별 처리량, 재현 명령과 해석 범위를 보고서에 수록했습니다. 실제 실행 화면과 수치의 후처리 시각화를 구분했고, 설명용 캡처와 이미지 저장은 처리량 계측에서 제외했습니다."
   ],
   "engines": [
     {
@@ -220,5 +220,6 @@
     32768,
     65536
   ],
-  "scope_constraint": "CPU-only engines excluded. CPU references cannot be counted as simulator performance. GSplat is a separately labeled GPU rendering benchmark."
+  "scope_constraint": "CPU-only engines excluded. CPU references cannot be counted as simulator performance. GSplat is a separately labeled GPU rendering benchmark.",
+  "report_section_title": "시험 방법 및 조건"
 }

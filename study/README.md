@@ -22,7 +22,7 @@ The `provided_*_suite.py` coordinators select supplied upstream models, perform 
 
 The final MJX Humanoid profile uses matched JAX/jaxlib/PJRT/plugin 0.12.0 and the isolated ROCm loader described in REPRODUCE.md. `configs/benchmarks/mjx-profile.json` selects `jax0120-default`; `recipes/mujoco/benchmarks/provided_mjx_suite.py` uses the default compiler options with no XLA_FLAGS override. The supplied physical settings remain unchanged.
 
-[prepare_mjx_aligned.py](../recipes/mujoco/benchmarks/prepare_mjx_aligned.py) creates that environment in fresh external prefixes and refuses to modify an existing measured environment. [software-observations.json](../configs/benchmarks/software.json) records observed package versions, source commits and build settings. Use [env.example.sh](runtime/env.example.sh) as the common environment template.
+[prepare_mjx_aligned.py](../recipes/mujoco/benchmarks/prepare_mjx_aligned.py) creates that environment in fresh external prefixes and refuses to modify an existing measured environment. software-observations.json (local output: `report/evidence/software-observations.json`) records observed package versions, source commits and build settings. Use [env.example.sh](runtime/env.example.sh) as the common environment template.
 
 `study/runtime/launch_remote.py` starts a persistent coordinator through the configured SSH connection. Use `--help` for its script, label and environment arguments. The target writes raw receipts and logs into external evidence storage. `study/runtime/collect.py` imports them into the ignored local `report/` directory.
 
@@ -57,3 +57,5 @@ python study/run.py audit_artifacts.py --data-dir report --plan report/test-plan
 ```
 
 These commands use the delivered aggregate data, accepted receipts and saved images. They require no SSH connection, private profile or GPU. Raw diagnostic history stays outside the delivery.
+
+Generated HTML, report Markdown, measured-parameter exports, software observations and review records belong only under the Git-ignored `report/` directory. Git retains source pins, execution configuration, scripts and maintained instructions. Customer reports embed per-engine execution guidance and omit document-authoring workflow records.

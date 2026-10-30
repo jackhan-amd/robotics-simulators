@@ -18,7 +18,7 @@ text=re.sub(r'최초 smoke는 float32 gravity.*?초기 실패·수정 후 결과
 text=text.replace('버전별 시도와 실패는 분리해 기록한다.','최종 실행 버전과 필요한 workaround를 함께 기록한다.')
 text=re.sub(r'^Run ID:.*$','실행 방법은 `study/REPRODUCE.md`를 따른다. 제공 예제 표의 최종 JSON에서 모델·버전·계측 조건과 실행 코드의 hash를 확인할 수 있다.',text,flags=re.M)
 text=text.replace('각 탭의 Run ID에서 실제 버전과 반복 시간을 확인한다.','각 탭의 최종 JSON에서 실제 버전과 반복 시간을 확인한다.')
-text=re.sub(r'Pinned commit:.*?(?=\n\n)', 'Pinned base commit: `d1adb4a0cd5f55ce80443e642092190de9d12f6e`. 최종 성공 실행의 재현 명령·설정·수치 JSON·로그는 `evidence/final/`에 수록했다. 실행과 보고서 생성 코드는 코드 ZIP의 `study/`에 있으며, 버전 목록은 `configs/benchmarks/software.json`에 기록했다.',text,count=1,flags=re.S)
+text=re.sub(r'Pinned commit:.*?(?=\n\n)', 'Pinned base commit: `d1adb4a0cd5f55ce80443e642092190de9d12f6e`. 최종 성공 실행의 재현 명령·설정·수치 JSON·로그는 `evidence/final/`에 수록했다. 실행과 보고서 생성 코드는 코드 ZIP의 `study/`에 있으며, 버전 목록은 `evidence/software-observations.json`에 기록했다.',text,count=1,flags=re.S)
 text=text.replace(' JAX 0.12.0 결과는 별도 버전 진단으로 표시한다.','')
 if c['status']=='IN_PROGRESS':
  text=text.replace('요청한 제공 예제 env scaling을 모두 실행했다. 실패 구성에는 처리량을 제시하지 않는다.','제공 예제 env scaling을 재측정 중이다. 통과한 구성만 처리량을 제시한다.')

@@ -34,3 +34,7 @@ __pycache__/
 
 # Local upstream dependencies, environments and generated measurements
 /.runtime/
+
+# Generated benchmark snapshots are local report artifacts, not source inputs
+/configs/benchmarks/parameters.json
+/configs/benchmarks/software.json

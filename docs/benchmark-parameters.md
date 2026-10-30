@@ -1,6 +1,6 @@
 # Published experiment parameters
 
-The [machine-readable manifest](../configs/benchmarks/parameters.json) records settings from the accepted MI355X measurements: 12 supplied-model/backend paths and 64 environment configurations. The separate 50-record GPU baseline is included under `reference_baseline_settings`; six MJWarp Humanoid configurations overlap, so these counts must not be added.
+The machine-readable manifest (local output: `report/benchmark-parameters.json`) records settings from the accepted MI355X measurements: 12 supplied-model/backend paths and 64 environment configurations. The separate 50-record GPU baseline is included under `reference_baseline_settings`; six MJWarp Humanoid configurations overlap, so these counts must not be added.
 
 These are forward simulation and rendering experiments. There is no policy training or optimizer in this campaign, so learning rate, PPO batch size and reward hyperparameters do not apply. The additional GSplat training and WAM inference blog reproductions have not been measured and are not included here.
 
@@ -45,7 +45,7 @@ All primary configurations use five samples and synchronized GPU boundaries. Mos
 
 ## Measured paths and parameter provenance
 
-The specification describes the parameters and conditions used for the measured paths. A measured forward path does not establish coverage of gradient/backward, learning, optimization, rendering or other engine paths. Parameters left unchanged are identified through the pinned example/model files, source commits and hashes, together with [software/build observations](../configs/benchmarks/software.json) and the linked adapter. Parameter inheritance and execution-path coverage are separate questions.
+The specification describes the parameters and conditions used for the measured paths. A measured forward path does not establish coverage of gradient/backward, learning, optimization, rendering or other engine paths. Parameters left unchanged are identified through the pinned example/model files, source commits and hashes, together with software/build observations (local output: `report/evidence/software-observations.json`) and the linked adapter. Parameter inheritance and execution-path coverage are separate questions.
 
 FluidLab engine execution occurred locally on the same MI355X GPU server. The Git repository tracks its harness, adapters and configuration, but does not vendor the complete upstream engine source. Separate runtime/source directories are part of the benchmark deployment, not remote compute services.
 
@@ -57,7 +57,7 @@ To export settings from your own accepted result bundle, use:
 
 ```bash
 python study/run.py export_benchmark_parameters.py --data-dir /path/to/results/report \
-  --output configs/benchmarks/parameters.json
+  --output report/benchmark-parameters.json
 ```
 
 The exporter checks the cohort sizes for this campaign. It does not infer an unrecorded default or validate a new GPU execution. Follow [the benchmark quick start](benchmark-reproduction.md) for environment setup and measurements.

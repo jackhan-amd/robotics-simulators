@@ -22,7 +22,7 @@ rendering library. CPU-only engines and standalone CPU performance tests are
 excluded. Short CPU calculations remain only where a GPU numerical sanity check
 requires them.
 
-[Experiment settings](docs/benchmark-parameters.md) lists model, solver, env count, warm-up, seed and timing settings; the JSON manifest covers both measured cohorts.
+[Experiment settings](docs/benchmark-parameters.md) lists model, solver, env count, warm-up, seed and timing settings; a locally generated JSON snapshot can include both measured cohorts.
 
 All engines use [pinned upstream dependency links](docs/upstream-dependencies.md) and the common `tools/fetch_sources.py` clone tool. Engine dependencies may live under the project-local, Git-ignored `.runtime/` directory; this is a file-layout choice, not remote computation.
 
@@ -45,7 +45,7 @@ python3 -m simulators smoke mujoco-mjx-rocm    # preview only
 Keep upstream sources, Python environments, models, datasets, caches, raw logs
 and credentials in configured external storage. No server address, private
 profile, individual run history or generated report is included in this repository.
-See [study configuration](configs/benchmark-profile.example.json) and [source/dependency observations](configs/benchmarks/software.json).
+See [study configuration](configs/benchmark-profile.example.json) and source/dependency observations (local output: `report/evidence/software-observations.json`).
 
 Run repository checks with Python 3.12:
 

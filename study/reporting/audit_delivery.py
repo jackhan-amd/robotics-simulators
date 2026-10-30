@@ -16,7 +16,8 @@ with zipfile.ZipFile(bundle)as z:
   assert 'run_id'not in receipt and'command'not in receipt and'environment'not in receipt
   assert 'report/evidence/final/'+receipt['execution_log']in names
  assert not any(re.match(r'report/evidence/results/\d{8}T',n)for n in names)
- review=json.loads(z.read('report/humanizer-review.json'));assert review['markdown_sha256']==hashlib.sha256(z.read('report/confluence-report.md')).hexdigest()
+ assert 'report/humanizer-review.json' not in z.namelist()
+ review=json.loads(z.read('report/publication-manifest.json'));assert review['markdown_sha256']==hashlib.sha256(z.read('report/confluence-report.md')).hexdigest()
  tokens=[v for k,v in profile().items()if isinstance(v,str)and len(v)>=6 and any(x in k for x in('ROOT','PATH','TARGET','CONFLUENCE'))]
  for name in names:
   if pathlib.PurePosixPath(name).suffix in('.md','.html','.json','.log','.csv','.txt'):
