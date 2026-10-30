@@ -16,7 +16,7 @@ class RecipeCatalogTests(unittest.TestCase):
    for action in ['check','build']:
     r=subprocess.run([sys.executable,'-m','simulators',action],cwd=root,capture_output=True,text=True,timeout=30)
     self.assertEqual(r.returncode,0,r.stdout+r.stderr)
-   self.assertTrue((root/'report/report.html').is_file());self.assertFalse((root/'results').exists())
+   self.assertTrue((root/'.runtime/catalog/index.html').is_file());self.assertFalse((root/'results').exists())
  def test_cpu_fallback_cannot_become_reviewed_gpu(self):
   with tempfile.TemporaryDirectory()as d:
    root=Path(d);self.copy_source(root);path=root/'configs/verification-summary.json';data=json.loads(path.read_text());gpu=next(x for x in data['configurations']if x['backend']!='cpu');gpu['backend']='cpu';path.write_text(json.dumps(data))
