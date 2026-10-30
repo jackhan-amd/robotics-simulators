@@ -15,7 +15,7 @@ class RecorderTests(unittest.TestCase):
     def run_fixture(self, code, timeout=5, run_kind=None):
         with tempfile.TemporaryDirectory(prefix='smoke-recorder-') as tmp:
             base = Path(tmp)
-            (base/'tools').mkdir(); (base/'configs').mkdir(); (base/'smokes').mkdir()
+            (base/'tools').mkdir(); (base/'configs').mkdir(); (base/'recipes').mkdir()
             shutil.copy2(RUNNER, base/'tools/run_case.py')
             (base/'configs/cases.json').write_text(json.dumps([{'suite':'fixture','id':'fixture','nodes':['halo']}]))
             p = subprocess.run([sys.executable, str(base/'tools/run_case.py'), '--private-root', str(base/'private'),

@@ -55,3 +55,28 @@ def ssh_prefix():
 def scp_prefix():
  return ['scp','-q','-o','ServerAliveInterval=30','-o','StrictHostKeyChecking='+('no'if value('STUDY_STRICT_HOST_KEY_CHECKING',True)is False else'yes'),'-P',str(value('STUDY_SSH_PORT',22))]
 def remote_file(path):return ssh_target()+':'+shlex.quote(str(path))
+
+
+def script_index():
+    return json.loads((REPO_ROOT/'study/scripts.json').read_text(encoding='utf-8'))['scripts']
+
+def source_reference(name):
+    return script_index().get(name, 'study/'+name)
+
+def script_path(name):
+    """Resolve a registered source file, or its unchanged flat-deployment name."""
+    if name not in script_index():raise ValueError('Unregistered study command: '+name)
+    flat=_HERE/name
+    if _HERE.name!='study' and flat.is_file():return flat
+    return REPO_ROOT/script_index()[name]
+
+def script_command(name, interpreter=None):
+    import sys
+    return [interpreter or sys.executable, str(REPO_ROOT/'study/run.py'), name]
+
+def activate_imports():
+    """Expose only the registered helper directories to study command imports."""
+    import sys
+    paths=[REPO_ROOT/'study']+sorted({(REPO_ROOT/path).parent for path in script_index().values()})
+    for path in reversed(paths):
+        if str(path) not in sys.path:sys.path.insert(0,str(path))

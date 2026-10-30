@@ -29,7 +29,7 @@ class RecipeCatalogTests(unittest.TestCase):
    r=subprocess.run(['bash','-n',str(path)],capture_output=True,text=True)
    self.assertEqual(r.returncode,0,str(path)+r.stderr)
  def test_python_sources_parse(self):
-  for area in ['tools','smokes','simulators']:
+  for area in ['tools','recipes','simulators']:
    for path in(BASE/area).rglob('*.py'):ast.parse(path.read_text())
  def test_unknown_recipe_is_rejected(self):
   with self.assertRaises(ValueError):resolve('does-not-exist')

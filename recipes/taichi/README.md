@@ -14,7 +14,7 @@ python3 tools/fetch_sources.py fetch --engine taichi
 Source checkout is separate from the GPU runtime build and smoke below. The source
 directory is a project dependency; it does not indicate a remote compute service.
 
-Use the official AMD Taichi 1.8.0b2 Python 3.12 payload. `study/docker_extract_taichi.py` extracts the documented image without a Docker daemon. Provide `venvs/taichi`, `ROCM_PATH` and the payload under `official-taichi/root`. The wrapper selects the supplied MPM88 example and explicit AMD backend.
+Use the official AMD Taichi 1.8.0b2 Python 3.12 payload. `recipes/taichi/benchmarks/docker_extract_taichi.py` extracts the documented image without a Docker daemon. Provide `venvs/taichi`, `ROCM_PATH` and the payload under `official-taichi/root`. The wrapper selects the supplied MPM88 example and explicit AMD backend.
 
 See [common configuration](../README.md), [MI355X quick start](../../docs/benchmark-reproduction.md)
 and [recorded software and commands](../../study/REPRODUCE.md). Runtime sources,

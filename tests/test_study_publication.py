@@ -3,6 +3,8 @@ import json,os,pathlib,sys,tempfile,unittest
 from unittest.mock import patch
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'study'))
+from workspace import activate_imports
+activate_imports()
 import publication
 import workspace
 
@@ -10,13 +12,13 @@ class StudyPublicationTests(unittest.TestCase):
  def test_source_references_and_private_paths(self):
   with patch.object(publication,'profile',return_value={'LAB_ROOT':'/external/work','STUDY_SSH_TARGET':'user@private-host'}):
    value=publication.sanitize_text('/external/work/storage/upstream/genesis-world/examples/coupling/sph_rigid.py /external/work/capture_provided_genesis.py user@private-host')
-   self.assertEqual(value,'genesis-world/examples/coupling/sph_rigid.py study/capture_provided_genesis.py ${STUDY_SSH_TARGET}')
+   self.assertEqual(value,'genesis-world/examples/coupling/sph_rigid.py recipes/genesis/benchmarks/capture_provided_genesis.py ${STUDY_SSH_TARGET}')
  def test_aggregates_drop_individual_history(self):
   data=publication.aggregate({'run_id':'private','command':['private command'],'measurement':{'envs':4096,'synchronized_rollout_s':[1,2,3,4,5]},'smoke_run_id':'private'})
   self.assertEqual(data,{'measurement':{'envs':4096,'synchronized_rollout_s':[1,2,3,4,5]}})
  def test_packaged_example_uses_logical_source_reference(self):
   source='${STUDY_STORAGE_ROOT}/official-taichi/root/usr/local/lib/python3.12/site-packages/taichi/examples/simulation/mpm88.py'
-  self.assertEqual(publication.repository_reference(source),'AMD Taichi provided example: simulation/mpm88.py (adapter: study/provided_replicas.py)')
+  self.assertEqual(publication.repository_reference(source),'AMD Taichi provided example: simulation/mpm88.py (adapter: study/benchmarks/provided_replicas.py)')
   self.assertNotIn('official-taichi/root',publication.sanitize_text(source))
  def test_only_final_successful_gpu_runs_selected(self):
   campaign={'campaigns':[{'smoke_status':'PASS','smoke_run_id':'smoke-final','points':[{'status':'PASS','run_id':'accepted'},{'status':'FAIL','run_id':'rejected'},{'status':'REMEASUREMENT_PENDING','run_id':'superseded'}]}]}

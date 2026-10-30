@@ -19,13 +19,13 @@ python3 -m simulators check
 
 The measured target was one MI355X/gfx950 with 288 GiB VRAM, Ubuntu 24.04.5
 and Python 3.12.3. Preserve the installed driver and use isolated user prefixes.
-Read [the observed versions](../study/software-observations.json) and
+Read [the observed versions](../configs/benchmarks/software.json) and
 [per-engine preparation](../study/REPRODUCE.md). The original core recipe smokes
 retain their reviewed gfx1151 target; use the study adapters for MI355X.
 
 ## 2. Configure configured runtime storage
 
-Prepare one runtime workspace and copy `study/profile.example.json` to the ignored
+Prepare one runtime workspace and copy `configs/benchmark-profile.example.json` to the ignored
 `private/study-profile.json` on the client, filling in your own connection and paths.
 Alternatively set the documented environment variables. Never commit that profile.
 On the Linux GPU target:
@@ -40,7 +40,7 @@ mkdir -p "$LAB_ROOT" "$STUDY_STORAGE_ROOT"
 python3 -m venv "$LAB_ROOT/bootstrap-tools"
 "$LAB_ROOT/bootstrap-tools/bin/pip" install uv
 export PATH="$LAB_ROOT/bootstrap-tools/bin:$PATH"
-python3 study/bootstrap.py
+python3 study/run.py bootstrap.py
 source "$LAB_ROOT/env.sh"
 ```
 
@@ -59,7 +59,7 @@ retain those packages. With Python 3.12 and a compatible ROCm Torch visible:
 ```bash
 python3 -c "import sys,torch; assert sys.version_info[:2]==(3,12); assert torch.version.hip; print(torch.__version__)"
 "$LAB_ROOT/bin/uv" venv --system-site-packages --python "$(command -v python3)" "$STUDY_STORAGE_ROOT/venvs/base"
-python3 study/setup_remote.py
+python3 study/run.py setup_remote.py
 ```
 
 `setup_remote.py` creates user-owned native build tools and the MuJoCo package
@@ -67,15 +67,15 @@ used for sanity checks; it does not install CPU-only simulators. Record tool
 versions after setup. Some dependencies are large; prepare one engine at a time.
 
 Use [REPRODUCE.md](../study/REPRODUCE.md) for exact engine commands and source pins.
-`study/install_gpu.py` prepares supported Python backends in isolated prefixes;
-`study/build_engine.py` provides gfx950 native build adapters. MJX Humanoid uses
+`study/runtime/install_gpu.py` prepares supported Python backends in isolated prefixes;
+`study/runtime/build_engine.py` provides gfx950 native build adapters. MJX Humanoid uses
 matched JAX/jaxlib/PJRT/plugin 0.12.0 and the isolated ROCm 7.14.1 loader:
 
 ```bash
-python3 study/prepare_mjx_aligned.py
+python3 study/run.py prepare_mjx_aligned.py
 ```
 
-Read the script's required environment and [MJX profile](../study/mjx-profile.json)
+Read the script's required environment and [MJX profile](../configs/benchmarks/mjx-profile.json)
 before execution. FluidLab requires operator-authorized upstream source/runtime;
 it is not bundled; use the common upstream clone tool for its pinned source. FluidLab measurements cover forward simulation only; gradient/backward, learning and optimization were not tested. Its engine runs on the same MI355X server GPU, with runtime files kept in a separate local directory. Taichi and Instinct Sim require their
 documented payload/build/asset setup. An install exit code is not a physics check.
@@ -126,7 +126,7 @@ five finite positive timing samples and any validation barriers. Compute
 For Chrono DEM, distinguish the 1 ms outer advance call from internal substeps;
 for nekRS, retain the consecutive-window sampling definition.
 
-From the configured client checkout, `python study/refresh_gpu_report.py --collect`
+From the configured client checkout, `python study/run.py refresh_gpu_report.py --collect`
 collects evidence and rebuilds an existing reviewed report package. A fresh code
 clone does not contain the private report Markdown or raw history: results can be
 inspected directly from receipts, or an independently supplied customer results

@@ -37,7 +37,7 @@ CH_ENABLE_MODULE_DEM=ON
 BUILD_TESTING=OFF
 ```
 
-Script는 `Chrono_fsisph`, `Chrono_dem`, `ChronoModels_robot`을 빌드한 뒤 `smokes/chrono`의 작은 실행 파일을 `build/chrono-smoke-hip`에 만든다. 병렬 작업2개, 단계별 최대900초다. 원본 compiler·CMake 인자는 [build.sh](build.sh)에서 확인한다.
+Script는 `Chrono_fsisph`, `Chrono_dem`, `ChronoModels_robot`을 빌드한 뒤 `recipes/chrono/smoke`의 작은 실행 파일을 `build/chrono-smoke-hip`에 만든다. 병렬 작업2개, 단계별 최대900초다. 원본 compiler·CMake 인자는 [build.sh](build.sh)에서 확인한다.
 
 ## 실행
 

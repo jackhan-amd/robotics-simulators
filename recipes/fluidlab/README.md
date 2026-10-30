@@ -17,7 +17,7 @@
 | seed / 제어 | 0 / stationary agent, zero action |
 | 실행 범위 | forward TaichiEnv.step; loss·gradient·optimizer·renderer 제외 |
 
-공개 Git에 add·commit된 것은 [실행 어댑터](../../study/provided_fluidlab_model.py), [계측 코드](../../study/provided_replicas.py), [실행 coordinator](../../study/provided_replicas_suite.py), 준비·호환성 도구와 설정입니다. **FluidLab 원본 엔진 source 전체는 이 Git 저장소에 add·commit되어 있지 않습니다.** 아래 upstream source를 별도 의존성으로 사용합니다. 이는 파일 배치·소스 배포 방식에 관한 구분이며 계산 위치에 관한 구분이 아닙니다.
+공개 Git에 add·commit된 것은 [실행 어댑터](../../recipes/fluidlab/benchmarks/provided_fluidlab_model.py), [계측 코드](../../study/benchmarks/provided_replicas.py), [실행 coordinator](../../study/benchmarks/provided_replicas_suite.py), 준비·호환성 도구와 설정입니다. **FluidLab 원본 엔진 source 전체는 이 Git 저장소에 add·commit되어 있지 않습니다.** 아래 upstream source를 별도 의존성으로 사용합니다. 이는 파일 배치·소스 배포 방식에 관한 구분이며 계산 위치에 관한 구분이 아닙니다.
 
 ## 기존 gfx1151 MPM core smoke
 

@@ -1,6 +1,6 @@
 # Published experiment parameters
 
-The [machine-readable manifest](../study/benchmark-parameters.json) records settings from the accepted MI355X measurements: 12 supplied-model/backend paths and 64 environment configurations. The separate 50-record GPU baseline is included under `reference_baseline_settings`; six MJWarp Humanoid configurations overlap, so these counts must not be added.
+The [machine-readable manifest](../configs/benchmarks/parameters.json) records settings from the accepted MI355X measurements: 12 supplied-model/backend paths and 64 environment configurations. The separate 50-record GPU baseline is included under `reference_baseline_settings`; six MJWarp Humanoid configurations overlap, so these counts must not be added.
 
 These are forward simulation and rendering experiments. There is no policy training or optimizer in this campaign, so learning rate, PPO batch size and reward hyperparameters do not apply. The additional GSplat training and WAM inference blog reproductions have not been measured and are not included here.
 
@@ -8,18 +8,18 @@ These are forward simulation and rendering experiments. There is no policy train
 
 | Model / backend | envs | Work per sample | dt / control interval | Warm-up | Adapter |
 |---|---|---|---|---|---|
-| chrono-dem | 1, 2, 4, 8 | 1 outer advance (400 native substeps) | 0.0010000000474974513 | discarded_full_trials=1 | [code](../study/provided_chrono_replicas.py) |
-| chrono-fsi | 1, 2, 4, 8 | 1000 steps/env | 0.0001 | discarded_full_trials=1 | [code](../study/provided_chrono_replicas.py) |
-| fluidlab | 1, 2, 4, 8 | 100 steps/env | 0.002 | steps=50 | [code](../study/provided_replicas.py) |
-| genesis-sph | 1, 2, 4, 8 | 100 steps/env | 0.01 | steps=50 | [code](../study/provided_replicas.py) |
-| genesis-franka | 1, 16, 64, 256, 1024, 2048, 4096, 8192, 16384, 32768, 65536 | 1000 steps/env | 0.01 | steps=100 | [code](../study/provided_genesis_franka.py) |
-| gsplat | 1, 2, 4, 8, 16, 32 | 100 frames/camera | not applicable | frames=10 | [code](../study/provided_gsplat_garden.py) |
-| incflo | 1, 2, 4, 8 | 50 steps/env | original CFL=0.45, fixed_dt=-1 | discarded_full_trials=1 | [code](../study/provided_incflo.py) |
-| instinct | 1, 2, 4, 8, 16, 32 | 100 steps/env | physics 0.002 s; control 0.05 s | control_steps=10 | [code](../study/provided_instinct_libero.py) |
-| mujoco-mjx | 2048, 4096, 8192, 16384, 32768, 65536 | 1000 steps/env | 0.005 | full_compiled_rollouts=1 | [code](../study/provided_mjx_humanoid.py) |
-| mujoco-mjwarp | 2048, 4096, 8192, 16384, 32768, 65536 | 1000 steps/env | 0.005 | steps=100 | [code](../study/representative_mujoco.py) |
-| nekrs | 1, 2, 4, 8 | 100 steps/env | 0.003 | steps=100 | [code](../study/provided_nekrs_windows.py) |
-| taichi | 1, 2, 4, 8, 16 | 1000 steps/env | 0.0002 | steps=50 | [code](../study/provided_replicas.py) |
+| chrono-dem | 1, 2, 4, 8 | 1 outer advance (400 native substeps) | 0.0010000000474974513 | discarded_full_trials=1 | [code](../recipes/chrono/benchmarks/provided_chrono_replicas.py) |
+| chrono-fsi | 1, 2, 4, 8 | 1000 steps/env | 0.0001 | discarded_full_trials=1 | [code](../recipes/chrono/benchmarks/provided_chrono_replicas.py) |
+| fluidlab | 1, 2, 4, 8 | 100 steps/env | 0.002 | steps=50 | [code](../study/benchmarks/provided_replicas.py) |
+| genesis-sph | 1, 2, 4, 8 | 100 steps/env | 0.01 | steps=50 | [code](../study/benchmarks/provided_replicas.py) |
+| genesis-franka | 1, 16, 64, 256, 1024, 2048, 4096, 8192, 16384, 32768, 65536 | 1000 steps/env | 0.01 | steps=100 | [code](../recipes/genesis/benchmarks/provided_genesis_franka.py) |
+| gsplat | 1, 2, 4, 8, 16, 32 | 100 frames/camera | not applicable | frames=10 | [code](../recipes/gsplat/benchmarks/provided_gsplat_garden.py) |
+| incflo | 1, 2, 4, 8 | 50 steps/env | original CFL=0.45, fixed_dt=-1 | discarded_full_trials=1 | [code](../recipes/incflo/benchmarks/provided_incflo.py) |
+| instinct | 1, 2, 4, 8, 16, 32 | 100 steps/env | physics 0.002 s; control 0.05 s | control_steps=10 | [code](../recipes/instinct/benchmarks/provided_instinct_libero.py) |
+| mujoco-mjx | 2048, 4096, 8192, 16384, 32768, 65536 | 1000 steps/env | 0.005 | full_compiled_rollouts=1 | [code](../recipes/mujoco/benchmarks/provided_mjx_humanoid.py) |
+| mujoco-mjwarp | 2048, 4096, 8192, 16384, 32768, 65536 | 1000 steps/env | 0.005 | steps=100 | [code](../recipes/mujoco/benchmarks/representative_mujoco.py) |
+| nekrs | 1, 2, 4, 8 | 100 steps/env | 0.003 | steps=100 | [code](../recipes/nekrs/benchmarks/provided_nekrs_windows.py) |
+| taichi | 1, 2, 4, 8, 16 | 1000 steps/env | 0.0002 | steps=50 | [code](../study/benchmarks/provided_replicas.py) |
 
 All primary configurations use five samples and synchronized GPU boundaries. Most use reset rollouts; nekRS uses five consecutive trajectory windows after 100 warm steps. Native process replication includes its documented IPC barriers. Build, initialization, validation/readback and rendering are included or excluded as stated per workload in the manifest; Instinct Sim includes GPU cameras/control/observations, while GSplat measures rendering only.
 
@@ -45,7 +45,7 @@ All primary configurations use five samples and synchronized GPU boundaries. Mos
 
 ## Measured paths and parameter provenance
 
-The specification describes the parameters and conditions used for the measured paths. A measured forward path does not establish coverage of gradient/backward, learning, optimization, rendering or other engine paths. Parameters left unchanged are identified through the pinned example/model files, source commits and hashes, together with [software/build observations](../study/software-observations.json) and the linked adapter. Parameter inheritance and execution-path coverage are separate questions.
+The specification describes the parameters and conditions used for the measured paths. A measured forward path does not establish coverage of gradient/backward, learning, optimization, rendering or other engine paths. Parameters left unchanged are identified through the pinned example/model files, source commits and hashes, together with [software/build observations](../configs/benchmarks/software.json) and the linked adapter. Parameter inheritance and execution-path coverage are separate questions.
 
 FluidLab engine execution occurred locally on the same MI355X GPU server. The Git repository tracks its harness, adapters and configuration, but does not vendor the complete upstream engine source. Separate runtime/source directories are part of the benchmark deployment, not remote compute services.
 
@@ -56,8 +56,8 @@ The adapter SHA-256 identifies the portable code in this repository, not a byte-
 To export settings from your own accepted result bundle, use:
 
 ```bash
-python study/export_benchmark_parameters.py --data-dir /path/to/results/report \
-  --output study/benchmark-parameters.json
+python study/run.py export_benchmark_parameters.py --data-dir /path/to/results/report \
+  --output configs/benchmarks/parameters.json
 ```
 
 The exporter checks the cohort sizes for this campaign. It does not infer an unrecorded default or validate a new GPU execution. Follow [the benchmark quick start](benchmark-reproduction.md) for environment setup and measurements.

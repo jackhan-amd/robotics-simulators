@@ -22,7 +22,7 @@
       },
       "command": [
         "${STUDY_STORAGE_ROOT}/venvs/mujoco-mjx-rocm/bin/python",
-        "smokes/mujoco_mjx.py"
+        "recipes/mujoco/mjx/smoke.py"
       ],
       "setup_group": "mjx",
       "timeout_s": 300,
@@ -72,8 +72,8 @@
       },
       "command": [
         "${STUDY_STORAGE_ROOT}/venvs/mjwarp-rocm/bin/python",
-        "smokes/compat/run_alternative.py",
-        "smokes/mjwarp_rocm.py"
+        "recipes/_shared/run_alternative.py",
+        "recipes/mujoco/mjwarp/smoke_rocm.py"
       ],
       "setup_group": "mjwarp",
       "timeout_s": 300,
@@ -119,7 +119,7 @@
       },
       "command": [
         "${STUDY_STORAGE_ROOT}/venvs/genesis-amdgpu/bin/python",
-        "smokes/genesis_rigid.py",
+        "recipes/genesis/smoke_rigid.py",
         "--backend",
         "amdgpu",
         "--steps",
@@ -163,7 +163,7 @@
       },
       "command": [
         "${STUDY_STORAGE_ROOT}/venvs/genesis-amdgpu/bin/python",
-        "smokes/genesis_rigid.py",
+        "recipes/genesis/smoke_rigid.py",
         "--backend",
         "amdgpu",
         "--steps",
@@ -207,7 +207,7 @@
       "command": [
         "${STUDY_STORAGE_ROOT}/venvs/genesis-amdgpu/bin/python",
         "-u",
-        "smokes/genesis_rigid.py",
+        "recipes/genesis/smoke_rigid.py",
         "--backend",
         "amdgpu",
         "--case",
@@ -257,10 +257,10 @@
       },
       "command": [
         "${STUDY_STORAGE_ROOT}/venvs/genesis-amdgpu/bin/python",
-        "smokes/compat/run_alternative.py",
+        "recipes/_shared/run_alternative.py",
         "--source-root",
         "${STUDY_STORAGE_ROOT}/upstream/genesis-world",
-        "smokes/genesis_fluid.py",
+        "recipes/genesis/smoke_fluid.py",
         "--backend",
         "amdgpu",
         "--solver",
@@ -309,7 +309,7 @@
       },
       "command": [
         "${STUDY_STORAGE_ROOT}/venvs/genesis-amdgpu/bin/python",
-        "smokes/genesis_fluid.py",
+        "recipes/genesis/smoke_fluid.py",
         "--backend",
         "amdgpu",
         "--steps",
@@ -358,10 +358,10 @@
       },
       "command": [
         "${STUDY_STORAGE_ROOT}/venvs/genesis-amdgpu/bin/python",
-        "smokes/compat/run_alternative.py",
+        "recipes/_shared/run_alternative.py",
         "--source-root",
         "${STUDY_STORAGE_ROOT}/upstream/genesis-world",
-        "smokes/genesis_fluid.py",
+        "recipes/genesis/smoke_fluid.py",
         "--backend",
         "amdgpu",
         "--solver",
@@ -472,7 +472,7 @@
       },
       "command": [
         "${STUDY_STORAGE_ROOT}/venvs/incflo-tools/bin/python",
-        "smokes/incflo_case.py",
+        "recipes/incflo/smoke.py",
         "--binary",
         "${STUDY_STORAGE_ROOT}/build/incflo-hip-devel/incflo.ex",
         "--backend",
@@ -517,7 +517,7 @@
       },
       "command": [
         "${STUDY_STORAGE_ROOT}/venvs/incflo-tools/bin/python",
-        "smokes/supplemental_nekrs.py",
+        "recipes/nekrs/smoke.py",
         "--backend",
         "hip",
         "--budget",
@@ -555,7 +555,7 @@
       },
       "command": [
         "${STUDY_STORAGE_ROOT}/venvs/fluidlab/bin/python",
-        "smokes/supplemental_fluidlab.py",
+        "recipes/fluidlab/smoke.py",
         "--backend",
         "hip",
         "--steps",
@@ -594,7 +594,8 @@
       "scope": "LIBERO GPU physics, OSC control and camera pipeline",
       "command": [
         "python3",
-        "study/catalog_gpu_smoke.py",
+        "study/run.py",
+        "catalog_gpu_smoke.py",
         "instinct"
       ],
       "timeout_s": 900,
@@ -615,7 +616,8 @@
       "scope": "AMD GPU supplied MPM88 example",
       "command": [
         "python3",
-        "study/catalog_gpu_smoke.py",
+        "study/run.py",
+        "catalog_gpu_smoke.py",
         "taichi"
       ],
       "timeout_s": 900,
@@ -636,7 +638,8 @@
       "scope": "GPU Gaussian rasterization; separate rendering adjunct",
       "command": [
         "python3",
-        "study/catalog_gpu_smoke.py",
+        "study/run.py",
+        "catalog_gpu_smoke.py",
         "gsplat"
       ],
       "timeout_s": 900,

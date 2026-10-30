@@ -67,6 +67,6 @@ python3 -m simulators smoke genesis-freefall --execute
 
 ## Recipe와 결과
 
-각 엔진의 shell 파일은 설치·빌드용이며 명령을 열어 볼 수 있다. `recipes/manifest.json`은 실행 명령·환경 설정·timeout의 원본이다. `smokes/`는 작은 장면과 수치 조건을 포함한다.
+각 엔진의 shell 파일은 설치·빌드용이며 명령을 열어 볼 수 있다. `recipes/manifest.json`은 실행 명령·환경 설정·timeout의 원본이다. engine-owned smoke files under `recipes/`는 작은 장면과 수치 조건을 포함한다.
 
 프로세스 종료0은 실행 기록 단계다. 새 기록은 `PENDING_VALIDATION`으로 남으며 CPU fallback을 GPU PASS로 바꾸지 않는다. [수치·backend 확인](../docs/verification.md)을 마친 뒤 로컬 기록을 판정한다. 개별 기록과 생성 HTML은 Git에서 제외한다.

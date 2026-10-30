@@ -27,7 +27,7 @@ timeout 900 cmake \
 timeout 900 cmake --build "$STUDY_STORAGE_ROOT/build/chrono-hip-devel" --target Chrono_fsisph Chrono_dem ChronoModels_robot --parallel 2
 timeout 900 cmake \
   -S \
-  smokes/chrono \
+  recipes/chrono/smoke \
   -B \
   "$STUDY_STORAGE_ROOT/build/chrono-smoke-hip" \
   -G \

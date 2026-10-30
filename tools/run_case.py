@@ -62,7 +62,7 @@ def main():
                            capture_output=True, text=True)
     # Preserve the exact source bytes hashed at launch, even across later edits.
     script_hashes = {}
-    for f in (BASE / 'smokes').rglob('*'):
+    for f in (BASE / 'recipes').rglob('*'):
         if not f.is_file() or not (f.suffix in ('.py', '.cpp', '.cc', '.h', '.hh') or f.name == 'CMakeLists.txt'):
             continue
         relative = f.relative_to(BASE)

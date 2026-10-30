@@ -14,7 +14,7 @@ python3 tools/fetch_sources.py fetch --engine gsplat
 Source checkout is separate from the GPU runtime build and smoke below. The source
 directory is a project dependency; it does not indicate a remote compute service.
 
-Prepare the pinned AMD-Ecosystem/gsplat v1.5.3b2 checkout and `venvs/gsplat`. `study/install_gpu.py gsplat` builds it for gfx950; apply the documented allocator compatibility patch when using the measured Torch 2.14 stack. The supplied garden fixture and source pins are in the study guide.
+Prepare the pinned AMD-Ecosystem/gsplat v1.5.3b2 checkout and `venvs/gsplat`. `study/runtime/install_gpu.py gsplat` builds it for gfx950; apply the documented allocator compatibility patch when using the measured Torch 2.14 stack. The supplied garden fixture and source pins are in the study guide.
 
 See [common configuration](../README.md), [MI355X quick start](../../docs/benchmark-reproduction.md)
 and [recorded software and commands](../../study/REPRODUCE.md). Runtime sources,

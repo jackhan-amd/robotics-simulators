@@ -26,6 +26,8 @@ requires them.
 
 All engines use [pinned upstream dependency links](docs/upstream-dependencies.md) and the common `tools/fetch_sources.py` clone tool. Engine dependencies may live under the project-local, Git-ignored `.runtime/` directory; this is a file-layout choice, not remote computation.
 
+See [the source layout](docs/repository-layout.md) for engine-owned smoke/benchmark code, shared study infrastructure and supported entry points.
+
 For clone-to-benchmark instructions, follow [the reproduction quick start](docs/benchmark-reproduction.md).
 
 Start with [common prerequisites](recipes/README.md), [verification rules](docs/verification.md)
@@ -43,7 +45,7 @@ python3 -m simulators smoke mujoco-mjx-rocm    # preview only
 Keep upstream sources, Python environments, models, datasets, caches, raw logs
 and credentials in configured external storage. No server address, private
 profile, individual run history or generated report is included in this repository.
-See [study configuration](study/profile.example.json) and [source/dependency observations](study/software-observations.json).
+See [study configuration](configs/benchmark-profile.example.json) and [source/dependency observations](configs/benchmarks/software.json).
 
 Run repository checks with Python 3.12:
 

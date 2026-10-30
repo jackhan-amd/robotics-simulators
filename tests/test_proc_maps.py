@@ -1,7 +1,7 @@
 from pathlib import Path
 import unittest
 
-from smokes.compat.proc_maps import library_paths
+from recipes._shared.proc_maps import library_paths
 
 
 class LibraryMapsTests(unittest.TestCase):
