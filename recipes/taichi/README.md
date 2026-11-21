@@ -16,7 +16,7 @@ directory is a project dependency; it does not indicate a remote compute service
 
 Use the official AMD Taichi 1.8.0b2 Python 3.12 payload. `recipes/taichi/benchmarks/docker_extract_taichi.py` extracts the documented image without a Docker daemon. Provide `venvs/taichi`, `ROCM_PATH` and the payload under `official-taichi/root`. The wrapper selects the supplied MPM88 example and explicit AMD backend.
 
-See [common configuration](../README.md), [MI355X quick start](../../docs/benchmark-reproduction.md)
+See [common configuration](../README.md), [MI355X quick start](../../docs/benchmark-quickstart.md)
 and [recorded software and commands](../../docs/benchmark-recipes.md). Runtime sources,
 environments and assets stay in external `STUDY_STORAGE_ROOT`.
 

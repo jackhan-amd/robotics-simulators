@@ -1,33 +1,33 @@
-# MuJoCo Warp 공개 AMD port
+# MuJoCo Warp: public AMD port
 
-AMD 공개 Warp와 MuJoCo Warp source를 HIP/gfx1151로 빌드한다. NVIDIA Warp 계열의 AMD port이며 vendor-neutral HIP solver로 분류하지 않는다. Native MuJoCo CPU 및 MJX-JAX와 환경을 나눈다.
+Build the public AMD Warp and MuJoCo Warp sources for HIP/gfx1151. This is an AMD port of the NVIDIA Warp stack, not a vendor-neutral HIP solver. Keep its environment separate from native MuJoCo CPU and MJX-JAX.
 
-| Source | 고정 commit |
+| Source | Pinned commit |
 |---|---|
 | [AMD-Ecosystem/warp](https://github.com/AMD-Ecosystem/warp) | `2e2673bb7b90eaabb9cb89dc1f55a76f61c13aab` |
 | [AMD-Ecosystem/mujoco_warp](https://github.com/AMD-Ecosystem/mujoco_warp) | `9dfdf7ab8d5a996fe143e9e2c1e5da646c6fc14f` |
 
-## 설치·빌드
+## Install and build
 
-[공통 준비](../../README.md#rocm-runtime)의 Python3.12 runtime과 HIP SDK가 필요하다. 기존 dependency prefix를 독립 복사한 뒤 고정 source를 빌드한다.
+Provide the Python3.12 runtime and HIP SDK from the [common prerequisites](../../README.md#rocm-runtime). Create an independent copy of the dependency prefix, then build the pinned sources.
 
 ```bash
 export VERIFIED_MJWARP_ROCM_ENV="$EXISTING_MJWARP_PY312_PREFIX"
-# ROCM_PATH 또는 VERIFIED_ROCM_BUILD_ENV도 준비한다.
+# Also provide ROCM_PATH or VERIFIED_ROCM_BUILD_ENV.
 bash recipes/mujoco/mjwarp/build.sh
 ```
 
-Warp build는 `--hip-arch=gfx1151 --jobs=2 --no-use-libmathdx`를 사용한다. 빌드 예산은300초다. 설치 대상은 해당 venv이며 원본 dependency prefix를 바꾸지 않는다.
+The Warp build uses `--hip-arch=gfx1151 --jobs=2 --no-use-libmathdx` with a 300-second build limit. It installs into the dedicated venv and leaves the original dependency prefix unchanged.
 
-## 설정과 실행
+## Configure and run
 
-실행 manifest의 `HIPRTC_COMPILE_OPTIONS_APPEND`가 unsigned 고정폭 정수 type macro와 `-mprintf-kind=buffered`를 지정한다. Source solver는 수정하지 않는다.
+The execution manifest sets `HIPRTC_COMPILE_OPTIONS_APPEND` with unsigned fixed-width integer type macros and `-mprintf-kind=buffered`. The source solver is unchanged.
 
 ```bash
 python3 -m simulators show mujoco-mjwarp-rocm
 python3 -m simulators smoke mujoco-mjwarp-rocm --execute
 ```
 
-작은 강체 장면의 실제 step, 접촉·유한 상태·중력 조건을 확인한다. Wrapper가 HIP runtime과 선택 장치의 provenance를 원본 로그에 남긴다. `backend_observed`와 물리 gate를 함께 검사한다.
+Check actual stepping, contact, finite state and gravity conditions in the bounded rigid-body scene. The wrapper records HIP runtime and selected-device provenance in the raw log. Check `backend_observed` together with the physics gates.
 
-공식 경로: [AMD sim-to-real recipe](https://rocm.blogs.amd.com/artificial-intelligence/sim2real-rl-instinct/README.html). Apache-2.0 및 dependency별 고지 유지.
+Official recipe: [AMD sim-to-real recipe](https://rocm.blogs.amd.com/artificial-intelligence/sim2real-rl-instinct/README.html). Retain Apache-2.0 and dependency-specific notices.

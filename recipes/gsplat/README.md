@@ -16,7 +16,7 @@ directory is a project dependency; it does not indicate a remote compute service
 
 Prepare the pinned AMD-Ecosystem/gsplat v1.5.3b2 checkout and `venvs/gsplat`. `tools/runtime/install_gpu.py gsplat` builds it for gfx950; apply the documented allocator compatibility patch when using the measured Torch 2.14 stack. The supplied garden fixture and source pins are in the study guide.
 
-See [common configuration](../README.md), [MI355X quick start](../../docs/benchmark-reproduction.md)
+See [common configuration](../README.md), [MI355X quick start](../../docs/benchmark-quickstart.md)
 and [recorded software and commands](../../docs/benchmark-recipes.md). Runtime sources,
 environments and assets stay in external `STUDY_STORAGE_ROOT`.
 

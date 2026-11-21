@@ -1,23 +1,23 @@
-# 동작 확인 기준
+# Execution verification
 
-설치와 source build가 끝나면 각 recipe의 작은 장면을 실행한다. `SMOKE_RESULT_JSON`의 실제 backend, 수치와 device를 확인한다. Child 종료0만으로 새 run의 G1을 확정하지 않는다.
+After installation and source builds, run the bounded scene in each recipe. Check the observed backend, numerical results and device in `SMOKE_RESULT_JSON`. A zero child exit code alone does not establish G1 validity for a new run.
 
-| 확인 단계 | 확인할 내용 |
+| Stage | Checks |
 |---|---|
-| 설치·빌드 | Python3.12, 고정 source·dependency, compiler 설정, binary 생성 |
-| Backend | 실제 solver의 CPU/HIP/AMD 선택과 실제 GPU 이름·ISA |
-| 물리 | 유한 상태, dt·step, 중력·접촉·mass·field 등 해당 장면의 gate |
-| CPU 대조 | 같은 장면·규모·dt에서 선언한 허용치로 비교 |
-| GPU 실행 | physics kernel profiler/trace와 실제 numerical step |
+| Installation and build | Python3.12, pinned sources and dependencies, compiler settings, generated binaries |
+| Backend | Actual CPU/HIP/AMD solver selection and GPU name/ISA |
+| Physics | Finite state, dt, steps and scene-specific gravity, contact, mass or field gates |
+| CPU comparison | Same scene, scale and dt, using the declared tolerances |
+| GPU execution | Physics kernel profiler/trace and actual numerical steps |
 
-Headless 장면에는 GPU renderer와 policy 추론을 섞지 않는다. Native CPU 실행은 `CPU_ONLY`로 표시한다. GPU를 요청했는데 CPU로 실행되면 GPU PASS로 올리지 않는다. 성능 G2는 별도 범위다.
+Keep GPU rendering and policy inference outside these headless scenes. Mark native CPU runs as `CPU_ONLY`. A requested GPU run that falls back to CPU cannot receive GPU PASS. Performance validation, G2, is a separate task.
 
-## 보존한 검증 범위
+## Retained verification scope
 
-Instinct Sim·Taichi·GSplat의 새 카탈로그 연결 3개는 `UNREVIEWED_CATALOG_ENTRY`로 구분합니다. 이전 MI355X study 측정과 새 카탈로그 실행의 검증은 별개입니다.
+The 3 catalog entries for Instinct Sim, Taichi and GSplat are marked `UNREVIEWED_CATALOG_ENTRY`. Earlier MI355X benchmark measurements do not validate a new catalog execution.
 
-2026-10-23까지 검토한 GPU 구성 중 이 저장소에 포함된 13개 구성의 범위만 [verification-summary.json](../configs/verification-summary.json)에 유지한다. 각 엔진·scene·backend와 수치 gate를 담고 throughput·개별 run ID·일지·raw log를 포함하지 않는다. 이 요약은 새 설치나 새 실행을 자동 검증하지 않는다.
+[verification-summary.json](../configs/verification-summary.json) retains the scope of the 13 included GPU configurations reviewed through 2026-10-23. It records engine, scene, backend and numerical gates, excluding throughput, individual run IDs, journals and raw logs. It does not automatically validate a new installation or run.
 
-새 실행의 JSON은 `${STUDY_PRIVATE_ROOT}/results/runs/<node>/<id>/result.json`, 실제 명령·원본 로그·source snapshot은 `${STUDY_PRIVATE_ROOT}/runs/<node>/<id>/`에 남긴다. 결과 상태는 검토 전 `PENDING_VALIDATION`이다. Raw evidence는 Git에 추가하지 않는다.
+New run JSON is stored at `${STUDY_PRIVATE_ROOT}/results/runs/<node>/<id>/result.json`; actual commands, raw logs and source snapshots go under `${STUDY_PRIVATE_ROOT}/runs/<node>/<id>/`. Results remain `PENDING_VALIDATION` until reviewed. Keep raw evidence out of Git.
 
-CUDA 열의 과거 기록과 현재 ROCm recipe는 구현·설정이 다를 수 있다. `cuda_reference_status`가 없는 항목은 이 저장소가 CUDA 실행을 주장하지 않는 항목이다. 기존 RTX3090 비교 기록은 로컬 연구 archive에 보존한다.
+Historical CUDA records and current ROCm recipes may use different implementations or settings. Entries without `cuda_reference_status` make no CUDA execution claim. Earlier RTX3090 comparisons remain in the local research archive.
